@@ -1,0 +1,48 @@
+body {
+    margin: 0px;
+    font-family: Kanit !important;
+    color: #1a1a1a;
+}
+
+#main-header {
+    background-color: #d63f3f;
+    display: flex;
+    height: 70px;
+    padding-inline: 40px;
+}
+
+.w-20p {
+    width: 20%;
+}
+
+.w-60p {
+    width: 60%;
+}
+
+.clean-link {
+    text-decoration: none;
+}
+
+.c-white-2 {
+    color: #f7f7f7;
+}
+
+.fs-2-5r {
+    font-size: 2.5rem;
+}
+
+.fs-1-25r {
+    font-size:1.25rem;
+}
+
+.mt-m-4px {
+    margin-top: -4px;
+}
+
+.hover-c-lgray {
+    transition: color 0.1s ease;
+}
+
+.hover-c-lgray:hover {
+    color: #dddddd;
+}
