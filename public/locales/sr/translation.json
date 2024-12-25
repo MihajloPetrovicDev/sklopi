@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "error_processing_request": "Došlo je do greške prilikom slanja vašeg zahteva.",
+        "unexpected_error": "Došlo je do neočekivane greške."
+    }
+}

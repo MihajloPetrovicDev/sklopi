@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <x-base-head-tags />
+    <title>@lang('ui.register.header_title')</title>
+</head>
+
+<body>
+    <x-minimal-header />
+
+    <div class="section-1 mx-auto mt-80px w-450px pin-50px">
+        <h2 class="text-center">@lang('ui.register.register')</h2>
+
+        <div id="error-container-placeholder"></div>
+
+        <form class="mt-5" id="register-form">
+            <label for="email">@lang('ui.register.username'):</label>
+            <input class="form-control" type="text" name="username" id="username"></input>
+
+            <label class="mt-3" for="email">@lang('ui.register.email'):</label>
+            <input class="form-control" type="email" name="email" id="email"></input>
+
+            <label class="mt-3" for="password">@lang('ui.register.password'):</label>
+            <input class="form-control" type="password" name="password" id="password"></input>
+
+            <label class="mt-3" for="password">@lang('ui.register.confirm_password'):</label>
+            <input class="form-control" type="password" name="confirm_password" id="confirm-password"></input>
+
+            <button class="mt-5 btn btn-primary mx-auto d-block" type="submit">@lang('ui.register.register')</button>
+        </form>
+
+        <div class="text-center mt-5">
+            <p class="mb-0px">@lang('ui.register.have_an_account')? <a href="/login"> @lang('ui.register.login').</a></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script type="module" src="{{ mix('resources/js/inits/register_init.js') }}"></script> 
+</body>
+</html>
