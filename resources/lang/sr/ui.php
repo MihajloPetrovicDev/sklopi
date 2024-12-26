@@ -6,6 +6,9 @@ return [
     ],
     'builder' => [
         'header_title' => 'Konfigurator - sklopi',
+        'my_builds' => 'Moje Konfiguracije',
+        'new_build' => 'Nova Konfiguracija',
+        'no_builds' => 'Nemate nijednu konfiguraciju.',
     ],
     'login' => [
         'header_title' => 'Prijavi Se - sklopi',

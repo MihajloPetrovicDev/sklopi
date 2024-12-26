@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('free_delivery_at', 10, 2)->nullable();
             $table->decimal('delivery_cost', 10, 2);
-            $table->string('currency');
             $table->timestamps();
         });
     }

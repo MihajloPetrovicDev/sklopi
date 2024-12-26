@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id');
             $table->boolean('is_public');
+            $table->string('currency');
+            $table->unsignedBigInteger('country_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 

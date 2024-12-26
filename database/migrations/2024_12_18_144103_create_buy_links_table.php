@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('link');
             $table->decimal('price', 10, 2);
-            $table->string('currency');
             $table->unsignedBigInteger('component_id');
             $table->unsignedBigInteger('delivery_group_id')->nullable();
             $table->timestamps();

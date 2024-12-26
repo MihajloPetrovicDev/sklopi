@@ -75,20 +75,21 @@ class AuthController extends Controller
             return response()->json([], 201);
         }
         catch(Exception $e) {
-            return $this->errorService->handleGuestException($e);
+            return $this->errorService->handleExceptionJSON($e);
         }
     }
 
 
     public function login(Request $request) {
         $incomingFields = $request->validate([
-            'email' => ['required', 'email', 'max: 80'],
+            'email' => ['required', 'email', 'max: 80', 'exists:users,email'],
             'password' => ['required', 'min: 5', 'max: 80'],
         ], 
         [
             'email.max' => __('errors.login.email_isnt_in_use'),
             'email.email' => __('errors.login.email_isnt_in_use'),
             'email.required' => __('errors.login.email_required'),
+            'email.exists' => __('errors.login.email_isnt_in_use'),
             'password.min' => __('errors.login.incorrect_password'),
             'password.max' => __('errors.login.incorrect_password'),
             'password.required' => __('errors.login.password_required'),
@@ -96,12 +97,6 @@ class AuthController extends Controller
 
         try {
             $user = User::where('email', $incomingFields['email'])->first();
-
-            if(!$user) {
-                return response()->json(['errors' => [
-                    'error' => [__('errors.login.email_isnt_in_use')]
-                ]], 404);
-            }
             
             if(!Hash::check($incomingFields['password'], $user->password)) {
                 return response()->json(['errors' => [
@@ -114,7 +109,7 @@ class AuthController extends Controller
             return response()->json([], 200);
         }
         catch(Exception $e) {
-            return $this->errorService->handleGuestException($e);
+            return $this->errorService->handleExceptionJSON($e);
         }
     }
 

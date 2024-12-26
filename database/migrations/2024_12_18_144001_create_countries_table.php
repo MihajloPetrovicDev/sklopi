@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_countries', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('buy_link_id');
             $table->timestamps();
-
-            $table->foreign('buy_link_id')->references('id')->on('buy_links');
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_countries');
+        Schema::dropIfExists('countries');
     }
 };
