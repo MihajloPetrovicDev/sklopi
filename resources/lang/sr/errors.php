@@ -24,5 +24,10 @@ return [
         'incorrect_password' => 'Netačna lozinka.',
         'email_required' => 'Email adresa je obavezna.',
         'password_required' => 'Lozinka je obavezna.',
+    ],
+    'create_new_build' => [
+        'build_name_max' => 'Ime konfiguracije ne sme da bude duže od 30 karaktera.',
+        'build_visibility_reqired' => 'Preglednost je obavezna.',
+        'build_visibility_boolean' => 'Preglednost mora biti tipa boolean',
     ]
 ];

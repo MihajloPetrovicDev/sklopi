@@ -15,10 +15,10 @@
 
         <form class="mt-5" id="login-form">
             <label for="email">@lang('ui.login.email'):</label>
-            <input class="form-control" type="email" name="email" id="email"></input>
+            <input class="form-control" type="email" id="email"></input>
 
             <label class="mt-3" for="password">@lang('ui.login.password'):</label>
-            <input class="form-control" type="password" name="password" id="password"></input>
+            <input class="form-control" type="password" id="password"></input>
 
             <button class="mt-5 btn btn-primary mx-auto d-block" type="submit">@lang('ui.login.login')</button>
         </form>

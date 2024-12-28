@@ -16,8 +16,16 @@ Route::get('/register', [AuthController::class, 'getRegisterPage'])->middleware(
 
 Route::get('/my-account', [AuthController::class, 'getMyAccountPage'])->middleware('auth');
 
+Route::get('/create-new-build', [BuilderController::class, 'getCreateNewBuildPage'])->middleware('auth');
+
+Route::get('/build/{id}', [BuilderController::class, 'getBuild'])->middleware('auth');
+
+Route::get('/guest-build', [BuilderController::class, 'getGuestBuild'])->middleware('guest');
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');
 
 Route::post('/api/log-out', [AuthController::class, 'logOut'])->middleware('auth');
+
+Route::post('/api/create-new-build', [BuilderController::class, 'createNewBuild'])->middleware('auth');

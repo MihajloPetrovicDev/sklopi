@@ -15,16 +15,16 @@
 
         <form class="mt-5" id="register-form">
             <label for="email">@lang('ui.register.username'):</label>
-            <input class="form-control" type="text" name="username" id="username"></input>
+            <input class="form-control" type="text" id="username"></input>
 
             <label class="mt-3" for="email">@lang('ui.register.email'):</label>
-            <input class="form-control" type="email" name="email" id="email"></input>
+            <input class="form-control" type="email" id="email"></input>
 
             <label class="mt-3" for="password">@lang('ui.register.password'):</label>
-            <input class="form-control" type="password" name="password" id="password"></input>
+            <input class="form-control" type="password" id="password"></input>
 
             <label class="mt-3" for="password">@lang('ui.register.confirm_password'):</label>
-            <input class="form-control" type="password" name="confirm_password" id="confirm-password"></input>
+            <input class="form-control" type="password" id="confirm-password"></input>
 
             <button class="mt-5 btn btn-primary mx-auto d-block" type="submit">@lang('ui.register.register')</button>
         </form>

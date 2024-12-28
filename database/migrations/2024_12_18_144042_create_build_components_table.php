@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('component_types', function (Blueprint $table) {
+        Schema::create('build_components', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_unique');
+            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('build_id');
             $table->timestamps();
+
+            $table->foreign('type_id')->references('id')->on('build_component_types');
+            $table->foreign('build_id')->references('id')->on('builds');
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('component_types');
+        Schema::dropIfExists('build_components');
     }
 };

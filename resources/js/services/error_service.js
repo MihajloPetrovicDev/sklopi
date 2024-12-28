@@ -20,7 +20,7 @@ const errorService = {
         containerToAttach.appendChild(errorContainer);
     },
     handleError(error) {
-        if(error.response.data.errors) {
+        if(error.response && error.response.data && error.response.data.errors) {
             let finalErrorMessage = '';
 
             for(const errorField in error.response.data.errors) {

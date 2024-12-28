@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Build;
+use App\Models\BuildComponent;
 use Illuminate\Http\Request;
 use App\Services\ErrorService;
 use Illuminate\Support\Facades\Auth;
@@ -32,5 +33,66 @@ class BuilderController extends Controller
         catch(Exception $e) {
             return $this->errorService->handleException($e);
         }
+    }
+
+
+    public function getCreateNewBuildPage() {
+        return view('create_new_build');
+    }
+
+
+    public function createNewBuild(Request $request) {
+        $incomingFields = $request->validate([
+            'buildName' => ['max: 30'],
+            'buildVisibility' => ['required', 'boolean'],
+        ],
+        [
+            'buildName.max' => __('errors.create_new_build.build_name_max'),
+            'buildVisibility.required' => __('errors.create_new_build.build_visibility_reqired'),
+            'buildVisibility.boolean' => __('errors.create_new_build.build_visibility_boolean'),
+        ]);
+
+        try {
+            if(!$incomingFields['buildName']) {
+                $buildName = __('ui.create_new_build.build');
+            }
+            else {
+                $buildName = $incomingFields['buildName'];
+            }
+
+            $build = new Build();
+
+            $build->user_id = Auth::id();
+            $build->name = $buildName;
+            $build->is_public = $incomingFields['buildVisibility'];
+            $build->country_id = 1;
+            $build->currency = 'RSD';
+
+            $build->save();
+
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            return $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function getBuild($id) {
+        try {
+            $build = Build::findOrFail($id);
+
+            $buildComponents = BuildComponent::where('build_id', $build->id)->get();
+
+            return view('build', compact('build', 'buildComponents'));
+        }
+        catch(Exception $e) {
+            $this->errorService->handleException($e);
+        }
+    }
+
+
+    public function getGuestBuild() {
+        return view('guest_build');
     }
 }
