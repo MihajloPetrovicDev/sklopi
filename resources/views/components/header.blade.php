@@ -5,7 +5,7 @@
     
     <div class="d-flex align-items-center justify-content-center gap-5 w-60p mt-m-2px">
         <a class="clean-link c-white-2 fs-1-2r fw-200 hover-c-lgray" href="/">Početna Stranica</a>
-        <a class="clean-link c-white-2 fs-1-2r fw-200 hover-c-lgray" href="/builder">Konfigurator</a>
+        <a class="clean-link c-white-2 fs-1-2r fw-200 hover-c-lgray" href="/my-builds">Konfigurator</a>
         <a class="clean-link c-white-2 fs-1-2r fw-200 hover-c-lgray" href="/builds">Konfiguracije</a>
         <a class="clean-link c-white-2 fs-1-2r fw-200 hover-c-lgray" href="/discussions">Diskusije</a>
     </div>

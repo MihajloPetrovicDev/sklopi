@@ -1,6 +1,15 @@
 {
     "errors": {
         "error_processing_request": "Došlo je do greške prilikom slanja vašeg zahteva.",
-        "unexpected_error": "Došlo je do neočekivane greške."
+        "unexpected_error": "Došlo je do neočekivane greške.",
+        "error_delivery_groups_request": "Došlo je do greške prilikom učitavanja grupa za dostavu."
+    },
+    "add_buy_link": {
+        "name": "Naziv:",
+        "optional": "Opcionalno",
+        "link": "Link:",
+        "price": "Cena:",
+        "delivery_group": "Grupa Dostave:",
+        "new_delivery_group": "+ Nova Grupa Dostave"
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Helpers\EncodeHelper;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -9,6 +10,7 @@ use Illuminate\View\Component;
 class BuildsListItem extends Component
 {
     public $buildId;
+    public $encodedBuildId;
     public $buildName;
 
     /**
@@ -17,6 +19,7 @@ class BuildsListItem extends Component
     public function __construct($buildId, $buildName)
     {
         $this->buildId = $buildId;
+        $this->encodedBuildId = EncodeHelper::encode($this->buildId);
         $this->buildName = $buildName;
     }
 

@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="mt-5 mx-auto w-fc">
-                    <a class="btn btn-secondary" href="/builder">@lang('ui.create_new_build.cancel')</a>
+                    <a class="btn btn-secondary" href="/my-builds">@lang('ui.create_new_build.cancel')</a>
                     <button class="btn btn-primary" type="submit">@lang('ui.create_new_build.create')</button>
                 </div>
             </form>

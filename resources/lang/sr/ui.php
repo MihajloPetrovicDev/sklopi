@@ -31,6 +31,15 @@ return [
         'optional' => 'Opcionalno',
         'build' => 'Konfiguracija',
     ],
+    'add_build_component' => [
+        'add_component' => 'Dodaj Komponentu',
+        'component_name' => 'Naziv Komponente',
+        'add' => 'Dodaj',
+        'cancel' => 'Otkaži',
+        'buy_links' => 'Linkovi za Kupovinu',
+        'add_buy_link' => 'Dodaj Link za Kupovinu',
+
+    ],
     'login' => [
         'header_title' => 'Prijavi Se - sklopi',
         'login' => 'Prijavi Se',

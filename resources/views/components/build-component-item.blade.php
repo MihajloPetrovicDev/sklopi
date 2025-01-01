@@ -4,6 +4,6 @@
             <p class="mb-0px">{{ $buildComponent->name }}</p>
         </div>
     @else
-        <button class="btn btn-primary">+ @lang('ui.build.add_component')</button>
+        <a class="btn btn-primary" href="/add-build-component/?build-id={{ $encodedBuildId }}&build-component-type-id={{ $buildComponentTypeId }}">+ @lang('ui.build.add_component')</a>
     @endif
 </div>

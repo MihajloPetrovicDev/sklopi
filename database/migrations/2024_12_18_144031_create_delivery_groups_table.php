@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('delivery_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('user_id');
             $table->decimal('free_delivery_at', 10, 2)->nullable();
             $table->decimal('delivery_cost', 10, 2);
+            $table->unsignedBigInteger('build_id')->nullable();
+            $table->string('currency');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('build_id')->references('id')->on('builds');
         });
     }
 

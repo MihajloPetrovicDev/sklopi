@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class BuilderComponent extends Component
+class Builder extends Component
 {
     public $build;
     public $buildComponents;
@@ -25,6 +25,6 @@ class BuilderComponent extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.builder-component');
+        return view('components.builder');
     }
 }

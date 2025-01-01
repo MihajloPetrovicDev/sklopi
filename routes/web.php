@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/builder', [BuilderController::class, 'getBuilderPage']);
+Route::get('/my-builds', [BuilderController::class, 'getMyBuildsPage']);
 
 Route::get('/login', [AuthController::class, 'getLoginPage'])->middleware('guest')->name('login');
 
@@ -22,6 +22,8 @@ Route::get('/build/{id}', [BuilderController::class, 'getBuild'])->middleware('a
 
 Route::get('/guest-build', [BuilderController::class, 'getGuestBuild'])->middleware('guest');
 
+Route::get('/add-build-component', [BuilderController::class, 'getAddBuildComponent'])->middleware('auth');
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');
@@ -29,3 +31,5 @@ Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest')
 Route::post('/api/log-out', [AuthController::class, 'logOut'])->middleware('auth');
 
 Route::post('/api/create-new-build', [BuilderController::class, 'createNewBuild'])->middleware('auth');
+
+Route::post('/api/get-build-delivery-groups', [BuilderCOntroller::class, 'getBuildDeliveryGroups'])->middleware('auth');
