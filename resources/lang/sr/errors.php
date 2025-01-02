@@ -26,8 +26,22 @@ return [
         'password_required' => 'Lozinka je obavezna.',
     ],
     'create_new_build' => [
-        'build_name_max' => 'Ime konfiguracije ne sme da bude duže od 30 karaktera.',
+        'build_name_max' => 'Naziv konfiguracije ne sme da bude duži od 30 karaktera.',
         'build_visibility_reqired' => 'Preglednost je obavezna.',
-        'build_visibility_boolean' => 'Preglednost mora biti tipa boolean',
-    ]
+        'build_visibility_boolean' => 'Preglednost mora biti tipa boolean.',
+    ],
+    'get_build_delivery_groups' => [
+        'build_id_required' => 'Greška prilikom obrade grupa za dostavu linkova kupovine.',
+        'build_id_int' => 'Greška prilikom obrade grupa za dostavu linkova kupovine.',
+    ],
+    'add_build_component' => [
+        'name_required' => 'Naziv komponente je obavezan.',
+        'name_max' => 'Naziv komponente ne sme da bude duži od 30 karaktera.',
+        'type_id_required' => 'Greška prilikom obrade tipa komponente.',
+        'type_id_int' => 'Greška prilikom obrade tipa komponente.',
+        'type_id_min' => 'Greška prilikom obrade tipa komponente.',
+        'type_id_max' => 'Greška prilikom obrade tipa komponente.',
+        'build_id_required' => 'Greška prilikom obrade konfiguracije komponente.',
+        'build_id_int' => 'Greška prilikom obrade konfiguracije komponente.',
+    ],
 ];

@@ -17,7 +17,7 @@ class BuildComponentItem extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($buildComponent, $build, $buildComponentTypeId)
+    public function __construct($buildComponent, ?object $build, ?int $buildComponentTypeId)
     {
         if($buildComponent) {
             $this->buildComponent = $buildComponent;

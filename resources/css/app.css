@@ -84,6 +84,10 @@ body {
     padding-top: 5px;
 }
 
+.pb-0px {
+    padding-bottom: 0px !important;
+}
+
 .pr-10px {
     padding-right: 10px;
 }
@@ -239,6 +243,20 @@ body {
     position: absolute;
     top: 15px;
     right: 30px;
+}
+
+.buy-link-delete-button {
+    position: relative;
+    top: -162px;
+    left: 98.5%;
+    background-color: #ffffff00;
+    border: none;
+    color: #e70f0f;
+    transition: color 0.1s ease-in;
+}
+
+.buy-link-delete-button:hover {
+    color: #a80000;
 }
 
 .bt-lgray {

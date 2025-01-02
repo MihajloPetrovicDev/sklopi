@@ -33,3 +33,5 @@ Route::post('/api/log-out', [AuthController::class, 'logOut'])->middleware('auth
 Route::post('/api/create-new-build', [BuilderController::class, 'createNewBuild'])->middleware('auth');
 
 Route::post('/api/get-build-delivery-groups', [BuilderCOntroller::class, 'getBuildDeliveryGroups'])->middleware('auth');
+
+Route::post('/api/add-new-build-component', [BuilderController::class, 'addNewBuildComponent'])->middleware('auth');

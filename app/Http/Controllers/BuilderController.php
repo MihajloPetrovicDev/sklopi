@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Build;
+use App\Models\BuyLink;
 use Illuminate\Http\Request;
 use App\Helpers\EncodeHelper;
 use App\Models\DeliveryGroup;
@@ -120,6 +121,9 @@ class BuilderController extends Controller
     public function getBuildDeliveryGroups(Request $request) {
         $incomingFields = $request->validate([
             'buildId' => ['required', 'int']
+        ], [
+            'buildId.required' => __('errors.get_build_delivery_groups.build_id_required'),
+            'buildId.int' => __('errors.get_build_delivery_groups.build_id_int'),
         ]);
 
         try {
@@ -133,6 +137,63 @@ class BuilderController extends Controller
             
             return response()->json(['deliveryGroups' => $deliveryGroups], 200);
         }
+        catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function addNewBuildComponent(Request $request) {
+        $incomingFields = $request->validate([
+            'name' => ['required', 'max: 200'],
+            'typeId' => ['required', 'int', 'min: 1', 'max: 8'],
+            'buildId' => ['required', 'int'],
+            'buyLinks' => ['nullable'],
+        ], [
+            'name.required' => __('errors.add_build_component.name_required'),
+            'name.max' => __('errors.add_build_component.name_max'),
+            'typeId.required' => __('errors.add_build_component.type_id_required'),
+            'typeId.int' => __('errors.add_build_component.type_id_int'),
+            'typeId.min' => __('errors.add_build_component.type_id_min'),
+            'typeId.max' => __('errors.add_build_component.type_id_max'),
+            'buildId.required' => __('errors.add_build_component.build_id_required'),
+            'buildId.int' => __('errors.add_build_component.build_id_int'),
+        ]);
+
+        try {
+            $build = Build::findOrFail($incomingFields['buildId']);
+
+            if($build->user_id != Auth::id()) {
+                return response()->json([], 403);
+            }
+
+            //Create the build component
+            $buildComponent = new BuildComponent();
+
+            $buildComponent->name = $incomingFields['name'];
+            $buildComponent->type_id = $incomingFields['typeId'];
+            $buildComponent->build_id = $incomingFields['buildId'];
+
+            $buildComponent->save();
+
+            //Create the buy links for the build component
+            foreach($incomingFields['buyLinks'] as $buyLinksArrayItem) {
+                $buyLink = new BuyLink();
+                
+                $buyLink->name = $buyLinksArrayItem['name'];
+                $buyLink->link = $buyLinksArrayItem['link'];
+                $buyLink->price = $buyLinksArrayItem['price'];
+                $buyLink->build_component_id = $buildComponent->id;
+
+                if($buyLinksArrayItem['deliveryGroupId'] != 'null') {
+                    $buyLink->delivery_group_id = $buyLinksArrayItem['deliveryGroupId'];
+                }
+
+                $buyLink->save();
+            }
+
+            return response()->json([], 201);
+        } 
         catch(Exception $e) {
             $this->errorService->handleExceptionJSON($e);
         }

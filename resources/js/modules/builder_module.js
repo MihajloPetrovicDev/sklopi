@@ -26,7 +26,7 @@ export async function createNewBuild(buildNameFieldId, visibilityFieldsName) {
 }
 
 
-export async function addNewBuildComponent(buyLinksContainerId ,addBuyLinkButtonId) {
+export async function showBuyLinksContainer(buyLinksContainerId ,addBuyLinkButtonId) {
     const buyLinksContainer = document.getElementById(buyLinksContainerId);
     const addBuyLinkButton = document.getElementById(addBuyLinkButtonId);
     const buildId = addBuyLinkButton.getAttribute('data-build-id');
@@ -36,6 +36,54 @@ export async function addNewBuildComponent(buyLinksContainerId ,addBuyLinkButton
     const addBuyLinkContainer = await getAddBuyLinkContainer(buildId);
 
     buyLinksContainer.appendChild(addBuyLinkContainer);
+
+    await setUpDeleteBuyLinkButtons('buy-link-delete-button');
+}
+
+
+export async function addNewBuildComponent(typeId, buildId, encodedBuildId) {
+    const buildComponentNameInput = document.getElementById('component-name');
+    const buyLinkNameInputs = document.querySelectorAll('.add-buy-link-name');
+    const buyLinkLinkInputs = document.querySelectorAll('.add-buy-link-link');
+    const buyLinkPriceInputs = document.querySelectorAll('.add-buy-link-price');
+    const buyLinkDeliveryGroupSelects = document.querySelectorAll('.add-buy-link-delivery-group');
+    let buyLinks = [];
+    
+    for (let i = 0; i < buyLinkNameInputs.length; i++) {
+        buyLinks.push({
+            name: buyLinkNameInputs[i]?.value || '',
+            link: buyLinkLinkInputs[i]?.value || '',
+            price: buyLinkPriceInputs[i]?.value || '',
+            deliveryGroupId: buyLinkDeliveryGroupSelects[i]?.value || '',
+        });
+    }
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/add-new-build-component', {
+            name: buildComponentNameInput.value,
+            typeId: typeId,
+            buildId: buildId,
+            buyLinks: buyLinks,
+        });
+
+        window.location.href = '/build/' + encodedBuildId;
+    } catch(error) {
+        errorService.handleError(error);
+    }
+}
+
+
+export async function setUpDeleteBuyLinkButtons(deleteBuyLinkButtonClass) {
+    const deleteBuyLinkButtons = document.querySelectorAll(`.${deleteBuyLinkButtonClass}`);
+
+    deleteBuyLinkButtons.forEach(deleteBuyLinkButton => {
+        deleteBuyLinkButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            let buyLinkContainer = deleteBuyLinkButton.parentElement;
+            buyLinkContainer.remove();
+        });
+    });
 }
 
 
@@ -169,10 +217,17 @@ async function getBuildDeliveryGroups(buildId) {
 
 async function getAddBuyLinkContainer(buildId) {
     const addBuyLinkContainer = document.createElement('div');
-    addBuyLinkContainer.classList.add('section-2', 'gap-5', 'w-100p', 'mt-3');
+    addBuyLinkContainer.classList.add('section-2', 'gap-5', 'w-100p', 'mt-3', 'pb-0px');
+
+    const addBuyLinkDeleteButton = document.createElement('button');
+    addBuyLinkDeleteButton.classList.add('buy-link-delete-button');
+
+    const addBuyLinkDeleteButtonSpan = document.createElement('span');
+    addBuyLinkDeleteButtonSpan.classList.add('material-symbols-outlined');
+    addBuyLinkDeleteButtonSpan.textContent = 'delete';
 
     const addBuyLinkContainerTopRow = document.createElement('div');
-    addBuyLinkContainerTopRow.classList.add('d-flex');
+    addBuyLinkContainerTopRow.classList.add('d-flex', 'mt-1');
 
     const addBuyLinkContainerBottomRow = document.createElement('div');
     addBuyLinkContainerBottomRow.classList.add('d-flex', 'mt-3');
@@ -191,5 +246,8 @@ async function getAddBuyLinkContainer(buildId) {
     addBuyLinkContainer.appendChild(addBuyLinkContainerTopRow);
     addBuyLinkContainer.appendChild(addBuyLinkContainerBottomRow);
 
-    return addBuyLinkContainer
+    addBuyLinkDeleteButton.appendChild(addBuyLinkDeleteButtonSpan);
+    addBuyLinkContainer.appendChild(addBuyLinkDeleteButton);
+
+    return addBuyLinkContainer;
 }

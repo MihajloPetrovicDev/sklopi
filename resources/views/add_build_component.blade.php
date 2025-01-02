@@ -11,10 +11,10 @@
     <main>
         <h2 class="mt-5 text-center fs-1">@lang('ui.add_build_component.add_component'): {{ $build->name }} / @lang('component_types.name_by_id.'.$buildComponentTypeId)</h2>
 
-        <div class="w-40p mx-auto" id="error-container-placeholder"></div>
+        <div class="w-60p mx-auto" id="error-container-placeholder"></div>
 
         <div class="section-1 mx-auto mt-80px w-60p mb-5">
-            <form class="w-85p mx-auto" id="create-new-build-form">
+            <form class="w-85p mx-auto">
                 <label for="component-name">@lang('ui.add_build_component.component_name'):</label>
                 <input class="form-control mt-1" type="text" id="component-name"></input>
             
@@ -28,7 +28,7 @@
 
                 <div class="mt-80px mx-auto w-fc">
                     <a class="btn btn-secondary" href="/build/{{ $encodedBuildId }}">@lang('ui.add_build_component.cancel')</a>
-                    <button class="btn btn-primary" type="submit">@lang('ui.add_build_component.add')</button>
+                    <button class="btn btn-primary" id="add_build_component_submit_button" data-type-id="{{ $buildComponentTypeId }}" data-build-id="{{ $build->id }}" data-encoded-build-id="{{ $encodedBuildId }}">@lang('ui.add_build_component.add')</button>
                 </div>
             </form>
         </div>
