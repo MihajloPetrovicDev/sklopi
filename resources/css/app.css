@@ -32,6 +32,10 @@ body {
     width: 20% !important;
 }
 
+.w-30p {
+    width: 30% !important;
+}
+
 .w-40p {
     width: 40% !important;
 }
@@ -257,6 +261,25 @@ body {
 
 .buy-link-delete-button:hover {
     color: #a80000;
+}
+
+.new-delivery-group-popup-background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000007e;
+}
+
+.new-delivery-group-popup-window {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    width: 60%;
+    height: fit-content;
+    padding-block: 30px;
+    padding-inline: 50px;
+    margin-inline: auto;
 }
 
 .bt-lgray {

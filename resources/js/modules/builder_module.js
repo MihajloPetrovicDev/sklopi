@@ -26,7 +26,7 @@ export async function createNewBuild(buildNameFieldId, visibilityFieldsName) {
 }
 
 
-export async function showBuyLinksContainer(buyLinksContainerId ,addBuyLinkButtonId) {
+export async function showNewBuyLinkContainer(buyLinksContainerId ,addBuyLinkButtonId) {
     const buyLinksContainer = document.getElementById(buyLinksContainerId);
     const addBuyLinkButton = document.getElementById(addBuyLinkButtonId);
     const buildId = addBuyLinkButton.getAttribute('data-build-id');
@@ -38,6 +38,7 @@ export async function showBuyLinksContainer(buyLinksContainerId ,addBuyLinkButto
     buyLinksContainer.appendChild(addBuyLinkContainer);
 
     await setUpDeleteBuyLinkButtons('buy-link-delete-button');
+    await setUpBuyLinkNewDeliveryGroupButtons('buy-link-new-delivery-group-button');
 }
 
 
@@ -53,7 +54,7 @@ export async function addNewBuildComponent(typeId, buildId, encodedBuildId) {
         buyLinks.push({
             name: buyLinkNameInputs[i]?.value || '',
             link: buyLinkLinkInputs[i]?.value || '',
-            price: buyLinkPriceInputs[i]?.value || '',
+            price: buyLinkPriceInputs[i]?.value || 0,
             deliveryGroupId: buyLinkDeliveryGroupSelects[i]?.value || '',
         });
     }
@@ -82,6 +83,21 @@ export async function setUpDeleteBuyLinkButtons(deleteBuyLinkButtonClass) {
             
             let buyLinkContainer = deleteBuyLinkButton.parentElement;
             buyLinkContainer.remove();
+        });
+    });
+}
+
+
+export async function setUpBuyLinkNewDeliveryGroupButtons(buyLinkNewDeliveryGroupButtonClass) {
+    const buyLinkNewDeliveryGroupButtons = document.querySelectorAll(`.${buyLinkNewDeliveryGroupButtonClass}`);
+    const buyLinkNewDeliveryGroupPopupWindow = document.getElementById('new-delivery-group-popup-container');
+
+    buyLinkNewDeliveryGroupButtons.forEach(buyLinkNewDeliveryGroupButton => {
+        buyLinkNewDeliveryGroupButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            buyLinkNewDeliveryGroupPopupWindow.classList.remove('d-none');
+            buyLinkNewDeliveryGroupPopupWindow.classList.add('d-flex');
         });
     });
 }
@@ -181,9 +197,9 @@ async function getAddBuyLinkDeliveryGroupContainer(buildId) {
     });
 
     let deliveryGroupButton = document.createElement('button');
-    deliveryGroupButton.classList.add('btn', 'btn-primary', 'h-38px', 'mt-28px', 'w-100p');
-    deliveryGroupButton.id = 'buy-link-new-delivery-group-button';
+    deliveryGroupButton.classList.add('btn', 'btn-primary', 'h-38px', 'mt-28px', 'w-100p', 'buy-link-new-delivery-group-button');
     deliveryGroupButton.textContent = i18next.t('add_buy_link.new_delivery_group');
+    deliveryGroupButton.type = 'button';
 
     deliveryGroupDivLeft.appendChild(deliveryGroupLabel);
     deliveryGroupDivLeft.appendChild(deliveryGroupSelect);

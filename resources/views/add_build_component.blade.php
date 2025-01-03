@@ -8,6 +8,8 @@
 <body>
     <x-header />
 
+    <x-new-delivery-group-popup-window />
+
     <main>
         <h2 class="mt-5 text-center fs-1">@lang('ui.add_build_component.add_component'): {{ $build->name }} / @lang('component_types.name_by_id.'.$buildComponentTypeId)</h2>
 

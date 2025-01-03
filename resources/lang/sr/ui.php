@@ -38,7 +38,16 @@ return [
         'cancel' => 'Otkaži',
         'buy_links' => 'Linkovi za Kupovinu',
         'add_buy_link' => 'Dodaj Link za Kupovinu',
-
+        'buy_link_name' => 'Link za Kupovinu',
+    ],
+    'new_delivery_group_popup_window' => [
+        'create_delivery_group' => 'Napravi Grupu Dostave',
+        'name' => 'Naziv',
+        'free_delivery_at' => 'Besplatna Dostava od',
+        'delivery_cost' => 'Cena Dostave',
+        'cancel' => 'Otkaži',
+        'create' => 'Napravi',
+        'optional' => 'Opcionalno',
     ],
     'login' => [
         'header_title' => 'Prijavi Se - sklopi',

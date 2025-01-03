@@ -178,9 +178,15 @@ class BuilderController extends Controller
 
             //Create the buy links for the build component
             foreach($incomingFields['buyLinks'] as $buyLinksArrayItem) {
+                $buyLinkName = __('ui.add_build_component.buy_link_name');
+
+                if($buyLinksArrayItem['name'] != '') {
+                    $buyLinkName = $buyLinksArrayItem['name'];
+                }
+
                 $buyLink = new BuyLink();
                 
-                $buyLink->name = $buyLinksArrayItem['name'];
+                $buyLink->name = $buyLinkName;
                 $buyLink->link = $buyLinksArrayItem['link'];
                 $buyLink->price = $buyLinksArrayItem['price'];
                 $buyLink->build_component_id = $buildComponent->id;
