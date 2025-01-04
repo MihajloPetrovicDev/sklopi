@@ -37,3 +37,5 @@ Route::post('/api/get-build-delivery-groups', [BuilderCOntroller::class, 'getBui
 Route::post('/api/add-new-build-component', [BuilderController::class, 'addNewBuildComponent'])->middleware('auth');
 
 Route::post('/api/create-new-delivery-group', [BuilderController::class, 'createNewDeliveryGroup'])->middleware('auth');
+
+Route::post('/api/delete-build-component', [BuilderController::class, 'deleteBuildComponent'])->middleware('auth');

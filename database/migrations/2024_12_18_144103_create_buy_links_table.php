@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('delivery_group_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('build_component_id')->references('id')->on('build_components');
+            $table->foreign('build_component_id')->references('id')->on('build_components')->onDelete('cascade');
             $table->foreign('delivery_group_id')->references('id')->on('delivery_groups');
         });
     }

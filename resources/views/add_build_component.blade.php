@@ -16,7 +16,7 @@
         <div class="w-60p mx-auto" id="error-container-placeholder"></div>
 
         <div class="section-1 mx-auto mt-80px w-60p mb-5">
-            <form class="w-85p mx-auto">
+            <div class="w-85p mx-auto">
                 <label for="component-name">@lang('ui.add_build_component.component_name'):</label>
                 <input class="form-control mt-1" type="text" id="component-name"></input>
             
@@ -32,7 +32,7 @@
                     <a class="btn btn-secondary" href="/build/{{ $encodedBuildId }}">@lang('ui.add_build_component.cancel')</a>
                     <button class="btn btn-primary" id="add-build-component-submit-button" data-type-id="{{ $buildComponentTypeId }}" data-build-id="{{ $build->id }}" data-encoded-build-id="{{ $encodedBuildId }}">@lang('ui.add_build_component.add')</button>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
 

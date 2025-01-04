@@ -16,8 +16,16 @@ body {
     height: fit-content !important;
 }
 
+.h-28px {
+    height: 28px !important;
+}
+
 .h-38px {
     height: 38px !important;
+}
+
+.w-5p {
+    width: 5% !important;
 }
 
 .w-10p {
@@ -184,6 +192,10 @@ body {
     margin-left: 5px;
 }
 
+.ml-3p {
+    margin-left: 3%;
+}
+
 .ml-5p {
     margin-left: 5%;
 }
@@ -260,6 +272,28 @@ body {
 }
 
 .buy-link-delete-button:hover {
+    color: #a80000;
+}
+
+.span-button-black {
+    background-color: #ffffff00;
+    border: none;
+    color: #3a3a3a;
+    transition: color 0.1s ease-in;
+}
+
+.span-button-black:hover {
+    color: #070707;
+}
+
+.span-button-red {
+    background-color: #ffffff00;
+    border: none;
+    color: #e70f0f;
+    transition: color 0.1s ease-in;
+}
+
+.span-button-red:hover {
     color: #a80000;
 }
 

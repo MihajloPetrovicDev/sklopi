@@ -49,5 +49,9 @@ return [
         'delivery_group_name_max' => 'Naziv grupe za dostavu ne sme da bude duži od 50 karaktera.',
         'build_id_required' => 'Greška prilikom obrade konfiguracije grupe za dostavu.',
         'build_id_int' => 'Greška prilikom obrade konfiguracije grupe za dostavu.',
-    ]
+    ],
+    'delete_build_component' => [
+        'delete_build_component_id_required' => 'Greška prilikom obrade konfiguracije komponente za brisanje.',
+        'delete_build_component_id_int' => 'Greška prilikom obrade konfiguracije komponente za brisanje.',
+    ],
 ];

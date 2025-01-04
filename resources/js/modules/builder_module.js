@@ -118,6 +118,30 @@ export async function createNewDeliveryGroup(newDeliveryGroupNameInputId, newDel
 }
 
 
+export async function setupDeleteBuildComponentButtons(deleteBuildComponentButtonClass) {
+    const deleteBuildComponentButtons = document.querySelectorAll(`.${deleteBuildComponentButtonClass}`);
+
+    for(const deleteBuildComponentButton of deleteBuildComponentButtons) {
+        deleteBuildComponentButton.addEventListener('click', async function(e) {
+            e.preventDefault;
+
+            let deleteButtonBuildComponentId = deleteBuildComponentButton.getAttribute('build-component-id');
+
+            try {
+                const response = await axios.post('http://localhost:8000/api/delete-build-component', {
+                    deleteBuildComponentId: deleteButtonBuildComponentId,
+                });
+
+                window.location.reload();
+            } 
+            catch(error) {
+                errorService.handleError(error);
+            }
+        });
+    }
+}
+
+
 function setUpBuyLinkNewDeliveryGroupButtons(buyLinkNewDeliveryGroupButtonClass, buyLinkNewDeliveryGroupPopupContainerId) {
     const buyLinkNewDeliveryGroupButtons = document.querySelectorAll(`.${buyLinkNewDeliveryGroupButtonClass}`);
     const buyLinkNewDeliveryGroupPopupWindow = document.getElementById(buyLinkNewDeliveryGroupPopupContainerId);

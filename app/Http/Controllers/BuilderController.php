@@ -251,4 +251,30 @@ class BuilderController extends Controller
             $this->errorService->handleExceptionJSON($e);
         }
     }
+
+
+    public function deleteBuildComponent(Request $request) {
+        $incomingFields = $request->validate([
+            'deleteBuildComponentId' => ['required', 'int'],
+        ],
+        [
+            'deleteBuildComponentId.required' => __('errors.delete_build_component.delete_build_component_id_required'),
+            'deleteBuildComponentId.int' => __('errors.delete_build_component.delete_build_component_id_int'),
+        ]);
+
+        try {
+            $buildComponentToDelete = BuildComponent::findOrFail($incomingFields['deleteBuildComponentId']);
+
+            if($buildComponentToDelete->build->user_id != Auth::id()) {
+                return response()->json([], 403);
+            }
+
+            $buildComponentToDelete->delete();
+
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
 }
