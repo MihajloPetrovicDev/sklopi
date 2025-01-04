@@ -70,5 +70,5 @@ return [
     'my_account' => [
         'header_title' => 'Moj Nalog - sklopi',
         'log_out' => 'Odjavi Se',
-    ]
+    ],
 ];

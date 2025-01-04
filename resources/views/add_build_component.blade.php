@@ -8,7 +8,7 @@
 <body>
     <x-header />
 
-    <x-new-delivery-group-popup-window />
+    <x-new-delivery-group-popup-window :build="$build" />
 
     <main>
         <h2 class="mt-5 text-center fs-1">@lang('ui.add_build_component.add_component'): {{ $build->name }} / @lang('component_types.name_by_id.'.$buildComponentTypeId)</h2>
@@ -30,7 +30,7 @@
 
                 <div class="mt-80px mx-auto w-fc">
                     <a class="btn btn-secondary" href="/build/{{ $encodedBuildId }}">@lang('ui.add_build_component.cancel')</a>
-                    <button class="btn btn-primary" id="add_build_component_submit_button" data-type-id="{{ $buildComponentTypeId }}" data-build-id="{{ $build->id }}" data-encoded-build-id="{{ $encodedBuildId }}">@lang('ui.add_build_component.add')</button>
+                    <button class="btn btn-primary" id="add-build-component-submit-button" data-type-id="{{ $buildComponentTypeId }}" data-build-id="{{ $build->id }}" data-encoded-build-id="{{ $encodedBuildId }}">@lang('ui.add_build_component.add')</button>
                 </div>
             </form>
         </div>

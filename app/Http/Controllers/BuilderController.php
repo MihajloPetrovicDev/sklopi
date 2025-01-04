@@ -145,23 +145,23 @@ class BuilderController extends Controller
 
     public function addNewBuildComponent(Request $request) {
         $incomingFields = $request->validate([
-            'name' => ['required', 'max: 200'],
-            'typeId' => ['required', 'int', 'min: 1', 'max: 8'],
-            'buildId' => ['required', 'int'],
-            'buyLinks' => ['nullable'],
+            'buildComponentName' => ['required', 'max: 200'],
+            'buildComponentTypeId' => ['required', 'int', 'min: 1', 'max: 8'],
+            'buildComponentBuildId' => ['required', 'int'],
+            'buildComponentBuyLinks' => ['nullable'],
         ], [
-            'name.required' => __('errors.add_build_component.name_required'),
-            'name.max' => __('errors.add_build_component.name_max'),
-            'typeId.required' => __('errors.add_build_component.type_id_required'),
-            'typeId.int' => __('errors.add_build_component.type_id_int'),
-            'typeId.min' => __('errors.add_build_component.type_id_min'),
-            'typeId.max' => __('errors.add_build_component.type_id_max'),
-            'buildId.required' => __('errors.add_build_component.build_id_required'),
-            'buildId.int' => __('errors.add_build_component.build_id_int'),
+            'buildComponentName.required' => __('errors.add_new_build_component.build_component_name_required'),
+            'buildComponentName.max' => __('errors.add_new_build_component.build_component_name_max'),
+            'buildComponentTypeId.required' => __('errors.add_new_build_component.build_component_type_id_required'),
+            'buildComponentTypeId.int' => __('errors.add_new_build_component.build_component_type_id_int'),
+            'buildComponentTypeId.min' => __('errors.add_new_build_component.build_component_type_id_min'),
+            'buildComponentTypeId.max' => __('errors.add_new_build_component.build_component_type_id_max'),
+            'buildComponentBuildId.required' => __('errors.add_new_build_component.build_component_build_id_required'),
+            'buildComponentBuildId.int' => __('errors.add_new_build_component.build_component_build_id_int'),
         ]);
 
         try {
-            $build = Build::findOrFail($incomingFields['buildId']);
+            $build = Build::findOrFail($incomingFields['buildComponentBuildId']);
 
             if($build->user_id != Auth::id()) {
                 return response()->json([], 403);
@@ -170,14 +170,14 @@ class BuilderController extends Controller
             //Create the build component
             $buildComponent = new BuildComponent();
 
-            $buildComponent->name = $incomingFields['name'];
-            $buildComponent->type_id = $incomingFields['typeId'];
-            $buildComponent->build_id = $incomingFields['buildId'];
+            $buildComponent->name = $incomingFields['buildComponentName'];
+            $buildComponent->type_id = $incomingFields['buildComponentTypeId'];
+            $buildComponent->build_id = $incomingFields['buildComponentBuildId'];
 
             $buildComponent->save();
 
             //Create the buy links for the build component
-            foreach($incomingFields['buyLinks'] as $buyLinksArrayItem) {
+            foreach($incomingFields['buildComponentBuyLinks'] as $buyLinksArrayItem) {
                 $buyLinkName = __('ui.add_build_component.buy_link_name');
 
                 if($buyLinksArrayItem['name'] != '') {
@@ -200,6 +200,53 @@ class BuilderController extends Controller
 
             return response()->json([], 201);
         } 
+        catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function createNewDeliveryGroup(Request $request) {
+        $incomingFields = $request-> validate([
+            'deliveryGroupName' => ['required', 'max:50'],
+            'deliveryGroupFreeDeliveryAt' => ['nullable'],
+            'deliveryGroupDeliveryCost' => ['nullable'],
+            'deliveryGroupBuildId' => ['required', 'int'],
+        ],
+        [
+            'deliveryGroupName.required' => __('errors.create_new_delivery_group.delivery_group_name_required'),
+            'deliveryGroupName.max' => __('errors.create_new_delivery_group.delivery_group_name_max'),
+            'deliveryGroupBuildId.required' => __('errors.create_new_delivery_group.build_id_required'),
+            'deliveryGroupBuildId.int' => __('errors.create_new_delivery_group.build_id_int'),
+        ]);
+
+        $deliveryGroupCost = 0;
+        $userId = Auth::id();
+
+        if($incomingFields['deliveryGroupDeliveryCost']) {
+            $deliveryGroupCost = $incomingFields['deliveryGroupDeliveryCost'];
+        }
+
+        try {
+            $build = Build::findOrFail($incomingFields['deliveryGroupBuildId']);
+
+            if($build->user_id != $userId) {
+                return response()->json([], 403);
+            }
+
+            $deliveryGroup = new DeliveryGroup();
+
+            $deliveryGroup->name = $incomingFields['deliveryGroupName'];
+            $deliveryGroup->user_id = $userId;
+            $deliveryGroup->free_delivery_at = $incomingFields['deliveryGroupFreeDeliveryAt'];
+            $deliveryGroup->delivery_cost = $deliveryGroupCost;
+            $deliveryGroup->build_id = $build->id;
+            $deliveryGroup->currency = 'RSD';
+
+            $deliveryGroup->save();
+
+            return response()->json([], 201);
+        }
         catch(Exception $e) {
             $this->errorService->handleExceptionJSON($e);
         }

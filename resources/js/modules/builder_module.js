@@ -26,30 +26,36 @@ export async function createNewBuild(buildNameFieldId, visibilityFieldsName) {
 }
 
 
-export async function showNewBuyLinkContainer(buyLinksContainerId ,addBuyLinkButtonId) {
+export async function showNewBuyLinkContainer(buyLinksContainerId, addBuyLinkButtonId) {
     const buyLinksContainer = document.getElementById(buyLinksContainerId);
     const addBuyLinkButton = document.getElementById(addBuyLinkButtonId);
     const buildId = addBuyLinkButton.getAttribute('data-build-id');
-
-    addBuyLinkButton.style.visibility = 'none';
 
     const addBuyLinkContainer = await getAddBuyLinkContainer(buildId);
 
     buyLinksContainer.appendChild(addBuyLinkContainer);
 
+    //Rerun the setup for delete buy link buttons every time a new buy link is added
+    //so that the delete button works on it
     await setUpDeleteBuyLinkButtons('buy-link-delete-button');
-    await setUpBuyLinkNewDeliveryGroupButtons('buy-link-new-delivery-group-button');
+
+    //Run the seyup for new delivery group buttons each time a new buy link is added so
+    //that the new delivery group button works on it
+    await setUpBuyLinkNewDeliveryGroupButtons('buy-link-new-delivery-group-button', 'new-delivery-group-popup-container');
 }
 
 
-export async function addNewBuildComponent(typeId, buildId, encodedBuildId) {
-    const buildComponentNameInput = document.getElementById('component-name');
-    const buyLinkNameInputs = document.querySelectorAll('.add-buy-link-name');
-    const buyLinkLinkInputs = document.querySelectorAll('.add-buy-link-link');
-    const buyLinkPriceInputs = document.querySelectorAll('.add-buy-link-price');
-    const buyLinkDeliveryGroupSelects = document.querySelectorAll('.add-buy-link-delivery-group');
+export async function addNewBuildComponent(typeId, buildId, encodedBuildId, buildComponentNameInputId, buyLinkNameInputClass, buyLinkLinkInputClass, buyLinkPriceInputClass, buyLinkDeliveryGroupSelectClass) {
+    const buildComponentNameInput = document.getElementById(buildComponentNameInputId);
+    const buyLinkNameInputs = document.querySelectorAll(`.${buyLinkNameInputClass}`);
+    const buyLinkLinkInputs = document.querySelectorAll(`.${buyLinkLinkInputClass}`);
+    const buyLinkPriceInputs = document.querySelectorAll(`.${buyLinkPriceInputClass}`);
+    const buyLinkDeliveryGroupSelects = document.querySelectorAll(`.${buyLinkDeliveryGroupSelectClass}`);
     let buyLinks = [];
     
+    //Iterate trough all buy links on the page and push the corresponding input values
+    //into the buyLinks array according to the current index, essentially push the buy link
+    //info into the buyLinks array
     for (let i = 0; i < buyLinkNameInputs.length; i++) {
         buyLinks.push({
             name: buyLinkNameInputs[i]?.value || '',
@@ -61,10 +67,10 @@ export async function addNewBuildComponent(typeId, buildId, encodedBuildId) {
 
     try {
         const response = await axios.post('http://localhost:8000/api/add-new-build-component', {
-            name: buildComponentNameInput.value,
-            typeId: typeId,
-            buildId: buildId,
-            buyLinks: buyLinks,
+            buildComponentName: buildComponentNameInput.value,
+            buildComponentTypeId: typeId,
+            buildComponentBuildId: buildId,
+            buildComponentBuyLinks: buyLinks,
         });
 
         window.location.href = '/build/' + encodedBuildId;
@@ -88,9 +94,33 @@ export async function setUpDeleteBuyLinkButtons(deleteBuyLinkButtonClass) {
 }
 
 
-export async function setUpBuyLinkNewDeliveryGroupButtons(buyLinkNewDeliveryGroupButtonClass) {
+export async function createNewDeliveryGroup(newDeliveryGroupNameInputId, newDeliveryGroupFreeDeliveryAtInputId, newDeliveryGroupDeliveryCostInputId, buildId) {
+    const newDeliveryGroupNameInput = document.getElementById(newDeliveryGroupNameInputId);
+    const newDeliveryGroupFreeDeliveryAtInput = document.getElementById(newDeliveryGroupFreeDeliveryAtInputId);
+    const newDeliveryGroupDeliveryCostInput = document.getElementById(newDeliveryGroupDeliveryCostInputId);
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/create-new-delivery-group', {
+            deliveryGroupName: newDeliveryGroupNameInput.value,
+            deliveryGroupFreeDeliveryAt: newDeliveryGroupFreeDeliveryAtInput.value,
+            deliveryGroupDeliveryCost: newDeliveryGroupDeliveryCostInput.value,
+            deliveryGroupBuildId: buildId,
+        });
+
+        const deliveryGroups = await getBuildDeliveryGroups(buildId);
+
+        //After creating the delivery group add it as an option to all the delivery group select elements
+        addNewDeliveryGroupOptionToEverySelect('add-buy-link-delivery-group', deliveryGroups);
+    }
+    catch(error) {
+        errorService.handleError(error);
+    }
+}
+
+
+function setUpBuyLinkNewDeliveryGroupButtons(buyLinkNewDeliveryGroupButtonClass, buyLinkNewDeliveryGroupPopupContainerId) {
     const buyLinkNewDeliveryGroupButtons = document.querySelectorAll(`.${buyLinkNewDeliveryGroupButtonClass}`);
-    const buyLinkNewDeliveryGroupPopupWindow = document.getElementById('new-delivery-group-popup-container');
+    const buyLinkNewDeliveryGroupPopupWindow = document.getElementById(buyLinkNewDeliveryGroupPopupContainerId);
 
     buyLinkNewDeliveryGroupButtons.forEach(buyLinkNewDeliveryGroupButton => {
         buyLinkNewDeliveryGroupButton.addEventListener('click', function (e) {
@@ -108,12 +138,12 @@ function getAddBuyLinkNameContainer() {
     nameDiv.classList.add('w-48p')
     
     let nameLabel = document.createElement('label');
-    nameLabel.for = 'buy-link-name';
+    nameLabel.for = 'add-buy-link-name';
     nameLabel.textContent = i18next.t('add_buy_link.name');
 
     let nameInput = document.createElement('input');
     nameInput.classList.add('form-control', 'mt-1', 'add-buy-link-name');
-    nameInput.id = 'buy-link-name';
+    nameInput.id = 'add-buy-link-name';
     nameInput.placeholder = i18next.t('add_buy_link.optional');
 
     nameDiv.appendChild(nameLabel);
@@ -128,12 +158,12 @@ function getAddBuyLinkLinkContainer() {
     linkDiv.classList.add('w-47p', 'ml-5p')
     
     let linkLabel = document.createElement('label');
-    linkLabel.for = 'buy-link-link';
+    linkLabel.for = 'add-buy-link-link';
     linkLabel.textContent = i18next.t('add_buy_link.link');
 
     let linkInput = document.createElement('input');
     linkInput.classList.add('form-control', 'mt-1', 'add-buy-link-link');
-    linkInput.id = 'buy-link-link';
+    linkInput.id = 'add-buy-link-link';
 
     linkDiv.appendChild(linkLabel);
     linkDiv.appendChild(linkInput);
@@ -147,12 +177,12 @@ function getAddBuyLinkPriceContainer() {
     priceDiv.classList.add('w-20p');
     
     let priceLabel = document.createElement('label');
-    priceLabel.for = 'buy-link-price';
+    priceLabel.for = 'add-buy-link-price';
     priceLabel.textContent = i18next.t('add_buy_link.price');
 
     let priceInput = document.createElement('input');
     priceInput.classList.add('form-control', 'mt-1', 'add-buy-link-price');
-    priceInput.id = 'buy-link-price';
+    priceInput.id = 'add-buy-link-price';
     priceInput.placeholder = i18next.t('add_buy_link.optional');
 
     priceDiv.appendChild(priceLabel);
@@ -173,12 +203,12 @@ async function getAddBuyLinkDeliveryGroupContainer(buildId) {
     deliveryGroupDivRight.classList.add('w-40p');
     
     let deliveryGroupLabel = document.createElement('label');
-    deliveryGroupLabel.for = 'buy-link-delivery-group-select';
+    deliveryGroupLabel.for = 'add-buy-link-delivery-group-select';
     deliveryGroupLabel.textContent = i18next.t('add_buy_link.delivery_group');
 
     let deliveryGroupSelect = document.createElement('select');
     deliveryGroupSelect.classList.add('form-select', 'h-38px', 'mt-1', 'add-buy-link-delivery-group');
-    deliveryGroupSelect.id = 'buy-link-delivery-group-select'
+    deliveryGroupSelect.id = 'add-buy-link-delivery-group-select'
 
     const deliveryGroups = await getBuildDeliveryGroups(buildId);
 
@@ -266,4 +296,26 @@ async function getAddBuyLinkContainer(buildId) {
     addBuyLinkContainer.appendChild(addBuyLinkDeleteButton);
 
     return addBuyLinkContainer;
+}
+
+
+function addNewDeliveryGroupOptionToEverySelect(deliveryGroupSelectClass, deliveryGroups) {
+    const deliveryGroupSelects = document.querySelectorAll(`.${deliveryGroupSelectClass}`);
+
+    deliveryGroupSelects.forEach(deliveryGroupSelect => {
+        deliveryGroupSelect.replaceChildren();
+
+        // Setting an empty delivery group option first
+        let deliveryGroupSelectOption = document.createElement('option');
+        deliveryGroupSelectOption.value = null;
+        deliveryGroupSelect.appendChild(deliveryGroupSelectOption);
+
+        deliveryGroups.forEach(deliveryGroup => {
+            let deliveryGroupSelectOption = document.createElement('option');
+            deliveryGroupSelectOption.text = deliveryGroup.name;
+            deliveryGroupSelectOption.value = deliveryGroup.id;
+
+            deliveryGroupSelect.appendChild(deliveryGroupSelectOption);
+        });
+    });
 }

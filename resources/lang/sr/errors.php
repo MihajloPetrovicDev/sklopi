@@ -34,14 +34,20 @@ return [
         'build_id_required' => 'Greška prilikom obrade grupa za dostavu linkova kupovine.',
         'build_id_int' => 'Greška prilikom obrade grupa za dostavu linkova kupovine.',
     ],
-    'add_build_component' => [
-        'name_required' => 'Naziv komponente je obavezan.',
-        'name_max' => 'Naziv komponente ne sme da bude duži od 30 karaktera.',
-        'type_id_required' => 'Greška prilikom obrade tipa komponente.',
-        'type_id_int' => 'Greška prilikom obrade tipa komponente.',
-        'type_id_min' => 'Greška prilikom obrade tipa komponente.',
-        'type_id_max' => 'Greška prilikom obrade tipa komponente.',
-        'build_id_required' => 'Greška prilikom obrade konfiguracije komponente.',
-        'build_id_int' => 'Greška prilikom obrade konfiguracije komponente.',
+    'add_new_build_component' => [
+        'build_component_name_required' => 'Naziv komponente je obavezan.',
+        'build_component_name_max' => 'Naziv komponente ne sme da bude duži od 200 karaktera.',
+        'build_component_type_id_required' => 'Greška prilikom obrade tipa komponente.',
+        'build_component_type_id_int' => 'Greška prilikom obrade tipa komponente.',
+        'build_component_type_id_min' => 'Greška prilikom obrade tipa komponente.',
+        'build_component_type_id_max' => 'Greška prilikom obrade tipa komponente.',
+        'build_component_build_id_required' => 'Greška prilikom obrade konfiguracije komponente.',
+        'build_component_build_id_int' => 'Greška prilikom obrade konfiguracije komponente.',
     ],
+    'create_new_delivery_group' => [
+        'delivery_group_name_required' => 'Naziv grupe za dostavu je obavezan.',
+        'delivery_group_name_max' => 'Naziv grupe za dostavu ne sme da bude duži od 50 karaktera.',
+        'build_id_required' => 'Greška prilikom obrade konfiguracije grupe za dostavu.',
+        'build_id_int' => 'Greška prilikom obrade konfiguracije grupe za dostavu.',
+    ]
 ];

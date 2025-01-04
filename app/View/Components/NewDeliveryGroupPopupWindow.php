@@ -8,12 +8,14 @@ use Illuminate\View\Component;
 
 class NewDeliveryGroupPopupWindow extends Component
 {
+    public $build;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($build)
     {
-        //
+        $this->build = $build;
     }
 
     /**
