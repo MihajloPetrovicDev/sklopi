@@ -24,6 +24,8 @@ Route::get('/guest-build', [BuilderController::class, 'getGuestBuild'])->middlew
 
 Route::get('/add-build-component', [BuilderController::class, 'getAddBuildComponent'])->middleware('auth');
 
+Route::get('/build-component/{id}', [BuilderController::class, 'getBuildComponentPage'])->middleware('auth');
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');

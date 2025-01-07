@@ -5,13 +5,15 @@
                 <p class="mb-0px">{{ $buildComponent->name }}</p>
             </div>
 
-            <button class="span-button-black h-28px w-5p build-component-settings-button" data-encoded-build-component-id="{{ $encodedBuildComponentId }}">
-                <span class="material-symbols-outlined">settings</span>
-            </button>
+            <div class="d-flex w-10p">
+                <a class="span-button-black h-24px build-component-settings-button" href="/build-component/{{ $encodedBuildComponentId }}">
+                    <span class="material-symbols-outlined mx-auto">settings</span>
+                </a>
 
-            <button class="span-button-red h-28px w-5p d-flex build-component-delete-button" build-component-id="{{ $buildComponent->id }}">
-                <span class="material-symbols-outlined ms-auto">delete</span>
-            </button>
+                <button class="span-button-red h-24px build-component-delete-button ms-auto pin-0px" build-component-id="{{ $buildComponent->id }}">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </div>
         </div>
     @else
         <a class="btn btn-primary" href="/add-build-component/?build-id={{ $encodedBuildId }}&build-component-type-id={{ $buildComponentTypeId }}">+ @lang('ui.build.add_component')</a>

@@ -81,11 +81,15 @@ class BuilderController extends Controller
     }
 
 
-    public function getBuild($hashedId) {
+    public function getBuild($encodedBuildId) {
         try {
-            $id = EncodeHelper::decode($hashedId);
+            $buildId = EncodeHelper::decode($encodedBuildId);
 
-            $build = Build::findOrFail($id);
+            $build = Build::findOrFail($buildId);
+
+            if($build->user_id != Auth::id() && $build->is_public == false) {
+                return response()->json([], 403);
+            }
 
             $buildComponents = BuildComponent::where('build_id', $build->id)->get();
 
@@ -178,7 +182,7 @@ class BuilderController extends Controller
 
             //Create the buy links for the build component
             foreach($incomingFields['buildComponentBuyLinks'] as $buyLinksArrayItem) {
-                $buyLinkName = __('ui.add_build_component.buy_link_name');
+                $buyLinkName = __('ui.add_build_component.buy_link_default_name');
 
                 if($buyLinksArrayItem['name'] != '') {
                     $buyLinkName = $buyLinksArrayItem['name'];
@@ -273,6 +277,31 @@ class BuilderController extends Controller
 
             return response()->json([], 200);
         }
+        catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function getBuildComponentPage($encodedBuildComponentId) {
+        try {
+            $buildComponentId = EncodeHelper::decode($encodedBuildComponentId);
+
+            $buildComponent = BuildComponent::findOrFail($buildComponentId);
+
+            if($buildComponent->build->user_id != Auth::id() && $buildComponent->build->is_public == false) {
+                return response()->json([], 403);
+            }
+
+            $buildDeliveryGroups = DeliveryGroup::where('user_id', Auth::id())
+                ->where(function ($query) use ($buildComponent) {
+                    $query->where('build_id', null)
+                        ->orWhere('build_id', $buildComponent->build_id);
+                })
+                ->get();
+
+            return view('build_component', compact('buildComponent', 'buildDeliveryGroups'));
+         }
         catch(Exception $e) {
             $this->errorService->handleExceptionJSON($e);
         }

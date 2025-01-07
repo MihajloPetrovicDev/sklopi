@@ -2,7 +2,7 @@ import { showNewBuyLinkContainer, createNewBuildComponent, setUpDeleteBuyLinkBut
 
 
 const addBuyLinkButton = document.getElementById('add-buy-link-button');
-const addBuildComponentButton = document.getElementById('add-build-component-submit-button');
+const saveBuildComponentButton = document.getElementById('build-component-save-button');
 const buyLinkNewDeliveryGroupPopupWindowCancelButton = document.getElementById('add-buy-link-popup-window-cancel-button');
 const buyLinkNewDeliveryGroupPopupWindowCreateButton = document.getElementById('add-buy-link-popup-window-create-button');
 
@@ -17,7 +17,7 @@ addBuyLinkButton.addEventListener('click', function(e) {
 });
 
 
-addBuildComponentButton.addEventListener('click', function(e) {
+saveBuildComponentButton.addEventListener('click', function(e) {
     e.preventDefault();
 
     const typeId = addBuildComponentButton.getAttribute('data-type-id');

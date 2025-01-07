@@ -45,7 +45,7 @@ export async function showNewBuyLinkContainer(buyLinksContainerId, addBuyLinkBut
 }
 
 
-export async function addNewBuildComponent(typeId, buildId, encodedBuildId, buildComponentNameInputId, buyLinkNameInputClass, buyLinkLinkInputClass, buyLinkPriceInputClass, buyLinkDeliveryGroupSelectClass) {
+export async function createNewBuildComponent(typeId, buildId, encodedBuildId, buildComponentNameInputId, buyLinkNameInputClass, buyLinkLinkInputClass, buyLinkPriceInputClass, buyLinkDeliveryGroupSelectClass) {
     const buildComponentNameInput = document.getElementById(buildComponentNameInputId);
     const buyLinkNameInputs = document.querySelectorAll(`.${buyLinkNameInputClass}`);
     const buyLinkLinkInputs = document.querySelectorAll(`.${buyLinkLinkInputClass}`);

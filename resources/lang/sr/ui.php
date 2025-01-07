@@ -4,7 +4,7 @@ return [
     'home' => [
         'header_title' => 'sklopi - Jednostavan i Efikasan Konfigurator Delova za Računar',
     ],
-    'builder' => [
+    'my_builds' => [
         'header_title' => 'Konfigurator - sklopi',
         'my_builds' => 'Moje Konfiguracije',
         'new_build' => 'Nova Konfiguracija',
@@ -38,7 +38,7 @@ return [
         'cancel' => 'Otkaži',
         'buy_links' => 'Linkovi za Kupovinu',
         'add_buy_link' => 'Dodaj Link za Kupovinu',
-        'buy_link_name' => 'Link za Kupovinu',
+        'buy_link_default_name' => 'Link za Kupovinu',
     ],
     'new_delivery_group_popup_window' => [
         'create_delivery_group' => 'Napravi Grupu Dostave',
@@ -71,4 +71,19 @@ return [
         'header_title' => 'Moj Nalog - sklopi',
         'log_out' => 'Odjavi Se',
     ],
+    'build_component' => [
+        'component' => 'Komponenta',
+        'component_name' => 'Naziv Komponente',
+        'add' => 'Dodaj',
+        'cancel' => 'Otkaži',
+        'save' => 'Sačuvaj',
+        'buy_links' => 'Linkovi za Kupovinu',
+        'add_buy_link' => 'Dodaj Link za Kupovinu',
+        'buy_link_default_name' => 'Link za Kupovinu',
+        'buy_link_name' => 'Naziv',
+        'buy_link_link' => 'Link',
+        'buy_link_price' => 'Cena',
+        'buy_link_delivery_group' => 'Grupa Dostave',
+        'buy_link_new_delivery_group' => 'Nova Grupa Dostave',
+    ]
 ];
