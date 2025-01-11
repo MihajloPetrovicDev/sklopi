@@ -29,7 +29,6 @@ return [
         'create' => 'Napravi',
         'cancel' => 'Otkaži',
         'optional' => 'Opcionalno',
-        'build' => 'Konfiguracija',
     ],
     'add_build_component' => [
         'add_component' => 'Dodaj Komponentu',
@@ -38,7 +37,6 @@ return [
         'cancel' => 'Otkaži',
         'buy_links' => 'Linkovi za Kupovinu',
         'add_buy_link' => 'Dodaj Link za Kupovinu',
-        'buy_link_default_name' => 'Link za Kupovinu',
     ],
     'new_delivery_group_popup_window' => [
         'create_delivery_group' => 'Napravi Grupu Dostave',
@@ -79,7 +77,6 @@ return [
         'save' => 'Sačuvaj',
         'buy_links' => 'Linkovi za Kupovinu',
         'add_buy_link' => 'Dodaj Link za Kupovinu',
-        'buy_link_default_name' => 'Link za Kupovinu',
         'buy_link_name' => 'Naziv',
         'buy_link_link' => 'Link',
         'buy_link_price' => 'Cena',

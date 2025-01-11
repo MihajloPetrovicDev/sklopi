@@ -1,4 +1,4 @@
-import { showNewBuyLinkContainer, createNewBuildComponent, setUpDeleteBuyLinkButtons, createNewDeliveryGroup } from "../modules/builder_module";
+import { showNewBuyLinkContainer, updateBuildComponent, setUpDeleteBuyLinkButtons, createNewDeliveryGroup, setUpBuyLinkNewDeliveryGroupButtons } from "../modules/builder_module";
 
 
 const addBuyLinkButton = document.getElementById('add-buy-link-button');
@@ -8,6 +8,9 @@ const buyLinkNewDeliveryGroupPopupWindowCreateButton = document.getElementById('
 
 
 setUpDeleteBuyLinkButtons('buy-link-delete-button');
+
+
+setUpBuyLinkNewDeliveryGroupButtons('buy-link-new-delivery-group-button', 'new-delivery-group-popup-container');
 
 
 addBuyLinkButton.addEventListener('click', function(e) {
@@ -20,11 +23,24 @@ addBuyLinkButton.addEventListener('click', function(e) {
 saveBuildComponentButton.addEventListener('click', function(e) {
     e.preventDefault();
 
-    const typeId = addBuildComponentButton.getAttribute('data-type-id');
-    const buildId = addBuildComponentButton.getAttribute('data-build-id');
-    const encodedBuildId = addBuildComponentButton.getAttribute('data-encoded-build-id');
+    const encodedBuildId = saveBuildComponentButton.getAttribute('data-encoded-build-id');
+    const buildComponentId = saveBuildComponentButton.getAttribute('data-build-component-id');
 
-    createNewBuildComponent(typeId, buildId, encodedBuildId, 'component-name', 'add-buy-link-name', 'add-buy-link-link', 'add-buy-link-price', 'add-buy-link-delivery-group');
+    const buyLinkClasses = {
+        buyLinkNameInputClass: 'buy-link-name',
+        buyLinkLinkInputClass: 'buy-link-link',
+        buyLinkPriceInputClass: 'buy-link-price',
+        buyLinkDeliveryGroupSelectClass: 'buy-link-delivery-group',
+    };
+
+    const addBuyLinkClasses = {
+        addBuyLinkNameInputClass: 'add-buy-link-name',
+        addBuyLinkLinkInputClass: 'add-buy-link-link',
+        addBuyLinkPriceInputClass: 'add-buy-link-price',
+        addBuyLinkDeliveryGroupSelectClass: 'add-buy-link-delivery-group'
+    };
+
+    updateBuildComponent(buildComponentId, encodedBuildId, 'component-name', buyLinkClasses, addBuyLinkClasses);
 });
 
 

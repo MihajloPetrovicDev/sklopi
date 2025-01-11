@@ -6,7 +6,7 @@
             </div>
 
             <div class="d-flex w-10p">
-                <a class="span-button-black h-24px build-component-settings-button" href="/build-component/{{ $encodedBuildComponentId }}">
+                <a class="span-button-black h-24px build-component-settings-button" href="/build-component/{{ $buildComponent->encodedId }}">
                     <span class="material-symbols-outlined mx-auto">settings</span>
                 </a>
 
@@ -16,6 +16,6 @@
             </div>
         </div>
     @else
-        <a class="btn btn-primary" href="/add-build-component/?build-id={{ $encodedBuildId }}&build-component-type-id={{ $buildComponentTypeId }}">+ @lang('ui.build.add_component')</a>
+        <a class="btn btn-primary" href="/add-build-component/?build-id={{ $build->encodedId }}&build-component-type-id={{ $buildComponentTypeId }}">+ @lang('ui.build.add_component')</a>
     @endif
 </div>

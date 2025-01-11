@@ -34,7 +34,7 @@
 
                 <div class="mt-80px mx-auto w-fc">
                     <a class="btn btn-secondary" href="/build/{{ $buildComponent->build->encoded_id }}">@lang('ui.build_component.cancel')</a>
-                    <button class="btn btn-primary" id="build-component-save-button">@lang('ui.build_component.save')</button>
+                    <button class="btn btn-primary" id="build-component-save-button" data-build-component-id="{{ $buildComponent->id }}" data-encoded-build-id="{{ $buildComponent->build->encoded_id }}">@lang('ui.build_component.save')</button>
                 </div>
             </div>
         </div>

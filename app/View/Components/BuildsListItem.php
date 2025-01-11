@@ -9,18 +9,14 @@ use Illuminate\View\Component;
 
 class BuildsListItem extends Component
 {
-    public $buildId;
-    public $encodedBuildId;
-    public $buildName;
+    public $build;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($buildId, $buildName)
+    public function __construct($build)
     {
-        $this->buildId = $buildId;
-        $this->encodedBuildId = EncodeHelper::encode($this->buildId);
-        $this->buildName = $buildName;
+        $this->build = $build;
     }
 
     /**

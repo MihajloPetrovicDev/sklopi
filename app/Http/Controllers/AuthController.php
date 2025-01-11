@@ -43,7 +43,7 @@ class AuthController extends Controller
             ]], 400);
         }
 
-        $incomingFields = $request->validate([
+        $requestData = $request->validate([
             'username' => ['required', 'min: 3', 'max: 20', 'unique:users,username'],
             'email' => ['required', 'email', 'max: 80', 'unique:users,email'],
             'password' => ['required', 'min: 5', 'max: 80', 'regex:/[a-zA-Z]/', 'regex:/[0-9]/'],
@@ -65,9 +65,9 @@ class AuthController extends Controller
 
         try {
             $user = new User();
-            $user->username = $incomingFields['username'];
-            $user->email = $incomingFields['email'];
-            $user->password = Hash::make($incomingFields['password']);
+            $user->username = $requestData['username'];
+            $user->email = $requestData['email'];
+            $user->password = Hash::make($requestData['password']);
             $user->save();
 
             Auth::login($user);
@@ -81,7 +81,7 @@ class AuthController extends Controller
 
 
     public function login(Request $request) {
-        $incomingFields = $request->validate([
+        $requestData = $request->validate([
             'email' => ['required', 'email', 'max: 80', 'exists:users,email'],
             'password' => ['required', 'min: 5', 'max: 80'],
         ], 
@@ -96,9 +96,9 @@ class AuthController extends Controller
         ]);
 
         try {
-            $user = User::where('email', $incomingFields['email'])->first();
+            $user = User::where('email', $requestData['email'])->first();
             
-            if(!Hash::check($incomingFields['password'], $user->password)) {
+            if(!Hash::check($requestData['password'], $user->password)) {
                 return response()->json(['errors' => [
                     'error' => [__('errors.login.incorrect_password')]
                 ]], 400);

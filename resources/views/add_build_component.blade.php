@@ -29,8 +29,8 @@
                 </div>
 
                 <div class="mt-80px mx-auto w-fc">
-                    <a class="btn btn-secondary" href="/build/{{ $encodedBuildId }}">@lang('ui.add_build_component.cancel')</a>
-                    <button class="btn btn-primary" id="add-build-component-submit-button" data-type-id="{{ $buildComponentTypeId }}" data-build-id="{{ $build->id }}" data-encoded-build-id="{{ $encodedBuildId }}">@lang('ui.add_build_component.add')</button>
+                    <a class="btn btn-secondary" href="/build/{{ $build->encodedId }}">@lang('ui.add_build_component.cancel')</a>
+                    <button class="btn btn-primary" id="add-build-component-submit-button" data-type-id="{{ $buildComponentTypeId }}" data-build-id="{{ $build->id }}" data-encoded-build-id="{{ $build->encodedId }}">@lang('ui.add_build_component.add')</button>
                 </div>
             </div>
         </div>

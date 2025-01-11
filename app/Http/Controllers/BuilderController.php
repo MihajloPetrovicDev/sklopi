@@ -10,6 +10,7 @@ use App\Helpers\EncodeHelper;
 use App\Models\DeliveryGroup;
 use App\Models\BuildComponent;
 use App\Services\ErrorService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class BuilderController extends Controller
@@ -45,7 +46,7 @@ class BuilderController extends Controller
 
 
     public function createNewBuild(Request $request) {
-        $incomingFields = $request->validate([
+        $requestData = $request->validate([
             'buildName' => ['max: 30'],
             'buildVisibility' => ['required', 'boolean'],
         ],
@@ -56,18 +57,18 @@ class BuilderController extends Controller
         ]);
 
         try {
-            if(!$incomingFields['buildName']) {
-                $buildName = __('ui.create_new_build.build');
+            if(!$requestData['buildName']) {
+                $buildName = __('default_values.build_default_name');
             }
             else {
-                $buildName = $incomingFields['buildName'];
+                $buildName = $requestData['buildName'];
             }
 
             $build = new Build();
 
             $build->user_id = Auth::id();
             $build->name = $buildName;
-            $build->is_public = $incomingFields['buildVisibility'];
+            $build->is_public = $requestData['buildVisibility'];
             $build->country_id = 1;
             $build->currency = 'RSD';
 
@@ -88,7 +89,7 @@ class BuilderController extends Controller
             $build = Build::findOrFail($buildId);
 
             if($build->user_id != Auth::id() && $build->is_public == false) {
-                return response()->json([], 403);
+                abort(403);
             }
 
             $buildComponents = BuildComponent::where('build_id', $build->id)->get();
@@ -114,7 +115,11 @@ class BuilderController extends Controller
 
             $build = Build::findOrFail($buildId);
 
-            return view('add_build_component', compact('build', 'buildComponentTypeId', 'encodedBuildId'));
+            if($build->user_id != Auth::id()) {
+                abort(403);
+            }
+
+            return view('add_build_component', compact('build', 'buildComponentTypeId'));
         }
         catch(Exception $e) {
             $this->errorService->handleException($e);
@@ -123,18 +128,19 @@ class BuilderController extends Controller
 
 
     public function getBuildDeliveryGroups(Request $request) {
-        $incomingFields = $request->validate([
+        $requestData = $request->validate([
             'buildId' => ['required', 'int']
-        ], [
+        ],
+        [
             'buildId.required' => __('errors.get_build_delivery_groups.build_id_required'),
             'buildId.int' => __('errors.get_build_delivery_groups.build_id_int'),
         ]);
 
         try {
             $deliveryGroups = DeliveryGroup::where('user_id', Auth::id())
-                ->where(function ($query) use ($incomingFields) {
+                ->where(function ($query) use ($requestData) {
                     $query->where('build_id', null)
-                        ->orWhere('build_id', $incomingFields['buildId']);
+                        ->orWhere('build_id', $requestData['buildId']);
                 })
                 ->get()
                 ->toArray();
@@ -148,12 +154,18 @@ class BuilderController extends Controller
 
 
     public function addNewBuildComponent(Request $request) {
-        $incomingFields = $request->validate([
+        $requestData = $request->validate([
             'buildComponentName' => ['required', 'max: 200'],
             'buildComponentTypeId' => ['required', 'int', 'min: 1', 'max: 8'],
             'buildComponentBuildId' => ['required', 'int'],
-            'buildComponentBuyLinks' => ['nullable'],
-        ], [
+            //Add buy links
+            'buildComponentAddBuyLinks' => ['nullable', 'array'],
+            'buildComponentAddBuyLinks.*.name' => ['nullable', 'max:50'],
+            'buildComponentAddBuyLinks.*.link' => ['required', 'max:300'],
+            'buildComponentAddBuyLinks.*.price' => ['nullable', 'numeric', 'min:0'],
+            'buildComponentAddBuyLinks.*.deliveryGroupId' => ['nullable', 'int'],
+        ],
+        [
             'buildComponentName.required' => __('errors.add_new_build_component.build_component_name_required'),
             'buildComponentName.max' => __('errors.add_new_build_component.build_component_name_max'),
             'buildComponentTypeId.required' => __('errors.add_new_build_component.build_component_type_id_required'),
@@ -162,10 +174,21 @@ class BuilderController extends Controller
             'buildComponentTypeId.max' => __('errors.add_new_build_component.build_component_type_id_max'),
             'buildComponentBuildId.required' => __('errors.add_new_build_component.build_component_build_id_required'),
             'buildComponentBuildId.int' => __('errors.add_new_build_component.build_component_build_id_int'),
+            //Add buy links
+            'buildComponentAddBuyLinks.array' => __('errors.add_new_build_component.build_component_add_buy_links_array'),
+            'buildComponentAddBuyLinks.*.name.max' => __('errors.add_new_build_component.build_component_add_buy_links_*_name_max'),
+            'buildComponentAddBuyLinks.*.link.required' => __('errors.add_new_build_component.build_component_add_buy_links_*_link_required'),
+            'buildComponentAddBuyLinks.*.link.max' => __('errors.add_new_build_component.build_component_add_buy_links_*_link_max'),
+            'buildComponentAddBuyLinks.*.price.numeric' => __('errors.add_new_build_component.build_component_add_buy_links_*_price_numeric'),
+            'buildComponentAddBuyLinks.*.price.min' => __('errors.add_new_build_component.build_component_add_buy_links_*_price_min'),
+            'buildComponentAddBuyLinks.*.deliveryGroupId.int' => __('errors.add_new_build_component.build_component_add_buy_links_*_delivery_group_id_int'),
+
         ]);
 
+        DB::beginTransaction();
+
         try {
-            $build = Build::findOrFail($incomingFields['buildComponentBuildId']);
+            $build = Build::findOrFail($requestData['buildComponentBuildId']);
 
             if($build->user_id != Auth::id()) {
                 return response()->json([], 403);
@@ -174,44 +197,46 @@ class BuilderController extends Controller
             //Create the build component
             $buildComponent = new BuildComponent();
 
-            $buildComponent->name = $incomingFields['buildComponentName'];
-            $buildComponent->type_id = $incomingFields['buildComponentTypeId'];
-            $buildComponent->build_id = $incomingFields['buildComponentBuildId'];
+            $buildComponent->name = $requestData['buildComponentName'];
+            $buildComponent->type_id = $requestData['buildComponentTypeId'];
+            $buildComponent->build_id = $requestData['buildComponentBuildId'];
 
             $buildComponent->save();
 
             //Create the buy links for the build component
-            foreach($incomingFields['buildComponentBuyLinks'] as $buyLinksArrayItem) {
-                $buyLinkName = __('ui.add_build_component.buy_link_default_name');
+            foreach($requestData['buildComponentAddBuyLinks'] as $addBuyLinksArrayItem) {
+                $addBuyLinkName = __('default_values.buy_link_default_name');
 
-                if($buyLinksArrayItem['name'] != '') {
-                    $buyLinkName = $buyLinksArrayItem['name'];
+                if($addBuyLinksArrayItem['name'] != '') {
+                    $addBuyLinkName = $addBuyLinksArrayItem['name'];
                 }
 
-                $buyLink = new BuyLink();
+                $buildComponentAddBuyLink = new BuyLink();
                 
-                $buyLink->name = $buyLinkName;
-                $buyLink->link = $buyLinksArrayItem['link'];
-                $buyLink->price = $buyLinksArrayItem['price'];
-                $buyLink->build_component_id = $buildComponent->id;
+                $buildComponentAddBuyLink->name = $addBuyLinkName;
+                $buildComponentAddBuyLink->link = $addBuyLinksArrayItem['link'];
+                $buildComponentAddBuyLink->price = $addBuyLinksArrayItem['price'];
+                $buildComponentAddBuyLink->build_component_id = $buildComponent->id;
 
-                if($buyLinksArrayItem['deliveryGroupId'] != 'null') {
-                    $buyLink->delivery_group_id = $buyLinksArrayItem['deliveryGroupId'];
+                if($addBuyLinksArrayItem['deliveryGroupId'] != null) {
+                    $buildComponentAddBuyLink->delivery_group_id = $addBuyLinksArrayItem['deliveryGroupId'];
                 }
 
-                $buyLink->save();
+                $buildComponentAddBuyLink->save();
             }
 
+            DB::commit();
             return response()->json([], 201);
         } 
         catch(Exception $e) {
+            DB::rollBack();
             $this->errorService->handleExceptionJSON($e);
         }
     }
 
 
     public function createNewDeliveryGroup(Request $request) {
-        $incomingFields = $request-> validate([
+        $requestData = $request-> validate([
             'deliveryGroupName' => ['required', 'max:50'],
             'deliveryGroupFreeDeliveryAt' => ['nullable'],
             'deliveryGroupDeliveryCost' => ['nullable'],
@@ -227,12 +252,12 @@ class BuilderController extends Controller
         $deliveryGroupCost = 0;
         $userId = Auth::id();
 
-        if($incomingFields['deliveryGroupDeliveryCost']) {
-            $deliveryGroupCost = $incomingFields['deliveryGroupDeliveryCost'];
+        if($requestData['deliveryGroupDeliveryCost']) {
+            $deliveryGroupCost = $requestData['deliveryGroupDeliveryCost'];
         }
 
         try {
-            $build = Build::findOrFail($incomingFields['deliveryGroupBuildId']);
+            $build = Build::findOrFail($requestData['deliveryGroupBuildId']);
 
             if($build->user_id != $userId) {
                 return response()->json([], 403);
@@ -240,9 +265,9 @@ class BuilderController extends Controller
 
             $deliveryGroup = new DeliveryGroup();
 
-            $deliveryGroup->name = $incomingFields['deliveryGroupName'];
+            $deliveryGroup->name = $requestData['deliveryGroupName'];
             $deliveryGroup->user_id = $userId;
-            $deliveryGroup->free_delivery_at = $incomingFields['deliveryGroupFreeDeliveryAt'];
+            $deliveryGroup->free_delivery_at = $requestData['deliveryGroupFreeDeliveryAt'];
             $deliveryGroup->delivery_cost = $deliveryGroupCost;
             $deliveryGroup->build_id = $build->id;
             $deliveryGroup->currency = 'RSD';
@@ -258,7 +283,7 @@ class BuilderController extends Controller
 
 
     public function deleteBuildComponent(Request $request) {
-        $incomingFields = $request->validate([
+        $requestData = $request->validate([
             'deleteBuildComponentId' => ['required', 'int'],
         ],
         [
@@ -267,7 +292,7 @@ class BuilderController extends Controller
         ]);
 
         try {
-            $buildComponentToDelete = BuildComponent::findOrFail($incomingFields['deleteBuildComponentId']);
+            $buildComponentToDelete = BuildComponent::findOrFail($requestData['deleteBuildComponentId']);
 
             if($buildComponentToDelete->build->user_id != Auth::id()) {
                 return response()->json([], 403);
@@ -303,6 +328,139 @@ class BuilderController extends Controller
             return view('build_component', compact('buildComponent', 'buildDeliveryGroups'));
          }
         catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function updateBuildComponent(Request $request) {
+        $requestData = $request->validate([
+            'buildComponentId' => ['required', 'int'],
+            'buildComponentName' => ['required', 'max:200'],
+            //Buy Links
+            'buildComponentBuyLinks' => ['nullable', 'array'],
+            'buildComponentBuyLinks.*.id' => ['required', 'int'],
+            'buildComponentBuyLinks.*.name' => ['required', 'max:50'],
+            'buildComponentBuyLinks.*.link' => ['required', 'max:300'],
+            'buildComponentBuyLinks.*.price' => ['required', 'numeric', 'min:0'],
+            'buildComponentBuyLinks.*.deliveryGroupId' => ['nullable', 'int'],
+            //Add Buy Links
+            'buildComponentAddBuyLinks' => ['nullable', 'array'],
+            'buildComponentAddBuyLinks.*.name' => ['nullable', 'max:50'],
+            'buildComponentAddBuyLinks.*.link' => ['required', 'max:300'],
+            'buildComponentAddBuyLinks.*.price' => ['nullable', 'numeric', 'min:0'],
+            'buildComponentAddBuyLinks.*.deliveryGroupId' => ['nullable', 'int'],
+        ],
+        [
+            'buildComponentId.required' => __('errors.update_build_component.build_component_id_required'),
+            'buildComponentId.int' => __('errors.update_build_component.build_component_id_int'),
+            'buildComponentName.required' => __('errors.update_build_component.build_component_name_required'),
+            'buildComponentName.max' => __('errors.update_build_component.build_component_name_max'),
+            //Buy Links
+            'buildComponentBuyLinks.array' => __('errors.update_build_component.build_component_buy_links_array'),
+            'buildComponentBuyLinks.*.id.required' => __('errors.update_build_component.build_component_buy_links_*_id_required'),
+            'buildComponentBuyLinks.*.id.int' => __('errors.update_build_component.build_component_buy_links_*_id_int'),
+            'buildComponentBuyLinks.*.name.required' => __('errors.update_build_component.build_component_buy_links_*_name_required'),
+            'buildComponentBuyLinks.*.name.max' => __('errors.update_build_component.build_component_buy_links_*_name_max'),
+            'buildComponentBuyLinks.*.link.required' => __('errors.update_build_component.build_component_buy_links_*_link_required'),
+            'buildComponentBuyLinks.*.link.max' => __('errors.update_build_component.build_component_buy_links_*_link_max'),
+            'buildComponentBuyLinks.*.price.required' => __('errors.update_build_component.build_component_buy_links_*_price_required'),
+            'buildComponentBuyLinks.*.price.numeric' => __('errors.update_build_component.build_component_buy_links_*_price_numeric'),
+            'buildComponentBuyLinks.*.price.min' => __('errors.update_build_component.build_component_buy_links_*_price_min'),
+            'buildComponentBuyLinks.*.deliveryGroupId.int' => __('errors.update_build_component.build_component_buy_links_*_delivery_group_id_int'),
+            //Add Buy Links
+            'buildComponentAddBuyLinks.array' => __('errors.update_build_component.build_component_add_buy_links_array'),
+            'buildComponentAddBuyLinks.*.name.max' => __('errors.update_build_component.build_component_add_buy_links_*_name_max'),
+            'buildComponentAddBuyLinks.*.link.required' => __('errors.update_build_component.build_component_add_buy_links_*_link_required'),
+            'buildComponentAddBuyLinks.*.link.max' => __('errors.update_build_component.build_component_add_buy_links_*_link_max'),
+            'buildComponentAddBuyLinks.*.price.numeric' => __('errors.update_build_component.build_component_add_buy_links_*_price_numeric'),
+            'buildComponentAddBuyLinks.*.price.min' => __('errors.update_build_component.build_component_add_buy_links_*_price_min'),
+            'buildComponentAddBuyLinks.*.deliveryGroupId.int' => __('errors.update_build_component.build_component_add_buy_links_*_delivery_group_id_int'),
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $buildComponent = BuildComponent::findOrFail($requestData['buildComponentId']);
+
+            if($buildComponent->build->user_id != Auth::id()) {
+                return response()->json([], 403);
+            }
+
+            //If the build component name is changed save it in the DB
+            if($buildComponent->name != $requestData['buildComponentName']) {
+                $buildComponent->name = $requestData['buildComponentName'];
+
+                $buildComponent->save();
+            }
+
+            //Apply the changes to existing build component buy links
+            foreach($requestData['buildComponentBuyLinks'] as $buyLinksArrayItem) {
+                $buildComponentBuyLink = BuyLink::findOrFail($buyLinksArrayItem['id']);
+
+                if($buildComponentBuyLink->name != $buyLinksArrayItem['name']) {
+                    $buildComponentBuyLink->name = $buyLinksArrayItem['name'];
+                }
+
+                if($buildComponentBuyLink->link != $buyLinksArrayItem['link']) {
+                    $buildComponentBuyLink->link = $buyLinksArrayItem['link'];
+                }
+
+                if($buildComponentBuyLink->price != $buyLinksArrayItem['price']) {
+                    $buildComponentBuyLink->price = $buyLinksArrayItem['price'];
+                }
+
+                if($buildComponentBuyLink->delivery_group_id != $buyLinksArrayItem['deliveryGroupId']) {
+                    if($buyLinksArrayItem['deliveryGroupId'] != null) {
+                        $newDeliveryGroup = DeliveryGroup::findOrFail($buyLinksArrayItem['deliveryGroupId']);
+
+                        $buildComponentBuyLink->delivery_group_id = $newDeliveryGroup->id;
+                    }
+                    else {
+                        $buildComponentBuyLink->delivery_group_id = null;
+                    }
+                }
+
+                $buildComponentBuyLink->save();
+            }
+
+            //Delete the buy links from the DB that were deleted client side
+            $buildComponentDbBuyLinksArray = BuyLink::where('build_component_id', $buildComponent->id)->pluck('id')->toArray();
+            $buildComponentRequestBuyLinksArray = collect($requestData['buildComponentBuyLinks'])->pluck('id')->toArray();
+
+            $buildComponentBuyLinksToDelete = array_diff($buildComponentDbBuyLinksArray, $buildComponentRequestBuyLinksArray);
+
+            if(!empty($buildComponentBuyLinksToDelete)) {
+                BuyLink::whereIn('id', $buildComponentBuyLinksToDelete)->delete();
+            }
+
+            //Create the new buy links for the build component
+            foreach($requestData['buildComponentAddBuyLinks'] as $addBuyLinksArrayItem) {
+                $buildComponentAddBuyLinkName = __('default_values.buy_link_default_name');
+
+                if($addBuyLinksArrayItem['name'] != '') {
+                    $buildComponentAddBuyLinkName = $addBuyLinksArrayItem['name'];
+                }
+
+                $buildComponentAddBuyLink = new BuyLink();
+                
+                $buildComponentAddBuyLink->name = $buildComponentAddBuyLinkName;
+                $buildComponentAddBuyLink->link = $addBuyLinksArrayItem['link'];
+                $buildComponentAddBuyLink->price = $addBuyLinksArrayItem['price'];
+                $buildComponentAddBuyLink->build_component_id = $buildComponent->id;
+
+                if($addBuyLinksArrayItem['deliveryGroupId'] != null) {
+                    $buildComponentAddBuyLink->delivery_group_id = $addBuyLinksArrayItem['deliveryGroupId'];
+                }
+
+                $buildComponentAddBuyLink->save();
+            }
+
+            DB::commit();
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            DB::rollBack();
             $this->errorService->handleExceptionJSON($e);
         }
     }

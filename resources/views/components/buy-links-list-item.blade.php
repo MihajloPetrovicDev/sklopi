@@ -1,4 +1,4 @@
-<div class="section-2 gap-5 w-100p mt-3 pb-0px">
+<div class="section-2 gap-5 w-100p mt-3 pb-0px" data-buy-link-id="{{ $buyLink->id }}">
     {{-- Top row --}}
     <div class="d-flex mt-1">
         {{-- Buy link name --}}
@@ -29,7 +29,7 @@
                 <label for="buy-link-delivery-group-select">@lang('ui.build_component.buy_link_delivery_group'):</label>
 
                 <select class="form-select h-38px mt-1 buy-link-delivery-group" id="buy-link-delivery-group-select">
-                    <option value="null"></option>
+                    <option></option>
                     
                     @foreach($buildDeliveryGroups as $buildDeliveryGroup)
                         <option value="{{ $buildDeliveryGroup->id }}" {{ $buyLink->delivery_group_id == $buildDeliveryGroup->id ? 'selected' : '' }}>{{ $buildDeliveryGroup->name }}</option>

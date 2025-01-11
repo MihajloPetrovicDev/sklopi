@@ -10,10 +10,8 @@ use Illuminate\Contracts\View\View;
 class BuildComponentItem extends Component
 {
     public $buildComponent;
-    public $encodedBuildComponentId;
     public $build;
     public $buildComponentTypeId;
-    public $encodedBuildId;
 
     /**
      * Create a new component instance.
@@ -22,12 +20,10 @@ class BuildComponentItem extends Component
     {
         if($buildComponent) {
             $this->buildComponent = $buildComponent;
-            $this->encodedBuildComponentId = EncodeHelper::encode($this->buildComponent->id);
         }
         else {
             $this->build = $build;
             $this->buildComponentTypeId = $buildComponentTypeId;
-            $this->encodedBuildId = EncodeHelper::encode($this->build->id);
         }
     }
 

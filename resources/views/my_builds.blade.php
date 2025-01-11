@@ -19,7 +19,7 @@
             @if(Auth::check())
                 @if(!$builds->isEmpty())
                     @foreach ($builds as $build)
-                        <x-builds-list-item buildId="{{ $build->id }}" buildName="{{ $build->name }}" />
+                        <x-builds-list-item :build="$build" />
                     @endforeach   
                 @else
                     <p class="text-center mb-0px mt-5 fw-light fst-italic c-gray-1">@lang('ui.my_builds.no_builds')</p>
