@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\ErrorService;
+use App\Services\BuilderService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ErrorService::class, function ($app) {
             return new ErrorService();
+        });
+        $this->app->singleton(BuilderService::class, function ($app) {
+            return new BuilderService();
         });
     }
 

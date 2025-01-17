@@ -76,7 +76,7 @@ export async function createNewBuildComponent(typeId, buildId, encodedBuildId, b
         buyLinks.push({
             name: buyLinkNameInputs[i]?.value || '',
             link: buyLinkLinkInputs[i]?.value || '',
-            price: buyLinkPriceInputs[i]?.value || 0,
+            price: buyLinkPriceInputs[i]?.value || null,
             deliveryGroupId: buyLinkDeliveryGroupSelects[i]?.value || null,
         });
     }

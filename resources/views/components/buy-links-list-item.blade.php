@@ -38,7 +38,7 @@
             </div>
             
             <div class="w-40p">
-                <button class="btn btn-primary h-38px mt-28px w-100p buy-link-new-delivery-group-button" type="button">+ @lang('ui.build_component.buy_link_new_delivery_group')</button>
+                <button class="btn btn-primary h-38px mt-28px w-100p buy-link-new-delivery-group-button btn-text-truncate" type="button">+ @lang('ui.build_component.buy_link_new_delivery_group')</button>
             </div>
         </div>
     </div>

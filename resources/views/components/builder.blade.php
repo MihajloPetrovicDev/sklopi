@@ -1,6 +1,6 @@
 <?php $hasComponent = false ?>
 
-<div class="mx-auto w-80p section-1 mt-5 pbl-20px mb-5">
+<div class="mx-auto w-80p section-1 mt-5 pbl-20px">
 
 
     

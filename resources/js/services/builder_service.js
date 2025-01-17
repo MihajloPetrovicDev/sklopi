@@ -86,7 +86,7 @@ const builderService = {
         });
 
         let deliveryGroupButton = document.createElement('button');
-        deliveryGroupButton.classList.add('btn', 'btn-primary', 'h-38px', 'mt-28px', 'w-100p', 'buy-link-new-delivery-group-button');
+        deliveryGroupButton.classList.add('btn', 'btn-primary', 'h-38px', 'mt-28px', 'w-100p', 'buy-link-new-delivery-group-button', 'btn-text-truncate');
         deliveryGroupButton.textContent = i18next.t('add_buy_link.new_delivery_group');
         deliveryGroupButton.type = 'button';
 

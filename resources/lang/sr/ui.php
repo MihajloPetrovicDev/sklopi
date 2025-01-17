@@ -18,6 +18,9 @@ return [
         'storage' => 'Memorija',
         'case' => 'Kućište',
         'other' => 'Ostalo',
+        'components_total' => 'Cena Komponenti',
+        'delivery_total' => 'Cena Dostave',
+        'total' => 'Ukupna Cena',
     ],
     'create_new_build' => [
         'header_title' => 'Napravi Novu Konfiguraciju - sklopi',

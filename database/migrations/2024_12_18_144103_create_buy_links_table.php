@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('link');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->unsignedBigInteger('build_component_id');
             $table->unsignedBigInteger('delivery_group_id')->nullable();
             $table->timestamps();
