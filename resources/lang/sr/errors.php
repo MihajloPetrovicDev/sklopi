@@ -84,5 +84,11 @@ return [
         'build_component_add_buy_links_*_price_numeric' => 'Greška prilikom obrade novih linkova za kupovinu komponente.',
         'build_component_add_buy_links_*_price_min' => 'Cena linka za kupovinu komponente ne može da bude negativna.',
         'build_component_add_buy_links_*_delivery_group_id_int' => 'Greška prilikom obrade grupa za dostavu novih linkova za kupovinu komponente.',
-        ]
+    ],
+    'save_build_name' => [
+        'build_id_required' => 'Greška prilikom obrade konfiguracije.',
+        'build_id_int' => 'Greška prilikom obrade konfiguracije.',
+        'new_build_name_required' => 'Naziv konfiguracije je obavezan.',
+        'new_build_name_max' => 'Naziv konfiguracije ne sme biti duži od 30 karaktera.',
+    ],
 ];

@@ -3,7 +3,6 @@
 namespace App\View\Components;
 
 use Closure;
-use App\Helpers\EncodeHelper;
 use Illuminate\View\Component;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;

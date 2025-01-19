@@ -26,6 +26,8 @@ Route::get('/add-build-component', [BuilderController::class, 'getAddBuildCompon
 
 Route::get('/build-component/{id}', [BuilderController::class, 'getBuildComponentPage'])->middleware('auth');
 
+Route::get('/manage-delivery-groups', [BuilderController::class, 'manageDeliveryGroups'])->middleware('auth');
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');
@@ -43,3 +45,7 @@ Route::post('/api/create-new-delivery-group', [BuilderController::class, 'create
 Route::post('/api/delete-build-component', [BuilderController::class, 'deleteBuildComponent'])->middleware('auth');
 
 Route::post('/api/update-build-component', [BuilderController::class, 'updateBuildComponent'])->middleware('auth');
+
+Route::delete('/api/delete-build/{id}', [BuilderController::class, 'deleteBuild'])->middleware('auth');
+
+Route::post('/api/save-build-name', [BuilderController::class, 'saveBuildName'])->middleware('auth');

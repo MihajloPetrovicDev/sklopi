@@ -6,16 +6,16 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class BuildsListItem extends Component
+class DeliveryGroupsListItem extends Component
 {
-    public $build;
-
+    public $deliveryGroup;
+    
     /**
      * Create a new component instance.
      */
-    public function __construct($build)
+    public function __construct($deliveryGroup)
     {
-        $this->build = $build;
+        $this->deliveryGroup = $deliveryGroup;
     }
 
     /**
@@ -23,6 +23,6 @@ class BuildsListItem extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.builds-list-item');
+        return view('components.delivery-groups-list-item');
     }
 }

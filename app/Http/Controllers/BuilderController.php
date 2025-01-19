@@ -350,4 +350,61 @@ class BuilderController extends Controller
             $this->errorService->handleExceptionJSON($e);
         }
     }
+
+
+    public function deleteBuild($encodedBuildId) {
+        try {
+            $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
+
+            $this->builderService->checkIsUserBuildOwnerJSON($build);
+
+            $build->delete();
+
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function saveBuildName(Request $request) {
+        $requestData = $request->validate([
+            'buildId' => ['required', 'int'],
+            'newBuildName' => ['required', 'max:30'],
+        ],
+        [
+            'buildId.required' => __('errors.save_build_name.build_id_required'),
+            'buildId.int' => __('errors.save_build_name.build_id_int'),
+            'newBuildName.required' => __('errors.save_build_name.new_build_name_required'),
+            'newBuildName.max' => __('errors.save_build_name.new_build_name_max'),
+        ]);
+
+        try {
+            $build = Build::findOrFail($requestData['buildId']);
+            $build->name = $requestData['newBuildName'];
+            $build->save();
+
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function manageDeliveryGroups(Request $request) {
+        $encodedBuildId = $request->query('build');
+
+        try {
+            $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
+
+            $buildDeliveryGroups = DeliveryGroup::where('build_id', $build->id)->get();
+
+            return view('manage_build_delivery_groups', compact('build', 'buildDeliveryGroups'));
+        }
+        catch(Exception $e) {
+            $this->errorService->handleException($e);
+        }
+    }
 }

@@ -214,3 +214,30 @@ export async function updateBuildComponent(buildComponentId, encodedBuildId, bui
         errorService.handleError(error);
     }
 }
+
+
+export async function deleteBuild(encodedBuildId) {
+    try {
+        const response = await axios.delete('http://localhost:8000/api/delete-build/' + encodedBuildId);
+
+        window.location.href = '/my-builds';
+    }
+    catch(error) {
+        errorService.handleError(error);
+    }
+}
+
+
+export async function saveBuildName($buildId, $buildName) {
+    try {
+        const response = await axios.post('http://localhost:8000/api/save-build-name', {
+            buildId: $buildId,
+            newBuildName: $buildName,
+        });
+
+        window.location.reload();
+    }
+    catch(error) {
+        errorService.handleError(error);
+    }
+}

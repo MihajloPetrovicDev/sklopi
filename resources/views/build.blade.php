@@ -9,7 +9,25 @@
     <x-header />
 
     <main>
-        <h2 class="mt-5 text-center fs-1">{{ $build->name }}</h2>
+        <div class="w-80p mx-auto mt-80px" id="error-container-placeholder"></div>
+
+        <div class="d-flex mt-5 w-80p mx-auto align-items-center">
+            <div class="w-20p">
+                <a class="btn btn-primary h-50px pt-12px w-80p btn-text-truncate" href="/manage-delivery-groups?build={{ $build->encodedId }}">@lang('ui.build.manage_delivery_groups')</a>
+            </div>
+
+            <div class="w-60p">
+                <div class="mx-auto d-flex w-70p">
+                    <input class="form-control h-50px w-100p fs-3" id="build-name-input" value="{{ $build->name }}"></input>
+
+                    <button class="btn btn-secondary h-50px w-100px ml-m-100px br-tl-0px br-bl-0px" id="save-build-name-button" data-build-id="{{ $build->id }}">@lang('ui.build.save')</button>
+                </div>
+            </div>
+
+            <div class="w-20p">
+                <button class="btn btn-danger h-50px float-end w-80p btn-text-truncate" id="delete-build-button" data-encoded-build-id="{{ $build->encodedId }}">@lang('ui.build.delete_build')</button>
+            </div>
+        </div>
 
         <x-builder :build="$build" :build-components="$buildComponents" :cheapest-buy-links-combination="$cheapestBuildComponentsBuyLinksCombination"/>
         

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('build_component_types');
-            $table->foreign('build_id')->references('id')->on('builds');
+            $table->foreign('build_id')->references('id')->on('builds')->onDelete('cascade');
         });
     }
 
