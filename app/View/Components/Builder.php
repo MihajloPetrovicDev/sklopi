@@ -3,21 +3,24 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\View;
 
 class Builder extends Component
 {
     public $build;
     public $buildComponents;
+    public $cheapestBuyLinksCombination;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($build, $buildComponents)
+    public function __construct($build, $buildComponents, $cheapestBuyLinksCombination)
     {
         $this->build = $build;
         $this->buildComponents = $buildComponents;
+        $this->cheapestBuyLinksCombination = $cheapestBuyLinksCombination;
     }
 
     /**

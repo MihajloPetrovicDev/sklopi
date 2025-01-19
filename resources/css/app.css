@@ -56,6 +56,10 @@ body {
     width: 48% !important;
 }
 
+.w-50p {
+    width: 50% !important;
+}
+
 .w-60p {
     width: 60% !important;
 }

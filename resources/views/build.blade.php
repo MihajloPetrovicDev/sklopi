@@ -11,8 +11,8 @@
     <main>
         <h2 class="mt-5 text-center fs-1">{{ $build->name }}</h2>
 
-        <x-builder :build="$build" :build-components="$buildComponents" />
-
+        <x-builder :build="$build" :build-components="$buildComponents" :cheapest-buy-links-combination="$cheapestBuildComponentsBuyLinksCombination"/>
+        
         <div class="section-1 mx-auto w-80p d-flex mt-5 mb-5 pin-50px align-items-center justify-content-between">
             <p class="mb-0 fs-5">@lang('ui.build.components_total'): {{ $buildTotals['combinationComponentTotal'] }} RSD</p>
             <p class="mb-0 fs-5">@lang('ui.build.delivery_total'): {{ $buildTotals['combinationDeliveryTotal'] }} RSD</p>

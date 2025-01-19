@@ -13,7 +13,7 @@
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 1)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                     <?php $hasComponent = true ?>
                 @endif
             @endforeach
@@ -43,7 +43,7 @@
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 2)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                     <?php $hasComponent = true ?>
                 @endif
             @endforeach
@@ -70,7 +70,7 @@
             {{-- Check trough the buildComponents list to see if there are RAM components. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 3)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                 @endif
             @endforeach
             
@@ -93,7 +93,7 @@
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 4)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                     <?php $hasComponent = true ?>
                 @endif
             @endforeach
@@ -120,7 +120,7 @@
             {{-- Check trough the buildComponents list to see if there are Storage components. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 5)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                 @endif
             @endforeach
             
@@ -143,7 +143,7 @@
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 6)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                     <?php $hasComponent = true ?>
                 @endif
             @endforeach
@@ -171,7 +171,7 @@
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 7)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                     <?php $hasComponent = true ?>
                 @endif
             @endforeach
@@ -197,7 +197,7 @@
             {{-- Check trough the buildComponents list to see if there are Other components. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 8)
-                    <x-build-component-item :build-component="$buildComponent" />
+                    <x-build-component-item :build-component="$buildComponent" :cheapest-buy-links-combination="$cheapestBuyLinksCombination" />
                 @endif
             @endforeach
             

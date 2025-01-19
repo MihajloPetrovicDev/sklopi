@@ -79,12 +79,12 @@ class BuilderController extends Controller
             //where every array represents a component and inside it its buy link ids
             $buildComponentsBuyLinkIdsCombinations = $this->builderService->getAllCombinationsOfArrayOfArrays($eachBuildComponentBuyLinkIds);
             //Get the cheapest combination of buy links
-            $cheapestBuildComponentsBuyLinksCombination = $this->builderService->getCheapestBuyLinksCombination($buildComponentsBuyLinkIdsCombinations);
+            $cheapestBuildComponentsBuyLinksCombination = collect($this->builderService->getCheapestBuyLinksCombination($buildComponentsBuyLinkIdsCombinations));
 
             $buildTotals = $this->builderService->calculateBuyLinksCombinationTotals($cheapestBuildComponentsBuyLinksCombination);
             $buildComponents = BuildComponent::where('build_id', $build->id)->get();
 
-            return view('build', compact('build', 'buildComponents', 'buildTotals'));
+            return view('build', compact('build', 'buildComponents', 'buildTotals', 'cheapestBuildComponentsBuyLinksCombination'));
         }
         catch(Exception $e) {
             $this->errorService->handleException($e);

@@ -2,9 +2,10 @@
 
 namespace App\View\Components;
 
-use App\Helpers\EncodeHelper;
 use Closure;
+use App\Helpers\EncodeHelper;
 use Illuminate\View\Component;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 
 class BuildComponentItem extends Component
@@ -12,14 +13,16 @@ class BuildComponentItem extends Component
     public $buildComponent;
     public $build;
     public $buildComponentTypeId;
+    public $buildComponentBuyLink;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($buildComponent, ?object $build, ?int $buildComponentTypeId)
+    public function __construct($buildComponent, ?object $build, ?int $buildComponentTypeId, ?Collection $cheapestBuyLinksCombination)
     {
         if($buildComponent) {
             $this->buildComponent = $buildComponent;
+            $this->buildComponentBuyLink = $cheapestBuyLinksCombination->where('build_component_id', $buildComponent->id)->first();
         }
         else {
             $this->build = $build;

@@ -9,4 +9,8 @@ class BuyLink extends Model
     public function deliveryGroup() {
         return $this->belongsTo(DeliveryGroup::class, 'delivery_group_id');
     }
+
+    public function buildComponent() {
+        return $this->belongsTo(BuildComponent::class, 'build_component_id');
+    }
 }
