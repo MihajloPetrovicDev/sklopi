@@ -3,8 +3,8 @@ import { showNewBuyLinkContainer, updateBuildComponent, setUpDeleteBuyLinkButton
 
 const addBuyLinkButton = document.getElementById('add-buy-link-button');
 const saveBuildComponentButton = document.getElementById('build-component-save-button');
-const buyLinkNewDeliveryGroupPopupWindowCancelButton = document.getElementById('add-buy-link-popup-window-cancel-button');
-const buyLinkNewDeliveryGroupPopupWindowCreateButton = document.getElementById('add-buy-link-popup-window-create-button');
+const buyLinkNewDeliveryGroupPopupWindowCancelButton = document.getElementById('add-delivery-group-popup-window-cancel-button');
+const buyLinkNewDeliveryGroupPopupWindowCreateButton = document.getElementById('add-delivery-group-popup-window-create-button');
 
 
 setUpDeleteBuyLinkButtons('buy-link-delete-button');

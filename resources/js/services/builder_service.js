@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 const builderService = {
     getAddBuyLinkNameContainer() {
         let nameDiv = document.createElement('div');
@@ -171,6 +173,102 @@ const builderService = {
                 deliveryGroupSelect.appendChild(deliveryGroupSelectOption);
             });
         });
+    },
+    getDeliveryGroupNameContainer(deliveryGroupName) {
+        const deliveryGroupNameContainer = document.createElement('div');
+        deliveryGroupNameContainer.classList.add('w-30p');
+
+        const deliveryGroupNameLabel = document.createElement('label');
+        deliveryGroupNameLabel.for = 'delivery-group-name';
+        deliveryGroupNameLabel.textContent = i18next.t('delivery_group.name');
+
+        const deliveryGroupNameInput = document.createElement('input');
+        deliveryGroupNameInput.classList.add('form-control', 'mt-1', 'add-delivery-group-name');
+        deliveryGroupNameInput.type = 'text';
+        deliveryGroupNameInput.value = deliveryGroupName;
+
+        deliveryGroupNameContainer.appendChild(deliveryGroupNameLabel);
+        deliveryGroupNameContainer.appendChild(deliveryGroupNameInput);
+
+        return deliveryGroupNameContainer;
+    },
+    getDeliveryGroupFreeDeliveryAtContainer(deliveryGroupFreeDeliveryAt, currency) {
+        const deliveryGroupFreeDeliveryAtContainer = document.createElement('div');
+        deliveryGroupFreeDeliveryAtContainer.classList.add('w-30p', 'ml-5p');
+
+        const deliveryGroupFreeDeliveryAtLabel = document.createElement('label');
+        deliveryGroupFreeDeliveryAtLabel.for = 'delivery-group-free-delivery-at';
+        deliveryGroupFreeDeliveryAtLabel.textContent = i18next.t('delivery_group.free_delivery_at');
+
+        const deliveryGroupFreeDeliveryAtInputContainer = document.createElement('div');
+        deliveryGroupFreeDeliveryAtInputContainer.classList.add('d-flex', 'mt-1');
+
+        const deliveryGroupFreeDeliveryAtInput = document.createElement('input');
+        deliveryGroupFreeDeliveryAtInput.classList.add('form-control', 'add-delivery-group-free-delivery-at');
+        deliveryGroupFreeDeliveryAtInput.type = 'text';
+        deliveryGroupFreeDeliveryAtInput.value = deliveryGroupFreeDeliveryAt;
+
+        const deliveryGroupFreeDeliveryAtInputOverlayContainer = document.createElement('div');
+        deliveryGroupFreeDeliveryAtInputOverlayContainer.classList.add('w-80px', 'ml-m-80px', 'h-38px', 'input-fixed-overlay-container', 'br-tl-0px', 'br-bl-0px');
+
+        const deliveryGroupFreeDeliveryAtInputOverlayText = document.createElement('p');
+        deliveryGroupFreeDeliveryAtInputOverlayText.classList.add('mb-0px');
+        deliveryGroupFreeDeliveryAtInputOverlayText.textContent = currency;
+
+        deliveryGroupFreeDeliveryAtInputOverlayContainer.appendChild(deliveryGroupFreeDeliveryAtInputOverlayText);
+        deliveryGroupFreeDeliveryAtInputContainer.appendChild(deliveryGroupFreeDeliveryAtInput);
+        deliveryGroupFreeDeliveryAtInputContainer.appendChild(deliveryGroupFreeDeliveryAtInputOverlayContainer);
+        deliveryGroupFreeDeliveryAtContainer.appendChild(deliveryGroupFreeDeliveryAtLabel);
+        deliveryGroupFreeDeliveryAtContainer.appendChild(deliveryGroupFreeDeliveryAtInputContainer);
+
+        return deliveryGroupFreeDeliveryAtContainer;
+    },
+    getDeliveryGroupDeliveryCostContainer(deliveryGroupCost, currency) {
+        const deliveryGroupDeliveryCostContainer = document.createElement('div');
+        deliveryGroupDeliveryCostContainer.classList.add('w-30p', 'ml-5p');
+
+        const deliveryGroupDeliveryCostLabel = document.createElement('label');
+        deliveryGroupDeliveryCostLabel.for = 'delivery-group-delivery-cost';
+        deliveryGroupDeliveryCostLabel.textContent = i18next.t('delivery_group.delivery_cost');
+
+        const deliveryGroupDeliveryCostInputContainer = document.createElement('div');
+        deliveryGroupDeliveryCostInputContainer.classList.add('d-flex', 'mt-1');
+
+        const deliveryGroupDeliveryCostInput = document.createElement('input');
+        deliveryGroupDeliveryCostInput.classList.add('form-control', 'add-delivery-group-delivery-cost');
+        deliveryGroupDeliveryCostInput.type = 'text';
+        deliveryGroupDeliveryCostInput.value = deliveryGroupCost;
+
+        const deliveryGroupDeliveryCostInputOverlayContainer = document.createElement('div');
+        deliveryGroupDeliveryCostInputOverlayContainer.classList.add('w-80px', 'ml-m-80px', 'h-38px', 'input-fixed-overlay-container', 'br-tl-0px', 'br-bl-0px');
+
+        const deliveryGroupDeliveryCostInputOverlayText = document.createElement('p');
+        deliveryGroupDeliveryCostInputOverlayText.classList.add('mb-0px');
+        deliveryGroupDeliveryCostInputOverlayText.textContent = currency;
+
+        deliveryGroupDeliveryCostInputOverlayContainer.appendChild(deliveryGroupDeliveryCostInputOverlayText);
+        deliveryGroupDeliveryCostInputContainer.appendChild(deliveryGroupDeliveryCostInput);
+        deliveryGroupDeliveryCostInputContainer.appendChild(deliveryGroupDeliveryCostInputOverlayContainer);
+        deliveryGroupDeliveryCostContainer.appendChild(deliveryGroupDeliveryCostLabel);
+        deliveryGroupDeliveryCostContainer.appendChild(deliveryGroupDeliveryCostInputContainer);
+
+        return deliveryGroupDeliveryCostContainer;
+    },
+    getDeleteDeliveryGroupButtonContainer() {
+        const deleteDeliveryGroupButtonContainer = document.createElement('div');
+        deleteDeliveryGroupButtonContainer.classList.add('w-10p', 'd-flex', 'justify-content-between');
+
+        const deleteDeliveryGroupButton = document.createElement('button');
+        deleteDeliveryGroupButton.classList.add('span-button-red', 'ms-auto', 'w-fc', 'pin-0px', 'delete-delivery-group-button');
+
+        const deleteDeliveryGroupButtonSpan = document.createElement('span');
+        deleteDeliveryGroupButtonSpan.classList.add('material-symbols-outlined');
+        deleteDeliveryGroupButtonSpan.textContent = 'delete';
+
+        deleteDeliveryGroupButton.appendChild(deleteDeliveryGroupButtonSpan);
+        deleteDeliveryGroupButtonContainer.appendChild(deleteDeliveryGroupButton);
+
+        return deleteDeliveryGroupButtonContainer;
     }
 }
 

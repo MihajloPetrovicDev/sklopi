@@ -11,5 +11,11 @@
         "price": "Cena:",
         "delivery_group": "Grupa Dostave:",
         "new_delivery_group": "+ Nova Grupa Dostave"
+    },
+    "delivery_group": {
+        "name": "Naziv:",
+        "free_delivery_at": "Besplatna Dostava Od",
+        "delivery_cost": "Cena Dostave:",
+        "optional": "Opcionalno"
     }
 }

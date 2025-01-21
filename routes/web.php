@@ -28,6 +28,10 @@ Route::get('/build-component/{id}', [BuilderController::class, 'getBuildComponen
 
 Route::get('/manage-delivery-groups', [BuilderController::class, 'manageDeliveryGroups'])->middleware('auth');
 
+Route::get('/builds', [BuilderController::class, 'getBuildsPage']);
+
+Route::get('/discussions', [BuilderController::class, 'getDiscussionsPage']);
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');

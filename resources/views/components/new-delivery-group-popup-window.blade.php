@@ -22,8 +22,8 @@
         </div>
 
         <div class="mx-auto d-flex w-fc mt-5">
-            <button class="btn btn-secondary" id="add-buy-link-popup-window-cancel-button">@lang('ui.new_delivery_group_popup_window.cancel')</button>
-            <button class="btn btn-primary ml-5px" id="add-buy-link-popup-window-create-button" data-build-id="{{ $build->id }}">@lang('ui.new_delivery_group_popup_window.create')</button>
+            <button class="btn btn-secondary" id="add-delivery-group-popup-window-cancel-button">@lang('ui.new_delivery_group_popup_window.cancel')</button>
+            <button class="btn btn-primary ml-5px" id="add-delivery-group-popup-window-create-button" data-build-id="{{ $build->id }}">@lang('ui.new_delivery_group_popup_window.create')</button>
         </div>
     </div>
 </div>

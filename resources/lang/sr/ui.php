@@ -24,6 +24,7 @@ return [
         'manage_delivery_groups' => 'Upravljaj Grupama Dostave',
         'delete_build' => 'Obriši Konfiguraciju',
         'save' => 'Sačuvaj',
+        'name' => 'Naziv',
     ],
     'create_new_build' => [
         'header_title' => 'Napravi Novu Konfiguraciju - sklopi',
@@ -91,7 +92,8 @@ return [
     ],
     'manage_delivery_groups' => [
         'manage_delivery_groups' => 'Upravljaj Grupama Dostave',
-        'local_delivery_groups' => 'Lokalne Grupe Dostave',
+        'local_delivery_groups' => 'Grupe Dostava',
+        'new_delivery_group' => 'Nova Grupa Dostave',
     ],
     'delivery_groups_list_item' => [
         'name' => 'Naziv',
@@ -100,5 +102,13 @@ return [
         'optional' => 'Opcionalno',
         'cancel' => 'Otkaži',
         'save' => 'Sačuvaj',
-    ]
+    ],
+    'builds' => [
+        'header_title' => 'Javne Konfiguracije - sklopi',
+        'coming_soon' => 'Javne Konfiguracije dolaze uskoro.',
+    ],
+    'discussions' => [
+        'header_title' => 'Diskusije - sklopi',
+        'coming_soon' => 'Diskusije dolaze uskoro.',
+    ],
 ];

@@ -228,11 +228,11 @@ export async function deleteBuild(encodedBuildId) {
 }
 
 
-export async function saveBuildName($buildId, $buildName) {
+export async function saveBuildName(buildId, buildName) {
     try {
         const response = await axios.post('http://localhost:8000/api/save-build-name', {
-            buildId: $buildId,
-            newBuildName: $buildName,
+            buildId: buildId,
+            newBuildName: buildName,
         });
 
         window.location.reload();
@@ -240,4 +240,27 @@ export async function saveBuildName($buildId, $buildName) {
     catch(error) {
         errorService.handleError(error);
     }
+}
+
+
+export function showNewDeliveryGroupContainer(deliveryGroupName, deliveryGroupFreeDeliveryAt, deliveryGroupDeliveryCost, deliveryGroupCurrency) {
+    const deliveryGroupNameContainer = builderService.getDeliveryGroupNameContainer(deliveryGroupName);
+    const deliveryGroupFreeDeliveryAtContainer = builderService.getDeliveryGroupFreeDeliveryAtContainer(deliveryGroupFreeDeliveryAt, deliveryGroupCurrency);
+    const deliveryGroupDeliveryCostContainer = builderService.getDeliveryGroupDeliveryCostContainer(deliveryGroupDeliveryCost, deliveryGroupCurrency);
+    const deleteDeliveryGroupButtonContainer = builderService.getDeleteDeliveryGroupButtonContainer();
+
+    const deliveryGroupContainer = document.createElement('div');
+    deliveryGroupContainer.classList.add('d-flex', 'mx-auto', 'w-100p', 'section-2');
+
+    const deliveryGroupInputsContainer = document.createElement('div');
+    deliveryGroupInputsContainer.classList.add('d-flex', 'w-90p');
+
+    deliveryGroupInputsContainer.appendChild(deliveryGroupNameContainer);
+    deliveryGroupInputsContainer.appendChild(deliveryGroupFreeDeliveryAtContainer);
+    deliveryGroupInputsContainer.appendChild(deliveryGroupDeliveryCostContainer);
+
+    deliveryGroupContainer.appendChild(deliveryGroupInputsContainer);
+    deliveryGroupContainer.appendChild(deleteDeliveryGroupButtonContainer);
+
+    return deliveryGroupContainer;
 }

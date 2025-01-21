@@ -407,4 +407,14 @@ class BuilderController extends Controller
             $this->errorService->handleException($e);
         }
     }
+
+
+    public function getBuildsPage() {
+        return view('builds');
+    }
+
+
+    public function getDiscussionsPage() {
+        return view('discussions');
+    }
 }
