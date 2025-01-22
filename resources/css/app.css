@@ -16,6 +16,10 @@ body {
     height: fit-content !important;
 }
 
+.h-0px {
+    height: 0px !important;
+}
+
 .h-24px {
     height: 24px !important;
 }
@@ -26,6 +30,10 @@ body {
 
 .h-45px {
     height: 45px !important;
+}
+
+.min-h-25px {
+    min-height: 25px;
 }
 
 .w-5p {
@@ -198,6 +206,10 @@ body {
 
 .fw-500 {
     font-weight: 500 !important;
+}
+
+.mt-m-20px {
+    margin-top: -20px;
 }
 
 .mt-m-2px {

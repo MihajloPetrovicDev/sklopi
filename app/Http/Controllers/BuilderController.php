@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Build;
-use App\Models\BuyLink;
 use Illuminate\Http\Request;
 use App\Helpers\EncodeHelper;
 use App\Models\DeliveryGroup;
@@ -12,7 +11,6 @@ use App\Models\BuildComponent;
 use App\Services\ErrorService;
 use App\Services\BuilderService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class BuilderController extends Controller
@@ -198,13 +196,17 @@ class BuilderController extends Controller
     public function createNewDeliveryGroup(Request $request) {
         $requestData = $request-> validate([
             'deliveryGroupName' => ['required', 'max:50'],
-            'deliveryGroupFreeDeliveryAt' => ['nullable'],
-            'deliveryGroupDeliveryCost' => ['nullable'],
+            'deliveryGroupFreeDeliveryAt' => ['nullable', 'numeric', 'min:0'],
+            'deliveryGroupDeliveryCost' => ['nullable', 'numeric', 'min:0'],
             'deliveryGroupBuildId' => ['required', 'int'],
         ],
         [
             'deliveryGroupName.required' => __('errors.create_new_delivery_group.delivery_group_name_required'),
             'deliveryGroupName.max' => __('errors.create_new_delivery_group.delivery_group_name_max'),
+            'deliveryGroupFreeDeliveryAt.min' => __('errors.create_new_delivery_group.delivery_group_free_delivery_at_min'),
+            'deliveryGroupFreeDeliveryAt.numeric' => __('errors.create_new_delivery_group.delivery_group_free_delivery_at_numeric'),
+            'deliveryGroupDeliveryCost.min' => __('errors.create_new_delivery_group.delivery_group_delivery_cost_min'),
+            'deliveryGroupDeliveryCost.numeric' => __('errors.create_new_delivery_group.delivery_group_delivery_cost_numeric'),
             'deliveryGroupBuildId.required' => __('errors.create_new_delivery_group.build_id_required'),
             'deliveryGroupBuildId.int' => __('errors.create_new_delivery_group.build_id_int'),
         ]);
@@ -261,7 +263,7 @@ class BuilderController extends Controller
             $this->builderService->checkPermissionToViewBuildJSON($buildComponent->build);
 
             $buildDeliveryGroups = DeliveryGroup::where('user_id', Auth::id())
-                ->where(function ($query) use ($buildComponent) {
+                ->where(function($query) use ($buildComponent) {
                     $query->where('build_id', null)
                         ->orWhere('build_id', $buildComponent->build_id);
                 })
@@ -416,5 +418,69 @@ class BuilderController extends Controller
 
     public function getDiscussionsPage() {
         return view('discussions');
+    }
+
+
+    public function updateDeliveryGroups(Request $request) {
+        $requestData = $request->validate([
+            'buildId' => ['nullable', 'int'],
+
+            //Delivery Groups
+            'deliveryGroups' => ['nullable', 'array'],
+            'deliveryGroups.*.id' => ['required', 'int'],
+            'deliveryGroups.*.name' => ['required', 'max:50'],
+            'deliveryGroups.*.freeDeliveryAt' => ['nullable', 'numeric', 'min:0'],
+            'deliveryGroups.*.deliveryCost' => ['required', 'numeric', 'min:0'],
+
+            //Add Delivery Groups
+            'addDeliveryGroups' => ['nullable', 'array'],
+            'addDeliveryGroups.*.name' => ['required', 'max:50'],
+            'addDeliveryGroups.*.freeDeliveryAt' => ['nullable', 'numeric', 'min:0'],
+            'addDeliveryGroups.*.deliveryCost' => ['nullable', 'numeric', 'min:0'],
+        ],
+        [
+            'buildId.int' => __('errors.update_delivery_groups.build_id_int'),
+
+            //Delivery Groups
+            'deliveryGroups.array' => __('errors.update_delivery_groups.delivery_groups_array'),
+            'deliveryGroups.*.id.required' => __('errors.update_delivery_groups.delivery_groups_*_id_required'),
+            'deliveryGroups.*.id.int' => __('errors.update_delivery_groups.delivery_groups_*_id_int'),
+            'deliveryGroups.*.name.required' => __('errors.update_delivery_groups.delivery_groups_*_name_required'),
+            'deliveryGroups.*.name.max' => __('errors.update_delivery_groups.delivery_groups_*_name_max'),
+            'deliveryGroups.*.freeDeliveryAt.numeric' => __('errors.update_delivery_groups.delivery_groups_*_free_delivery_at_numeric'),
+            'deliveryGroups.*.freeDeliveryAt.min' => __('errors.update_delivery_groups.delivery_groups_*_free_delivery_at_min'),
+            'deliveryGroups.*.deliveryCost.required' => __('errors.update_delivery_groups.delivery_groups_*_delivery_cost_required'),
+            'deliveryGroups.*.deliveryCost.numeric' => __('errors.update_delivery_groups.delivery_groups_*_delivery_cost_numeric'),
+            'deliveryGroups.*.deliveryCost.min' => __('errors.update_delivery_groups.delivery_groups_*_delivery_cost_min'),
+
+            //Add Delivery Groups
+            'addDeliveryGroups.array' => __('errors.update_delivery_groups.add_delivery_groups_array'),
+            'addDeliveryGroups.*.name.required' => __('errors.update_delivery_groups.add_delivery_groups_*_name_required'),
+            'addDeliveryGroups.*.name.max' => __('errors.update_delivery_groups.add_delivery_groups_*_name_max'),
+            'addDeliveryGroups.*.freeDeliveryAt.numeric' => __('errors.update_delivery_groups.add_delivery_groups_*_free_delivery_at_numeric'),
+            'addDeliveryGroups.*.freeDeliveryAt.min' => __('errors.update_delivery_groups.add_delivery_groups_*_free_delivery_at_min'),
+            'addDeliveryGroups.*.deliveryCost.numeric' => __('errors.update_delivery_groups.add_delivery_groups_*_delivery_cost_numeric'),
+            'addDeliveryGroups.*.deliveryCost.min' => __('errors.update_delivery_groups.add_delivery_groups_*_delivery_cost_min'),
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            //Apply the changes to existing delivery groups
+            $this->builderService->updateDeliveryGroups($requestData);
+
+            //Delete the delivery groups from the DB that were deleted client side
+            $this->builderService->deleteFromDbDeletedClientSideDeliveryGroups($requestData);
+
+            //Create the new deliveryGroups
+            $this->builderService->createDeliveryGroups($requestData);
+
+            DB::commit();
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            DB::rollBack();
+            $this->errorService->handleExceptionJSON($e);
+        }
     }
 }

@@ -51,7 +51,7 @@ export function setUpBuyLinkNewDeliveryGroupButtons(buyLinkNewDeliveryGroupButto
     const buyLinkNewDeliveryGroupPopupWindow = document.getElementById(buyLinkNewDeliveryGroupPopupContainerId);
 
     buyLinkNewDeliveryGroupButtons.forEach(buyLinkNewDeliveryGroupButton => {
-        buyLinkNewDeliveryGroupButton.addEventListener('click', function (e) {
+        buyLinkNewDeliveryGroupButton.addEventListener('click', function(e) {
             e.preventDefault();
             
             buyLinkNewDeliveryGroupPopupWindow.classList.remove('d-none');
@@ -101,7 +101,7 @@ export function setUpDeleteBuyLinkButtons(deleteBuyLinkButtonClass) {
     const deleteBuyLinkButtons = document.querySelectorAll(`.${deleteBuyLinkButtonClass}`);
 
     deleteBuyLinkButtons.forEach(deleteBuyLinkButton => {
-        deleteBuyLinkButton.addEventListener('click', function (e) {
+        deleteBuyLinkButton.addEventListener('click', function(e) {
             e.preventDefault();
             
             let buyLinkContainer = deleteBuyLinkButton.parentElement;
@@ -263,4 +263,70 @@ export function showNewDeliveryGroupContainer(deliveryGroupName, deliveryGroupFr
     deliveryGroupContainer.appendChild(deleteDeliveryGroupButtonContainer);
 
     return deliveryGroupContainer;
+}
+
+
+export function setupDeleteDeliveryGroupButtons(deleteDeliveryGroupButtonClass) {
+    const deleteDeliveryGroupButtons = document.querySelectorAll(`.${deleteDeliveryGroupButtonClass}`);
+
+    deleteDeliveryGroupButtons.forEach(deleteDeliveryGroupButton => {
+        deleteDeliveryGroupButton.addEventListener('click', function(e) {
+            deleteDeliveryGroupButton?.parentElement?.parentElement?.remove();
+        });
+    });
+}
+
+
+export async function updateDeliveryGroups(deliveryGroupClasses, addDeliveryGroupClasses, buildId, encodedBuildId) {
+    const deliveryGroupNameInputs = document.querySelectorAll(`.${deliveryGroupClasses.deliveryGroupNameInputClass}`);
+    const deliveryGroupFreeDeliveryAtInputs = document.querySelectorAll(`.${deliveryGroupClasses.deliveryGroupFreeDeliveryAtInputClass}`);
+    const deliveryGroupDeliveryCostInputs = document.querySelectorAll(`.${deliveryGroupClasses.deliveryGroupDeliveryCostInputClass}`);
+
+    const addDeliveryGroupNameInputs = document.querySelectorAll(`.${addDeliveryGroupClasses.addDeliveryGroupNameInputClass}`);
+    const addDeliveryGroupFreeDeliveryAtInputs = document.querySelectorAll(`.${addDeliveryGroupClasses.addDeliveryGroupFreeDeliveryAtInputClass}`);
+    const addDeliveryGroupDeliveryCostInputs = document.querySelectorAll(`.${addDeliveryGroupClasses.addDeliveryGroupDeliveryCostInputClass}`);
+
+    let deliveryGroups = [];
+    let addDeliveryGroups = [];
+
+    //Iterate trough all existing delivery groups on the page and push the corresponding input values
+    //into the deliveryGroups array according to the current index, essentially push the existing delivery groups
+    //info into the deliveryGroups array
+    for(let i = 0; i < deliveryGroupNameInputs.length; i++) {
+        deliveryGroups.push({
+            id: deliveryGroupNameInputs[i]?.parentElement?.parentElement?.parentElement?.getAttribute('data-delivery-group-id') || null,   //Get the id from the delivery group container
+            name: deliveryGroupNameInputs[i]?.value || '',
+            freeDeliveryAt: deliveryGroupFreeDeliveryAtInputs[i]?.value || null,
+            deliveryCost: deliveryGroupDeliveryCostInputs[i]?.value || 0,
+        });
+    }
+    
+    //Iterate trough all new delivery groups on the page and push the corresponding input values
+    //into the addDeliveryGroups array according to the current index, essentially push the new delivery groups
+    //info into the addDeliveryGroups array
+    for(let i = 0; i < addDeliveryGroupNameInputs.length; i++) {
+        addDeliveryGroups.push({
+            name: addDeliveryGroupNameInputs[i]?.value || '',
+            freeDeliveryAt: addDeliveryGroupFreeDeliveryAtInputs[i]?.value || null,
+            deliveryCost: addDeliveryGroupDeliveryCostInputs[i]?.value || 0,
+        });
+    }
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/update-delivery-groups', {
+            buildId: buildId || null,
+            deliveryGroups: deliveryGroups,
+            addDeliveryGroups: addDeliveryGroups,
+        });
+
+        if(encodedBuildId) {
+            window.location.href = '/build/' + encodedBuildId;
+        }
+        else {
+            window.location.href = '/my-builds';
+        }
+    }
+    catch(error) {
+        errorService.handleError(error);
+    }
 }

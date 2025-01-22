@@ -194,6 +194,13 @@ class BuilderService {
     }
 
 
+    public function checkIsUserDeliveryGroupOwnerJSON($deliveryGroup) {
+        if($deliveryGroup->user_id != Auth::id()) {
+            return response()->json([], 403);
+        }
+    }
+
+
     public function createBuyLinks($requestData, $buildComponent) {
         foreach($requestData['buildComponentAddBuyLinks'] as $buyLink) {
             $buyLinkName = __('default_values.buy_link_default_name');
@@ -202,18 +209,18 @@ class BuilderService {
                 $buyLinkName = $buyLink['name'];
             }
 
-            $newbuyLink = new BuyLink();
+            $newBuyLink = new BuyLink();
             
-            $newbuyLink->name = $buyLinkName;
-            $newbuyLink->link = $buyLink['link'];
-            $newbuyLink->price = $buyLink['price'];
-            $newbuyLink->build_component_id = $buildComponent->id;
+            $newBuyLink->name = $buyLinkName;
+            $newBuyLink->link = $buyLink['link'];
+            $newBuyLink->price = $buyLink['price'];
+            $newBuyLink->build_component_id = $buildComponent->id;
 
             if($buyLink['deliveryGroupId'] != null) {
-                $newbuyLink->delivery_group_id = $buyLink['deliveryGroupId'];
+                $newBuyLink->delivery_group_id = $buyLink['deliveryGroupId'];
             }
 
-            $newbuyLink->save();
+            $newBuyLink->save();
         }
     }
 
@@ -288,5 +295,72 @@ class BuilderService {
         $deliveryGroup->save();
 
         return $deliveryGroup;
+    }
+
+
+    public function updateDeliveryGroups($requestData) {
+        foreach($requestData['deliveryGroups'] as $deliveryGroupsArrayItem) {
+            $deliveryGroup = DeliveryGroup::findOrFail($deliveryGroupsArrayItem['id']);
+
+            $this->checkIsUserDeliveryGroupOwnerJSON($deliveryGroup);
+
+            if($deliveryGroup->name != $deliveryGroupsArrayItem['name']) {
+                $deliveryGroup->name = $deliveryGroupsArrayItem['name'];
+            }
+            
+            if($deliveryGroup->free_delivery_at != $deliveryGroupsArrayItem['freeDeliveryAt']) {
+                $deliveryGroup->free_delivery_at = $deliveryGroupsArrayItem['freeDeliveryAt'];
+            }
+
+            if($deliveryGroup->delivery_cost != $deliveryGroupsArrayItem['deliveryCost']) {
+                $deliveryGroup->delivery_cost = $deliveryGroupsArrayItem['deliveryCost'];
+            }
+
+            $deliveryGroup->save();
+        }
+    }
+
+
+    public function deleteFromDbDeletedClientSideDeliveryGroups($requestData) {
+        $buildId = $requestData['buildId'];
+
+        if($buildId) {
+            $deliveryGroupsArray = DeliveryGroup::where(function ($query) use ($buildId) {
+                $query->where('build_id', $buildId)
+                    ->orWhereNull('build_id');
+            })
+            ->where('user_id', Auth::id())
+            ->pluck('id')
+            ->toArray();
+        }
+        else {
+            $deliveryGroupsArray = DeliveryGroup::where('user_id', Auth::id())->where('build_id', null)->pluck('id')->toArray();
+        }
+        $requestDeliveryGroupsArray = collect($requestData['deliveryGroups'])->pluck('id')->toArray();
+
+        $deliveryGroupsToDelete = array_diff($deliveryGroupsArray, $requestDeliveryGroupsArray);
+
+        if(!empty($deliveryGroupsToDelete)) {
+            DeliveryGroup::whereIn('id', $deliveryGroupsToDelete)->delete();
+        }
+    }
+
+
+    public function createDeliveryGroups($requestData) {
+        foreach($requestData['addDeliveryGroups'] as $addDeliveryGroupsArrayItem) {
+            $newDeliveryGroup = new DeliveryGroup();
+            
+            $newDeliveryGroup->name = $addDeliveryGroupsArrayItem['name'];
+            $newDeliveryGroup->free_delivery_at = $addDeliveryGroupsArrayItem['freeDeliveryAt'];
+            $newDeliveryGroup->delivery_cost = $addDeliveryGroupsArrayItem['deliveryCost'];
+            $newDeliveryGroup->user_id = Auth::id();
+            $newDeliveryGroup->currency = 'RSD';
+
+            if($requestData['buildId']) {
+                $newDeliveryGroup->build_id = $requestData['buildId'];
+            }
+
+            $newDeliveryGroup->save();
+        }
     }
 }

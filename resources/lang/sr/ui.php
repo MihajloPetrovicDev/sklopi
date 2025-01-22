@@ -94,6 +94,7 @@ return [
         'manage_delivery_groups' => 'Upravljaj Grupama Dostave',
         'local_delivery_groups' => 'Grupe Dostava',
         'new_delivery_group' => 'Nova Grupa Dostave',
+        'no_delivery_groups' => 'Nemate ni jednu grupu dostave.',
     ],
     'delivery_groups_list_item' => [
         'name' => 'Naziv',

@@ -1,10 +1,13 @@
-import { showNewDeliveryGroupContainer } from '../modules/builder_module';
+import { showNewDeliveryGroupContainer, setupDeleteDeliveryGroupButtons, updateDeliveryGroups } from '../modules/builder_module';
 
 
 const newDeliveryGroupPopupWindow = document.getElementById('new-delivery-group-popup-container');
 const newDeliveryGroupButton = document.getElementById('new-delivery-group-button');
 const newDeliveryGroupPopupWindowCancelButton = document.getElementById('add-delivery-group-popup-window-cancel-button');
 const newDeliveryGroupPopupWindowCreateButton = document.getElementById('add-delivery-group-popup-window-create-button');
+const saveDeliveryGroupsButton = document.getElementById('save-delivery-groups-button');
+
+setupDeleteDeliveryGroupButtons('delete-delivery-group-button');
 
 
 newDeliveryGroupButton.addEventListener('click', function(e) {
@@ -40,7 +43,7 @@ newDeliveryGroupPopupWindowCreateButton.addEventListener('click', async function
     const buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput = document.getElementById('delivery-group-free-delivery-at');
     const buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput = document.getElementById('delivery-group-delivery-cost');
 
-    const newDeliveryGroupContainer = showNewDeliveryGroupContainer(buyLinkNewDeliveryGroupPopupWindowNameInput.value, buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput.value, buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput.value, 'RSD');
+    const newDeliveryGroupContainer = showNewDeliveryGroupContainer(buyLinkNewDeliveryGroupPopupWindowNameInput.value, buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput.value, buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput?.value || 0, 'RSD');
 
     deliveryGroupsContainer.appendChild(newDeliveryGroupContainer);
 
@@ -50,4 +53,23 @@ newDeliveryGroupPopupWindowCreateButton.addEventListener('click', async function
     buyLinkNewDeliveryGroupPopupWindowNameInput.value = "";
     buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput.value = "";
     buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput.value = "";
+});
+
+
+saveDeliveryGroupsButton.addEventListener('click', function(e) {
+    const buildId = saveDeliveryGroupsButton.getAttribute('data-build-id');
+    const encodedBuildId = saveDeliveryGroupsButton.getAttribute('data-encoded-build-id');
+
+    const deliveryGroupClasses = {
+        deliveryGroupNameInputClass: 'delivery-group-name',
+        deliveryGroupFreeDeliveryAtInputClass: 'delivery-group-free-delivery-at',
+        deliveryGroupDeliveryCostInputClass: 'delivery-group-delivery-cost',
+    }
+    const addDeliveryGroupClasses = {
+        addDeliveryGroupNameInputClass: 'add-delivery-group-name',
+        addDeliveryGroupFreeDeliveryAtInputClass: 'add-delivery-group-free-delivery-at',
+        addDeliveryGroupDeliveryCostInputClass: 'add-delivery-group-delivery-cost',
+    }
+
+    updateDeliveryGroups(deliveryGroupClasses, addDeliveryGroupClasses, buildId, encodedBuildId);
 });

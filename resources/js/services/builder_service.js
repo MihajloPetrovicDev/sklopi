@@ -206,7 +206,14 @@ const builderService = {
         const deliveryGroupFreeDeliveryAtInput = document.createElement('input');
         deliveryGroupFreeDeliveryAtInput.classList.add('form-control', 'add-delivery-group-free-delivery-at');
         deliveryGroupFreeDeliveryAtInput.type = 'text';
-        deliveryGroupFreeDeliveryAtInput.value = deliveryGroupFreeDeliveryAt;
+        deliveryGroupFreeDeliveryAtInput.placeholder = i18next.t('delivery_group.optional');
+
+        if(deliveryGroupFreeDeliveryAt == '') {
+            deliveryGroupFreeDeliveryAtInput.value = deliveryGroupFreeDeliveryAt;
+        }
+        else {
+            deliveryGroupFreeDeliveryAtInput.value = Number(deliveryGroupFreeDeliveryAt).toFixed(2);
+        }
 
         const deliveryGroupFreeDeliveryAtInputOverlayContainer = document.createElement('div');
         deliveryGroupFreeDeliveryAtInputOverlayContainer.classList.add('w-80px', 'ml-m-80px', 'h-38px', 'input-fixed-overlay-container', 'br-tl-0px', 'br-bl-0px');
@@ -237,7 +244,7 @@ const builderService = {
         const deliveryGroupDeliveryCostInput = document.createElement('input');
         deliveryGroupDeliveryCostInput.classList.add('form-control', 'add-delivery-group-delivery-cost');
         deliveryGroupDeliveryCostInput.type = 'text';
-        deliveryGroupDeliveryCostInput.value = deliveryGroupCost;
+        deliveryGroupDeliveryCostInput.value = Number(deliveryGroupCost).toFixed(2);
 
         const deliveryGroupDeliveryCostInputOverlayContainer = document.createElement('div');
         deliveryGroupDeliveryCostInputOverlayContainer.classList.add('w-80px', 'ml-m-80px', 'h-38px', 'input-fixed-overlay-container', 'br-tl-0px', 'br-bl-0px');

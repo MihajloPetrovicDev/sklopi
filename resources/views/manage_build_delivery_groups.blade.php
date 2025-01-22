@@ -29,7 +29,9 @@
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex flex-column gap-4" id="delivery-groups-container">
+                <p class="mt-5 h-0px text-center fw-light fst-italic c-gray-1">@lang('ui.manage_delivery_groups.no_delivery_groups')</p>
+
+                <div class="d-flex flex-column gap-4 mt-m-20px min-h-25px" id="delivery-groups-container">
                     @foreach($buildDeliveryGroups as $buildDeliveryGroup)
                         <x-delivery-groups-list-item :delivery-group="$buildDeliveryGroup" />
                     @endforeach
@@ -42,7 +44,7 @@
         <div class="d-flex mx-auto mt-5 w-fc mb-5">
             <a class="btn btn-secondary" href="{{ $build ? '/build/'.$build->encodedId : '/my-builds' }}">@lang('ui.delivery_groups_list_item.cancel')</a>
 
-            <button class="btn btn-primary ml-5px" id="save-delivery-groups-button">@lang('ui.delivery_groups_list_item.save')</button>
+            <button class="btn btn-primary ml-5px" id="save-delivery-groups-button" data-encoded-build-id="{{ $build->encodedId }}" data-build-id="{{ $build->id }}">@lang('ui.delivery_groups_list_item.save')</button>
         </div>
     </main>
 

@@ -53,3 +53,5 @@ Route::post('/api/update-build-component', [BuilderController::class, 'updateBui
 Route::delete('/api/delete-build/{id}', [BuilderController::class, 'deleteBuild'])->middleware('auth');
 
 Route::post('/api/save-build-name', [BuilderController::class, 'saveBuildName'])->middleware('auth');
+
+Route::post('/api/update-delivery-groups', [BuilderController::class, 'updateDeliveryGroups'])->middleware('auth');

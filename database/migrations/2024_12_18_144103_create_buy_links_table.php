@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('build_component_id')->references('id')->on('build_components')->onDelete('cascade');
-            $table->foreign('delivery_group_id')->references('id')->on('delivery_groups');
+            $table->foreign('delivery_group_id')->references('id')->on('delivery_groups')->onDelete('set null');
         });
     }
 

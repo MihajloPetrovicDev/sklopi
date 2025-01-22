@@ -17,7 +17,7 @@
 
             <div class="w-30p ml-5p">
                 <label for="component-name">@lang('ui.new_delivery_group_popup_window.delivery_cost'):</label>
-                <input class="form-control mt-1" type="text" id="delivery-group-delivery-cost" placeholder="{{ __('ui.new_delivery_group_popup_window.optional') }}"></input>
+                <input class="form-control mt-1" type="text" id="delivery-group-delivery-cost"></input>
             </div>
         </div>
 
