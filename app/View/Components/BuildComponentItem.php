@@ -5,12 +5,16 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\View\Component;
 use Illuminate\Support\Collection;
+use App\Helpers\NumberFormatHelper;
+
 use Illuminate\Contracts\View\View;
+use function App\Helpers\formatToComaDecimalSeparator;
 
 class BuildComponentItem extends Component
 {
     public $buildComponent;
     public $build;
+    public $buildComponentBuyLinkPrice;
     public $buildComponentTypeId;
     public $buildComponentBuyLink;
 
@@ -22,6 +26,10 @@ class BuildComponentItem extends Component
         if($buildComponent) {
             $this->buildComponent = $buildComponent;
             $this->buildComponentBuyLink = $cheapestBuyLinksCombination->where('build_component_id', $buildComponent->id)->first();
+
+            if($this->buildComponentBuyLink && $this->buildComponentBuyLink->price) {
+                $this->buildComponentBuyLinkPrice = NumberFormatHelper::formatToComaDecimalSeparator($this->buildComponentBuyLink->price);
+            }
         }
         else {
             $this->build = $build;

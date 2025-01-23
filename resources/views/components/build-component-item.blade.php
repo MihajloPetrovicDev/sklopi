@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="w-50p">
-                        <p class="mb-0px">{{ $buildComponentBuyLink->price == null ? '--' : $buildComponentBuyLink->price }} RSD</p>
+                        <p class="mb-0px">{{ $buildComponentBuyLinkPrice == null ? '--' : $buildComponentBuyLinkPrice }} RSD</p>
                     </div>
                 @endif
             </div>

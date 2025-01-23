@@ -3,6 +3,19 @@
 return [
     'home' => [
         'header_title' => 'sklopi - Jednostavan i Efikasan Konfigurator Delova za Računar',
+        'title' => 'Sklopi računar na jednom mestu.',
+        'sub_title' => 'Ne moraš više da imaš 1000 otvorenih kartica na pregledaču i 10 kalkulatora. Unesi komponente i linkove na kojima možeš da ih kupiš, zajedno sa podatcima o ceni i dostavi, a mi ćemo naći najbolje opcije za vas.',
+        'build_pc' => 'Sklopi Računar',
+        'enter_build_components_text' => 'Unesi komponente konfiguracije.',
+        'enter_buy_links_text' => 'Unesi linkove za kupovinu komponenti.',
+        'enter_delivery_groups_text' => 'Napravi i dodeli grupe za dostavu linkovima za kupovinu.',
+        'we_will_choose_the_cheapest_option_text' => 'Mi ćemo izračunati najjeftiji link za kupovinu za svaku komponentu imajući u vidu cenu dostave i količinu pri kojoj dostava postaje besplatna u određenoj grupi za dostavu.',
+        'because_of_builder_flexibility_text' => 'Zbog fleksibilnosti konfiguratora možete uneti linkove za kupovinu sličnih komponenti koje su kompatibilne sa vašom konfiguracijom i tako dodati još potencijala za uštedu, kako na komponentama tako i na dostavi. Na primer možete uneti više različitih modela SSD-a slične brzine i kapaciteta.',
+        'dont_want_to_look_alone_text' => 'Ne želite da tražite komponente i prodavnice sami?',
+        'look_trough' => 'Pogledajte',
+        'public_builds' => 'Javne Konfiguracije',
+        'and' => 'i',
+        'discussions' => 'Diskusije',
     ],
     'my_builds' => [
         'header_title' => 'Konfigurator - sklopi',

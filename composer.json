@@ -25,15 +25,16 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/EncodeHelper.php",
+            "app/Helpers/NumberFormatHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        },
-        "files": [
-            "app/Helpers/EncodeHelper.php"
-        ]
+        }
     },
     "scripts": {
         "post-autoload-dump": [

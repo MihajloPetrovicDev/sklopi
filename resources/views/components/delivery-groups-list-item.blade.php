@@ -30,7 +30,7 @@
 
     <div class="w-10p d-flex justify-content-between">
         <button class="span-button-red ms-auto w-fc pin-0px delete-delivery-group-button">
-            <span class="material-symbols-outlined">delete</span>
+            <span class="material-symbols-outlined mt-2">delete</span>
         </button>
     </div>
 </div>

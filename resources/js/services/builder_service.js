@@ -269,7 +269,7 @@ const builderService = {
         deleteDeliveryGroupButton.classList.add('span-button-red', 'ms-auto', 'w-fc', 'pin-0px', 'delete-delivery-group-button');
 
         const deleteDeliveryGroupButtonSpan = document.createElement('span');
-        deleteDeliveryGroupButtonSpan.classList.add('material-symbols-outlined');
+        deleteDeliveryGroupButtonSpan.classList.add('material-symbols-outlined', 'mt-2');
         deleteDeliveryGroupButtonSpan.textContent = 'delete';
 
         deleteDeliveryGroupButton.appendChild(deleteDeliveryGroupButtonSpan);

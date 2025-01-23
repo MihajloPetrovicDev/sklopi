@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\ErrorService;
 use App\Services\BuilderService;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::directive('formatToComaDecimalSeparator', function($number) {
+            return "<?php echo \App\Helpers\NumberFormatHelper::formatToComaDecimalSeparator($number); ?>";
+        });
     }
 }
