@@ -403,7 +403,7 @@ class BuilderController extends Controller
 
             $buildDeliveryGroups = DeliveryGroup::where('build_id', $build->id)->get();
 
-            return view('manage_build_delivery_groups', compact('build', 'buildDeliveryGroups'));
+            return view('manage_delivery_groups', compact('build', 'buildDeliveryGroups'));
         }
         catch(Exception $e) {
             $this->errorService->handleException($e);

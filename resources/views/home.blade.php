@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="w-30p text-center mx-auto mt-120px mb-5">
+        <div class="w-30p text-center mx-auto mt-120px">
             <h2 class="fs-1 w-70p mx-auto">@lang('ui.home.dont_want_to_look_alone_text')</h2>
 
             <div class="d-flex mt-5 gap-2 mx-auto w-fc align-items-center">
@@ -42,6 +42,8 @@
             </div>
         </div>
     </main>
+
+    <x-footer />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

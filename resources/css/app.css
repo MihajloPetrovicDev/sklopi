@@ -3,6 +3,14 @@ body {
     font-family: Kanit !important;
     color: #1a1a1a;
     background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main {
+    flex: 1;
 }
 
 #main-header {
@@ -10,6 +18,14 @@ body {
     display: flex;
     height: 70px;
     padding-inline: 40px;
+}
+
+#footer {
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 150px;
+    margin-top: 120px;
+    padding: 25px;
 }
 
 .h-fc {
@@ -30,6 +46,14 @@ body {
 
 .h-45px {
     height: 45px !important;
+}
+
+.h-85p {
+    height: 85% !important;
+}
+
+.h-15p {
+    height: 15% !important;
 }
 
 .min-h-25px {
@@ -58,6 +82,10 @@ body {
 
 .w-30p {
     width: 30% !important;
+}
+
+.w-33p {
+    width: 33% !important;
 }
 
 .w-40p {
@@ -172,6 +200,14 @@ body {
     color: #f7f7f7;
 }
 
+.c-white-3 {
+    color: #e9e9e9;
+}
+
+.c-white-4 {
+    color: #bbbbbb;
+}
+
 .c-gray-1 {
     color: #444444;
 }
@@ -282,6 +318,14 @@ body {
 
 .hover-c-lgray:hover {
     color: #cacaca;
+}
+
+.hover-c-lgray-2 {
+    transition: color 0.1s ease;
+}
+
+.hover-c-lgray-2:hover {
+    color: #aaaaaa;
 }
 
 .hover-bgc-gray {

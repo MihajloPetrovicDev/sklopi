@@ -12,12 +12,26 @@
 
             <div class="w-30p ml-5p">
                 <label for="component-name">@lang('ui.new_delivery_group_popup_window.free_delivery_at'):</label>
-                <input class="form-control mt-1" type="text" id="delivery-group-free-delivery-at" placeholder="{{ __('ui.new_delivery_group_popup_window.optional') }}"></input>
+            
+                <div class="d-flex mt-1">
+                    <input class="form-control" type="text" id="delivery-group-free-delivery-at" placeholder="{{ __('ui.new_delivery_group_popup_window.optional') }}"></input>
+
+                    <div class="w-80px ml-m-80px h-38px input-fixed-overlay-container br-tl-0px br-bl-0px">
+                        <p class="mb-0px">RSD</p>
+                    </div>
+                </div>
             </div>
 
             <div class="w-30p ml-5p">
                 <label for="component-name">@lang('ui.new_delivery_group_popup_window.delivery_cost'):</label>
-                <input class="form-control mt-1" type="text" id="delivery-group-delivery-cost"></input>
+                
+                <div class="d-flex mt-1">
+                    <input class="form-control" type="text" id="delivery-group-delivery-cost"></input>
+
+                    <div class="w-80px ml-m-80px h-38px input-fixed-overlay-container br-tl-0px br-bl-0px">
+                        <p class="mb-0px">RSD</p>
+                    </div>
+                </div>
             </div>
         </div>
 

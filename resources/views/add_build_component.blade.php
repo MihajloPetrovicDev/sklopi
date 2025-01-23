@@ -15,7 +15,7 @@
 
         <div class="w-60p mx-auto" id="error-container-placeholder"></div>
 
-        <div class="section-1 mx-auto mt-80px w-60p mb-5">
+        <div class="section-1 mx-auto mt-80px w-60p">
             <div class="w-85p mx-auto">
                 <label for="component-name">@lang('ui.add_build_component.component_name'):</label>
                 <input class="form-control mt-1" type="text" id="component-name"></input>
@@ -35,6 +35,8 @@
             </div>
         </div>
     </main>
+
+    <x-footer />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="module" src="{{ mix('resources/js/inits/add_build_component_init.js') }}"></script>

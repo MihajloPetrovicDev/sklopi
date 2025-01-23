@@ -28,7 +28,7 @@
             <div class="w-60p pr-10px">
                 <label for="buy-link-delivery-group-select">@lang('ui.build_component.buy_link_delivery_group'):</label>
 
-                <select class="form-select h-38px mt-1 buy-link-delivery-group" id="buy-link-delivery-group-select">
+                <select class="form-select h-38px mt-1 buy-link-delivery-group buy-link-delivery-group-select" id="buy-link-delivery-group-select">
                     <option></option>
                     
                     @foreach($buildDeliveryGroups as $buildDeliveryGroup)

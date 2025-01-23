@@ -127,7 +127,7 @@ export async function createNewDeliveryGroup(newDeliveryGroupNameInputId, newDel
         const deliveryGroups = await builderService.getBuildDeliveryGroups(buildId);
 
         //After creating the delivery group add it as an option to all the delivery group select elements
-        builderService.addNewDeliveryGroupOptionToEverySelect('add-buy-link-delivery-group', deliveryGroups);
+        builderService.addNewDeliveryGroupOptionToEverySelect('buy-link-delivery-group-select', deliveryGroups);
     }
     catch(error) {
         errorService.handleError(error);
@@ -266,7 +266,7 @@ export function showNewDeliveryGroupContainer(deliveryGroupName, deliveryGroupFr
 }
 
 
-export function setupDeleteDeliveryGroupButtons(deleteDeliveryGroupButtonClass) {
+export function setUpDeleteDeliveryGroupButtons(deleteDeliveryGroupButtonClass) {
     const deleteDeliveryGroupButtons = document.querySelectorAll(`.${deleteDeliveryGroupButtonClass}`);
 
     deleteDeliveryGroupButtons.forEach(deleteDeliveryGroupButton => {

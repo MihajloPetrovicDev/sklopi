@@ -17,7 +17,7 @@
             <p class="mb-0px ml-5px fw-light user-select-none">Moj Nalog</p>
         </a>
     @else
-        <a class="clean-link c-white-2 fs-1-2r hover-c-lgray fw-light user-select-none" href="/login">Prijavi Se</a>
+        <a class="btn btn-light" href="/login">Prijavi Se</a>
     @endif
     </div>
 </header>

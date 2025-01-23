@@ -69,7 +69,7 @@ const builderService = {
         deliveryGroupLabel.textContent = i18next.t('add_buy_link.delivery_group');
 
         let deliveryGroupSelect = document.createElement('select');
-        deliveryGroupSelect.classList.add('form-select', 'h-38px', 'mt-1', 'add-buy-link-delivery-group');
+        deliveryGroupSelect.classList.add('form-select', 'h-38px', 'mt-1', 'add-buy-link-delivery-group', 'buy-link-delivery-group-select');
         deliveryGroupSelect.id = 'add-buy-link-delivery-group-select'
 
         const deliveryGroups = await this.getBuildDeliveryGroups(buildId);

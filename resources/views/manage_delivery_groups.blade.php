@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="robots" content="noindex, nofollow">
     <x-base-head-tags />
     <title>@lang('ui.manage_delivery_groups.manage_delivery_groups'){{ $build ? ': '.$build->name : '' }} - sklopi</title>
 </head>
@@ -41,12 +42,14 @@
 
         @endif
 
-        <div class="d-flex mx-auto mt-5 w-fc mb-5">
+        <div class="d-flex mx-auto mt-5 w-fc">
             <a class="btn btn-secondary" href="{{ $build ? '/build/'.$build->encodedId : '/my-builds' }}">@lang('ui.delivery_groups_list_item.cancel')</a>
 
             <button class="btn btn-primary ml-5px" id="save-delivery-groups-button" data-encoded-build-id="{{ $build->encodedId }}" data-build-id="{{ $build->id }}">@lang('ui.delivery_groups_list_item.save')</button>
         </div>
     </main>
+
+    <x-footer />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="module" src="{{ mix('resources/js/inits/manage_delivery_groups_init.js') }}"></script>

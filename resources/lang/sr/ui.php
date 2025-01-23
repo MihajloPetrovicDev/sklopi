@@ -125,4 +125,7 @@ return [
         'header_title' => 'Diskusije - sklopi',
         'coming_soon' => 'Diskusije dolaze uskoro.',
     ],
+    'footer' => [
+        'all_rights_reserved' => 'sklopi. Sva prava zadržana.',
+    ]
 ];
