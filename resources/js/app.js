@@ -2,7 +2,8 @@ import './bootstrap';
 import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 
-i18next
+async function initialiseApp() {
+    await i18next
     .use(i18nextHttpBackend)  // Use backend for external JSON files
     .init({
         lng: 'sr',  // Set default language
@@ -12,4 +13,7 @@ i18next
         },
     });
 
-window.i18next = i18next;
+    window.i18next = i18next;
+}
+
+await initialiseApp();

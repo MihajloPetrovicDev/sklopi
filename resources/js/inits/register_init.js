@@ -1,4 +1,4 @@
-import { register } from '../modules/auth_module';
+import authModule from '../modules/auth_module';
 
 
 const registerForm = document.getElementById('register-form');
@@ -7,5 +7,5 @@ const registerForm = document.getElementById('register-form');
 registerForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    register('username', 'email', 'password', 'confirm-password');
+    authModule.register('username', 'email', 'password', 'confirm-password');
 });

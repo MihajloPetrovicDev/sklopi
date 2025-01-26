@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuilderController;
+use App\Http\Controllers\GuestBuilderController;
+use App\View\Components\GuestBuilder;
 
 Route::get('/', function () {
     return view('home');
@@ -20,7 +22,7 @@ Route::get('/create-new-build', [BuilderController::class, 'getCreateNewBuildPag
 
 Route::get('/build/{id}', [BuilderController::class, 'getBuild'])->middleware('auth');
 
-Route::get('/guest-build', [BuilderController::class, 'getGuestBuild'])->middleware('guest');
+Route::get('/guest-build', [GuestBuilderController::class, 'getGuestBuild'])->middleware('guest');
 
 Route::get('/add-build-component', [BuilderController::class, 'getAddBuildComponent'])->middleware('auth');
 
@@ -31,6 +33,8 @@ Route::get('/manage-delivery-groups', [BuilderController::class, 'manageDelivery
 Route::get('/builds', [BuilderController::class, 'getBuildsPage']);
 
 Route::get('/discussions', [BuilderController::class, 'getDiscussionsPage']);
+
+Route::get('/add-guest-build-component', [GuestBuilderController::class, 'getAddGuestBuildComponentPage'])->middleware('guest');
 
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 

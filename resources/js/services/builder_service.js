@@ -19,6 +19,8 @@ const builderService = {
 
         return nameDiv;
     },
+
+
     getAddBuyLinkLinkContainer() {
         let linkDiv = document.createElement('div');
         linkDiv.classList.add('w-47p', 'ml-5p')
@@ -36,6 +38,8 @@ const builderService = {
 
         return linkDiv;
     },
+
+
     getAddBuyLinkPriceContainer() {
         let priceDiv = document.createElement('div');
         priceDiv.classList.add('w-20p');
@@ -54,6 +58,8 @@ const builderService = {
 
         return priceDiv;
     },
+
+
     async getAddBuyLinkDeliveryGroupContainer(buildId) {
         let deliveryGroupDiv = document.createElement('div');
         deliveryGroupDiv.classList.add('d-flex', 'w-75p', 'ml-5p');
@@ -101,6 +107,8 @@ const builderService = {
 
         return deliveryGroupDiv;
     },
+
+
     async getBuildDeliveryGroups(buildId) {
         try {
             const response = await axios.post('http://localhost:8000/api/get-build-delivery-groups', {
@@ -118,6 +126,8 @@ const builderService = {
             return [];
         }
     },
+
+
     async getAddBuyLinkContainer(buildId) {
         const addBuyLinkContainer = document.createElement('div');
         addBuyLinkContainer.classList.add('section-2', 'gap-5', 'w-100p', 'mt-3', 'pb-0px');
@@ -154,6 +164,8 @@ const builderService = {
 
         return addBuyLinkContainer;
     },
+
+
     addNewDeliveryGroupOptionToEverySelect(deliveryGroupSelectClass, deliveryGroups) {
         const deliveryGroupSelects = document.querySelectorAll(`.${deliveryGroupSelectClass}`);
 
@@ -174,6 +186,8 @@ const builderService = {
             });
         });
     },
+
+
     getDeliveryGroupNameContainer(deliveryGroupName) {
         const deliveryGroupNameContainer = document.createElement('div');
         deliveryGroupNameContainer.classList.add('w-30p');
@@ -192,6 +206,8 @@ const builderService = {
 
         return deliveryGroupNameContainer;
     },
+
+
     getDeliveryGroupFreeDeliveryAtContainer(deliveryGroupFreeDeliveryAt, currency) {
         const deliveryGroupFreeDeliveryAtContainer = document.createElement('div');
         deliveryGroupFreeDeliveryAtContainer.classList.add('w-30p', 'ml-5p');
@@ -230,6 +246,8 @@ const builderService = {
 
         return deliveryGroupFreeDeliveryAtContainer;
     },
+
+
     getDeliveryGroupDeliveryCostContainer(deliveryGroupCost, currency) {
         const deliveryGroupDeliveryCostContainer = document.createElement('div');
         deliveryGroupDeliveryCostContainer.classList.add('w-30p', 'ml-5p');
@@ -261,6 +279,8 @@ const builderService = {
 
         return deliveryGroupDeliveryCostContainer;
     },
+
+    
     getDeleteDeliveryGroupButtonContainer() {
         const deleteDeliveryGroupButtonContainer = document.createElement('div');
         deleteDeliveryGroupButtonContainer.classList.add('w-10p', 'd-flex', 'justify-content-between');
@@ -276,7 +296,7 @@ const builderService = {
         deleteDeliveryGroupButtonContainer.appendChild(deleteDeliveryGroupButton);
 
         return deleteDeliveryGroupButtonContainer;
-    }
+    },
 }
 
 export default builderService;

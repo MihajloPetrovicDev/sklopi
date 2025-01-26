@@ -1,4 +1,4 @@
-import { login } from '../modules/auth_module';
+import authModule from '../modules/auth_module';
 
 
 const loginForm = document.getElementById('login-form');
@@ -7,5 +7,5 @@ const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    login('email', 'password');
+    authModule.login('email', 'password');
 });

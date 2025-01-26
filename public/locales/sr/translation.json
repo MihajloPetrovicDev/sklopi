@@ -4,6 +4,9 @@
         "unexpected_error": "Došlo je do neočekivane greške.",
         "error_delivery_groups_request": "Došlo je do greške prilikom učitavanja grupa za dostavu."
     },
+    "default_values": {
+        "buy_link_name": "Link za Kupovinu"
+    },
     "add_buy_link": {
         "name": "Naziv:",
         "optional": "Opcionalno",
@@ -17,5 +20,8 @@
         "free_delivery_at": "Besplatna Dostava Od",
         "delivery_cost": "Cena Dostave:",
         "optional": "Opcionalno"
+    },
+    "add_build_component_button": {
+        "add_component": "+ Dodaj Komponentu"
     }
 }

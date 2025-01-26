@@ -1,4 +1,4 @@
-import { showNewBuyLinkContainer, updateBuildComponent, setUpDeleteBuyLinkButtons, createNewDeliveryGroup, setUpBuyLinkNewDeliveryGroupButtons } from "../modules/builder_module";
+import builderModule from "../modules/builder_module";
 
 
 const addBuyLinkButton = document.getElementById('add-buy-link-button');
@@ -7,16 +7,16 @@ const buyLinkNewDeliveryGroupPopupWindowCancelButton = document.getElementById('
 const buyLinkNewDeliveryGroupPopupWindowCreateButton = document.getElementById('add-delivery-group-popup-window-create-button');
 
 
-setUpDeleteBuyLinkButtons('buy-link-delete-button');
+builderModule.setUpDeleteBuyLinkButtons('buy-link-delete-button');
 
 
-setUpBuyLinkNewDeliveryGroupButtons('buy-link-new-delivery-group-button', 'new-delivery-group-popup-container');
+builderModule.setUpBuyLinkNewDeliveryGroupButtons('buy-link-new-delivery-group-button', 'new-delivery-group-popup-container');
 
 
 addBuyLinkButton.addEventListener('click', function(e) {
     e.preventDefault();
 
-    showNewBuyLinkContainer('buy-links-container', 'add-buy-link-button');
+    builderModule.showNewBuyLinkContainer('buy-links-container', 'add-buy-link-button');
 });
 
 
@@ -40,7 +40,7 @@ saveBuildComponentButton.addEventListener('click', function(e) {
         addBuyLinkDeliveryGroupSelectClass: 'add-buy-link-delivery-group'
     };
 
-    updateBuildComponent(buildComponentId, encodedBuildId, 'component-name', buyLinkClasses, addBuyLinkClasses);
+    builderModule.updateBuildComponent(buildComponentId, encodedBuildId, 'component-name', buyLinkClasses, addBuyLinkClasses);
 });
 
 
@@ -70,7 +70,7 @@ buyLinkNewDeliveryGroupPopupWindowCreateButton.addEventListener('click', functio
     const buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput = document.getElementById('delivery-group-free-delivery-at');
     const buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput = document.getElementById('delivery-group-delivery-cost');
 
-    createNewDeliveryGroup('delivery-group-name', 'delivery-group-free-delivery-at', 'delivery-group-delivery-cost', buildId);
+    builderModule.createNewDeliveryGroup('delivery-group-name', 'delivery-group-free-delivery-at', 'delivery-group-delivery-cost', buildId);
 
     buyLinkNewDeliveryGroupPopupWindow.classList.remove('d-flex');
     buyLinkNewDeliveryGroupPopupWindow.classList.add('d-none');

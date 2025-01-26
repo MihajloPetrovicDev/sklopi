@@ -90,11 +90,6 @@ class BuilderController extends Controller
     }
 
 
-    public function getGuestBuild() {
-        return view('guest_build');
-    }
-
-
     public function getAddBuildComponent(Request $request) {
         try {
             $encodedBuildId = $request->query('build-id');

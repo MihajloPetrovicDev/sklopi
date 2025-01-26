@@ -1,15 +1,15 @@
 <footer class="c-white-3 fw-light" id="footer">
     <div class="d-flex h-85p w-60p mx-auto">
         <div class="w-33p text-center">
-            <a class="c-white-3 fs-1-2r clean-link hover-c-lgray-2" href="/terms-of-service">Uslovi Korišćenja</a>
+            <a class="c-white-3 fs-1-2r clean-link hover-c-lgray-2" href="/terms-of-service">@lang('ui.footer.terms_of_service')</a>
         </div>
 
         <div class="w-33p text-center">
-            <a class="c-white-3 fs-1-2r clean-link hover-c-lgray-2" href="/privacy-policy">Politika Privatnosti</a>
+            <a class="c-white-3 fs-1-2r clean-link hover-c-lgray-2" href="/privacy-policy">@lang('ui.footer.privacy_policy')</a>
         </div>
 
         <div class="w-33p text-center">
-            <p class="fs-1-2r"><span class="fw-200">Kontakt:</span> support@sklopi.live</p>
+            <p class="fs-1-2r"><span class="fw-200">@lang('ui.footer.contact'):</span> @lang('ui.footer.support_email')</p>
         </div>
     </div>
 

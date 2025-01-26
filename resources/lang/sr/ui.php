@@ -127,5 +127,25 @@ return [
     ],
     'footer' => [
         'all_rights_reserved' => 'sklopi. Sva prava zadržana.',
+        'terms_of_service' => 'Uslovi Korišćenja',
+        'privacy_policy' => 'Politika Privatnosti',
+        'contact' => 'Kontakt',
+        'support_email' => 'support@sklopi.live',
+    ],
+    'guest_build' => [
+        'header_title' => 'Konfigurator za sklapanje računara - sklopi',
+        'motherboard' => 'Matična Ploča',
+        'storage' => 'Memorija',
+        'case' => 'Kućište',
+        'other' => 'Ostalo',
+        'total' => 'Ukupna Cena',
+    ],
+    'add_guest_build_component' => [
+        'add_component' => 'Dodaj Komponentu: Gost Konfiguracija',
+        'component_name' => 'Naziv Komponente',
+        'buy_links' => 'Linkovi za Kupovinu',
+        'add_buy_link' => 'Dodaj Link za Kupovinu',
+        'cancel' => 'Otkaži',
+        'add' => 'Dodaj',
     ]
 ];

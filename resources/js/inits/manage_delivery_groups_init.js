@@ -1,4 +1,4 @@
-import { showNewDeliveryGroupContainer, setUpDeleteDeliveryGroupButtons, updateDeliveryGroups } from '../modules/builder_module';
+import builderModule from "../modules/builder_module";
 
 
 const newDeliveryGroupPopupWindow = document.getElementById('new-delivery-group-popup-container');
@@ -7,7 +7,8 @@ const newDeliveryGroupPopupWindowCancelButton = document.getElementById('add-del
 const newDeliveryGroupPopupWindowCreateButton = document.getElementById('add-delivery-group-popup-window-create-button');
 const saveDeliveryGroupsButton = document.getElementById('save-delivery-groups-button');
 
-setUpDeleteDeliveryGroupButtons('delete-delivery-group-button');
+
+builderModule.setUpDeleteDeliveryGroupButtons('delete-delivery-group-button');
 
 
 newDeliveryGroupButton.addEventListener('click', function(e) {
@@ -43,11 +44,11 @@ newDeliveryGroupPopupWindowCreateButton.addEventListener('click', async function
     const buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput = document.getElementById('delivery-group-free-delivery-at');
     const buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput = document.getElementById('delivery-group-delivery-cost');
 
-    const newDeliveryGroupContainer = showNewDeliveryGroupContainer(buyLinkNewDeliveryGroupPopupWindowNameInput.value, buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput.value, buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput?.value || 0, 'RSD');
+    const newDeliveryGroupContainer = builderModule.showNewDeliveryGroupContainer(buyLinkNewDeliveryGroupPopupWindowNameInput.value, buyLinkNewDeliveryGroupPopupWindowFreeDeliveryAtInput.value, buyLinkNewDeliveryGroupPopupWindowDeliveryCostInput?.value || 0, 'RSD');
 
     deliveryGroupsContainer.appendChild(newDeliveryGroupContainer);
 
-    setUpDeleteDeliveryGroupButtons('delete-delivery-group-button');
+    builderModule.setUpDeleteDeliveryGroupButtons('delete-delivery-group-button');
 
     buyLinkNewDeliveryGroupPopupWindow.classList.remove('d-flex');
     buyLinkNewDeliveryGroupPopupWindow.classList.add('d-none');
@@ -73,5 +74,5 @@ saveDeliveryGroupsButton.addEventListener('click', function(e) {
         addDeliveryGroupDeliveryCostInputClass: 'add-delivery-group-delivery-cost',
     }
 
-    updateDeliveryGroups(deliveryGroupClasses, addDeliveryGroupClasses, buildId, encodedBuildId);
+    builderModule.updateDeliveryGroups(deliveryGroupClasses, addDeliveryGroupClasses, buildId, encodedBuildId);
 });
