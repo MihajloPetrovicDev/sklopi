@@ -36,6 +36,8 @@ Route::get('/discussions', [BuilderController::class, 'getDiscussionsPage']);
 
 Route::get('/add-guest-build-component', [GuestBuilderController::class, 'getAddGuestBuildComponentPage'])->middleware('guest');
 
+Route::get('/guest-build-component', [GuestBuilderController::class, 'getGuestBuildComponentPage'])->middleware('guest');
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');

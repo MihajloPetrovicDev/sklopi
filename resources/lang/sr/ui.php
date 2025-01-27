@@ -147,5 +147,14 @@ return [
         'add_buy_link' => 'Dodaj Link za Kupovinu',
         'cancel' => 'Otkaži',
         'add' => 'Dodaj',
-    ]
+    ],
+    'guest_build_component' => [
+        'component' => 'Komponenta',
+        'component_name' => 'Naziv Komponente',
+        'add' => 'Dodaj',
+        'cancel' => 'Otkaži',
+        'save' => 'Sačuvaj',
+        'buy_links' => 'Linkovi za Kupovinu',
+        'add_buy_link' => 'Dodaj Link za Kupovinu',
+    ],
 ];

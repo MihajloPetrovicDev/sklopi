@@ -16,4 +16,12 @@ class GuestBuilderController extends Controller
 
         return view('add_guest_build_component', compact('buildComponentTypeId'));
     }
+
+
+    public function getGuestBuildComponentPage(Request $request) {
+        $buildComponentId = $request->query('build-component');
+        $buildComponentTypeId = $request->query('build-component-type');
+
+        return view('guest_build_component', compact('buildComponentId', 'buildComponentTypeId'));
+    }
 }

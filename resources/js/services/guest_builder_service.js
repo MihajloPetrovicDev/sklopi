@@ -1,18 +1,22 @@
 import { v4 as uuid } from 'uuid';
-import i18next from "i18next";
+import i18next from 'i18next';
+import numberFormatService from './number_format_service';
+
 
 const guestBuilderService = {
     getCheapestBuyLinksCombination(buildComponents, buyLinks) {
         let cheapestBuyLinksCombination = [];
         
         buildComponents.forEach(buildComponent => {
-            const buildComponentBuyLinks = buyLinks.filter(buyLink => buyLink.buildComponentId === buildComponent.id);
+            const buildComponentBuyLinks = buyLinks.filter(buyLink => buyLink.buildComponentId === buildComponent.id) || null;
 
-            const buildComponentCheapestBuyLink = buildComponentBuyLinks.reduce((currentBuyLink, minBuyLink) => {
-                return currentBuyLink.price < minBuyLink.price ? currentBuyLink : minBuyLink;
-            });
+            if(buildComponentBuyLinks.length > 0){ 
+                const buildComponentCheapestBuyLink = buildComponentBuyLinks.reduce((currentBuyLink, minBuyLink) => {
+                    return currentBuyLink.price < minBuyLink.price ? currentBuyLink : minBuyLink;
+                });
 
-            cheapestBuyLinksCombination.push(buildComponentCheapestBuyLink);
+                cheapestBuyLinksCombination.push(buildComponentCheapestBuyLink);
+            }
         });
 
         return cheapestBuyLinksCombination;
@@ -151,7 +155,7 @@ const guestBuilderService = {
 
 
     createBuildComponentBuyLinks(buildComponentId, addBuyLinkNameInputClass, addBuyLinkPriceInputClass, addBuyLinkLinkInputClass) {
-        const addBuyLinksToAdd = this.getBuyLinkInputElementsToArray(addBuyLinkNameInputClass, addBuyLinkPriceInputClass, addBuyLinkLinkInputClass);
+        const addBuyLinksToAdd = this.getAddBuyLinkInputElementsToArray(addBuyLinkNameInputClass, addBuyLinkPriceInputClass, addBuyLinkLinkInputClass);
 
         let buyLinks = JSON.parse(localStorage.getItem('buyLinks')) || [];
 
@@ -162,7 +166,6 @@ const guestBuilderService = {
                 price: buyLinkToAdd['price'],
                 link: buyLinkToAdd['link'],
                 buildComponentId: buildComponentId,
-                currency: 'RSD',
             };
 
             buyLinks.push(buyLink);
@@ -174,7 +177,7 @@ const guestBuilderService = {
     },
 
 
-    getBuyLinkInputElementsToArray(buyLinkNameInputClass, buyLinkPriceInputClass, buyLinkLinkInputClass) {
+    getAddBuyLinkInputElementsToArray(buyLinkNameInputClass, buyLinkPriceInputClass, buyLinkLinkInputClass) {
         const buyLinkNameInputs = document.querySelectorAll(`.${buyLinkNameInputClass}`);
         const buyLinkPriceInputs = document.querySelectorAll(`.${buyLinkPriceInputClass}`);
         const buyLinkLinkInputs = document.querySelectorAll(`.${buyLinkLinkInputClass}`);
@@ -182,9 +185,29 @@ const guestBuilderService = {
 
         for(let i = 0; i < buyLinkNameInputs.length; i++) {
             buyLinks.push({
-                name: buyLinkNameInputs[i]?.value || i18next.t('default_vales.buy_link_name'),
+                name: buyLinkNameInputs[i]?.value || i18next.t('default_values.buy_link_name'),
                 price: buyLinkPriceInputs[i]?.value || null,
                 link: buyLinkLinkInputs[i]?.value || '',
+            });
+        }
+
+        return buyLinks;
+    },
+
+
+    getBuyLinkInputElementsToArray(buildComponentId, buyLinkNameInputClass, buyLinkPriceInputClass, buyLinkLinkInputClass) {
+        const buyLinkNameInputs = document.querySelectorAll(`.${buyLinkNameInputClass}`);
+        const buyLinkPriceInputs = document.querySelectorAll(`.${buyLinkPriceInputClass}`);
+        const buyLinkLinkInputs = document.querySelectorAll(`.${buyLinkLinkInputClass}`);
+        let buyLinks = [];
+
+        for(let i = 0; i < buyLinkNameInputs.length; i++) {
+            buyLinks.push({
+                id: buyLinkNameInputs[i]?.parentElement?.parentElement?.parentElement?.getAttribute('data-buy-link-id'),
+                name: buyLinkNameInputs[i]?.value || i18next.t('default_values.buy_link_name'),
+                price: buyLinkPriceInputs[i]?.value || null,
+                link: buyLinkLinkInputs[i]?.value || '',
+                buildComponentId: buildComponentId,
             });
         }
 
@@ -201,7 +224,7 @@ const guestBuilderService = {
 
         const buildComponentNameContainer = this.getBuildComponentNameContainer(buildComponent.name);
         const buildComponentBuyLinkContainer = this.getBuildComponentBuyLinkContainer(cheapestBuyLink);
-        const buildComponentControlsContainer = this.getBuildComponentControlsContainer(buildComponent.type_id);
+        const buildComponentControlsContainer = this.getBuildComponentControlsContainer(buildComponent);
 
         buildComponentMainContainer.appendChild(buildComponentNameContainer);
         buildComponentMainContainer.appendChild(buildComponentBuyLinkContainer);
@@ -248,7 +271,7 @@ const guestBuilderService = {
 
             const buyLinkPrice = document.createElement('p');
             buyLinkPrice.classList.add('mb-0px');
-            buyLinkPrice.textContent = buyLink.price == null ? '--' : buyLink.price + ' ' + buyLink.currency;
+            buyLinkPrice.textContent = (buyLink.price == null ? '--' : numberFormatService.formatNumberToComaDecimalSeparator(Number(buyLink.price))) + ' RSD';
 
             buyLinkLinkContainer.appendChild(buyLinkLink);
 
@@ -262,13 +285,13 @@ const guestBuilderService = {
     },
 
 
-    getBuildComponentControlsContainer(buildComponentTypeId) {
+    getBuildComponentControlsContainer(buildComponent) {
         const buyLinkControlsContainer = document.createElement('div');
         buyLinkControlsContainer.classList.add('d-flex', 'w-10p');
           
         const buyLinkSettingsLink = document.createElement('a');
         buyLinkSettingsLink.classList.add('span-button-black', 'h-24px', 'build-component-settings-button');
-        buyLinkSettingsLink.href = '/guest-build-component/' + buildComponentTypeId;
+        buyLinkSettingsLink.href = '/guest-build-component?build-component=' + buildComponent.id + '&build-component-type=' + buildComponent.typeId;
 
         const buyLinkSettingsSpan = document.createElement('span');
         buyLinkSettingsSpan.classList.add('material-symbols-outlined', 'mx-auto');
@@ -276,7 +299,7 @@ const guestBuilderService = {
 
         const deleteBuyLinkButton = document.createElement('button');
         deleteBuyLinkButton.classList.add('span-button-red', 'h-24px', 'build-component-delete-button', 'ms-auto', 'pin-0px');
-        deleteBuyLinkButton.setAttribute('data-build-component-type-id', buildComponentTypeId);
+        deleteBuyLinkButton.setAttribute('data-build-component-type-id', buildComponent.id);
 
         const deleteBuyLinkButtonSpan = document.createElement('span');
         deleteBuyLinkButtonSpan.classList.add('material-symbols-outlined');
@@ -289,6 +312,153 @@ const guestBuilderService = {
         buyLinkControlsContainer.appendChild(deleteBuyLinkButton);
 
         return buyLinkControlsContainer;
+    },
+
+
+    deleteBuildComponent(buildComponentId) {
+        const buildComponents = JSON.parse(localStorage.getItem('buildComponents')) || [];
+        const buyLinks = JSON.parse(localStorage.getItem('buyLinks')) || [];
+
+        const filteredBuildComponents = buildComponents.filter(buildComponent => buildComponent.id != buildComponentId);
+        const filteredBuyLinks = buyLinks.filter(buyLink => buyLink.buildComponentId != buildComponentId);
+        
+        console.log(buildComponentId);
+
+        localStorage.setItem('buildComponents', JSON.stringify(filteredBuildComponents));
+        localStorage.setItem('buyLinks', JSON.stringify(filteredBuyLinks));
+    },
+
+
+    getBuildComponentBuyLinksCombinationTotal(buyLinksCombination) {
+        let buildTotal = 0;
+
+        buyLinksCombination.forEach(buyLink => {
+            buildTotal += Number(buyLink.price);
+        });
+
+        return buildTotal;
+    },
+
+
+    getBuyLinkNameContainer(buyLinkName) {
+        let nameDiv = document.createElement('div');
+        nameDiv.classList.add('w-65p')
+        
+        let nameLabel = document.createElement('label');
+        nameLabel.for = 'add-buy-link-name';
+        nameLabel.textContent = i18next.t('add_buy_link.name');
+
+        let nameInput = document.createElement('input');
+        nameInput.classList.add('form-control', 'mt-1', 'buy-link-name');
+        nameInput.id = 'add-buy-link-name';
+        nameInput.placeholder = i18next.t('add_buy_link.optional');
+        nameInput.value = buyLinkName;
+
+        nameDiv.appendChild(nameLabel);
+        nameDiv.appendChild(nameInput);
+
+        return nameDiv;
+    },
+
+
+    getBuyLinkLinkContainer(buyLinkLink) {
+        let linkDiv = document.createElement('div');
+        linkDiv.classList.add('w-100p')
+        
+        let linkLabel = document.createElement('label');
+        linkLabel.for = 'add-buy-link-link';
+        linkLabel.textContent = i18next.t('add_buy_link.link');
+
+        let linkInput = document.createElement('input');
+        linkInput.classList.add('form-control', 'mt-1', 'buy-link-link');
+        linkInput.id = 'add-buy-link-link';
+        linkInput.value = buyLinkLink;
+
+        linkDiv.appendChild(linkLabel);
+        linkDiv.appendChild(linkInput);
+
+        return linkDiv;
+    },
+
+
+    getBuyLinkPriceContainer(buyLinkPrice) {
+        let priceDiv = document.createElement('div');
+        priceDiv.classList.add('w-30p', 'ml-5p');
+        
+        let priceLabel = document.createElement('label');
+        priceLabel.for = 'add-buy-link-price';
+        priceLabel.textContent = i18next.t('add_buy_link.price');
+
+        let priceInput = document.createElement('input');
+        priceInput.classList.add('form-control', 'mt-1', 'buy-link-price');
+        priceInput.id = 'add-buy-link-price';
+        priceInput.placeholder = i18next.t('add_buy_link.optional');
+        priceInput.value = buyLinkPrice;
+
+        priceDiv.appendChild(priceLabel);
+        priceDiv.appendChild(priceInput);
+
+        return priceDiv;
+    },
+
+
+    getBuyLinkContainer(buyLink) {
+        const buyLinkContainer = document.createElement('div');
+        buyLinkContainer.classList.add('section-2', 'gap-5', 'w-100p', 'mt-3', 'pb-0px');
+        buyLinkContainer.setAttribute('data-buy-link-id', buyLink.id);
+
+        const buyLinkDeleteButton = document.createElement('button');
+        buyLinkDeleteButton.classList.add('buy-link-delete-button');
+
+        const buyLinkDeleteButtonSpan = document.createElement('span');
+        buyLinkDeleteButtonSpan.classList.add('material-symbols-outlined');
+        buyLinkDeleteButtonSpan.textContent = 'delete';
+
+        const buyLinkContainerTopRow = document.createElement('div');
+        buyLinkContainerTopRow.classList.add('d-flex', 'mt-1');
+
+        const buyLinkContainerBottomRow = document.createElement('div');
+        buyLinkContainerBottomRow.classList.add('d-flex', 'mt-3');
+
+        const buyLinkNameContainer = this.getBuyLinkNameContainer(buyLink.name);
+        const buyLinkLinkContainer = this.getBuyLinkLinkContainer(buyLink.link);
+        const buyLinkPriceContainer = this.getBuyLinkPriceContainer(buyLink.price);
+
+        buyLinkContainerTopRow.appendChild(buyLinkNameContainer);
+        buyLinkContainerTopRow.appendChild(buyLinkPriceContainer);
+        buyLinkContainerBottomRow.appendChild(buyLinkLinkContainer);
+
+        buyLinkContainer.appendChild(buyLinkContainerTopRow);
+        buyLinkContainer.appendChild(buyLinkContainerBottomRow);
+
+        buyLinkDeleteButton.appendChild(buyLinkDeleteButtonSpan);
+        buyLinkContainer.appendChild(buyLinkDeleteButton);
+
+        return buyLinkContainer;
+    },
+
+
+    saveBuildComponentName(buildComponentId, newbuildComponentName) {
+        const buildComponents = JSON.parse(localStorage.getItem('buildComponents') || []);
+        const buildComponent = buildComponents.find(buildComponent => buildComponent.id == buildComponentId);
+
+        buildComponent.name = newbuildComponentName;
+
+        const updatedBuildComponents = buildComponents.filter(buildComponent => buildComponent.id != buildComponentId);
+        updatedBuildComponents.push(buildComponent);
+
+        localStorage.setItem('buildComponents', JSON.stringify(updatedBuildComponents));
+    },
+
+
+    saveBuildComponentBuyLinks(buildComponentId, buyLinkClasses, addBuyLinkClasses) {
+        const buyLinks = this.getBuyLinkInputElementsToArray(buildComponentId, buyLinkClasses.buyLinkNameInputClass, buyLinkClasses.buyLinkPriceInputClass, buyLinkClasses.buyLinkLinkInputClass);
+        const localStorageBuyLinks = JSON.parse(localStorage.getItem('buyLinks')) || [];
+        const localStorageOtherBuyLinks = localStorageBuyLinks.filter(localStorageBuyLink => localStorageBuyLink.buildComponentId != buildComponentId);
+
+        localStorage.setItem('buyLinks', JSON.stringify(buyLinks.concat(localStorageOtherBuyLinks)));
+
+        this.createBuildComponentBuyLinks(buildComponentId, addBuyLinkClasses.buyLinkNameInputClass, addBuyLinkClasses.buyLinkPriceInputClass, addBuyLinkClasses.buyLinkLinkInputClass)
     },
 }
 

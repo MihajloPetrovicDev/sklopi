@@ -17,7 +17,7 @@
         </main>
 
         <div class="section-1 mx-auto w-80p d-flex mt-5 pin-50px align-items-center justify-content-between">
-            <p class="mb-0 fs-3 ms-auto">@lang('ui.guest_build.total'): <span class="fw-500"></span></p>
+            <p class="mb-0 fs-3 ms-auto" id="build-total">@lang('ui.guest_build.total'): <span class="fw-500"></span></p>
         </div>
     </main>
 
