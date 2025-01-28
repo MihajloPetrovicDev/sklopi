@@ -18,6 +18,7 @@ return [
         'email_required' => 'Email adresa je obavezna.',
         'password_required' => 'Lozinka je obavezna.',
         'password_regex' => 'Lozinka mora da sadrži minimum 1 broj i 1 slovo.',
+        'tos_privacy_policy_check_accepted' => 'Morate da prihvatite Uslove Korišćenja i Politiku Privatnosti.',
     ],
     'login' => [
         'email_isnt_in_use' => 'Ne postoji nalog sa unetom Email adresom.',

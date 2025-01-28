@@ -1,14 +1,13 @@
 <?php
 
+use App\View\Components\GuestBuilder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\BuilderController;
 use App\Http\Controllers\GuestBuilderController;
-use App\View\Components\GuestBuilder;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [PagesController::class, 'getHomePage'])->name('home');
 
 Route::get('/my-builds', [BuilderController::class, 'getMyBuildsPage']);
 
@@ -37,6 +36,10 @@ Route::get('/discussions', [BuilderController::class, 'getDiscussionsPage']);
 Route::get('/add-guest-build-component', [GuestBuilderController::class, 'getAddGuestBuildComponentPage'])->middleware('guest');
 
 Route::get('/guest-build-component', [GuestBuilderController::class, 'getGuestBuildComponentPage'])->middleware('guest');
+
+Route::get('/terms-of-service', [PagesController::class, 'getTermsOfServicePage']);
+
+Route::get('/privacy-policy', [PagesController::class, 'getPrivacyPolicyPage']);
 
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 

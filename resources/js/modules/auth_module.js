@@ -3,11 +3,12 @@ import '../app';
 
 
 const authModule = {
-    async register(usernameFieldId, emailFieldId, passwordFieldId, confirmPasswordFieldId) {
+    async register(usernameFieldId, emailFieldId, passwordFieldId, confirmPasswordFieldId, tosPrivacyPolicyCheckboxId) {
         const usernameField = document.getElementById(usernameFieldId);
         const emailField = document.getElementById(emailFieldId);
         const passwordField = document.getElementById(passwordFieldId);
         const confirmPasswordField = document.getElementById(confirmPasswordFieldId);
+        const tosPrivacyPolicyCheckbox = document.getElementById(tosPrivacyPolicyCheckboxId);
 
         try {
             const response = await axios.post('http://localhost:8000/api/register', {
@@ -15,6 +16,7 @@ const authModule = {
                 email: emailField.value,
                 password: passwordField.value,
                 confirmPassword: confirmPasswordField.value,
+                tosPrivacyPolicyCheck: tosPrivacyPolicyCheckbox.checked,
             }); 
 
             window.location.href = '/';

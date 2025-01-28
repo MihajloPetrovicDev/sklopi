@@ -256,6 +256,10 @@ main {
     margin-top: -2px;
 }
 
+.mt-21px {
+    margin-top: 21px;
+}
+
 .mt-24px {
     margin-top: 24px;
 }
@@ -278,6 +282,10 @@ main {
 
 .ml-20px {
     margin-left: 20px;
+}
+
+.ml-15px {
+    margin-left: 15px;
 }
 
 .ml-10px {
@@ -342,6 +350,10 @@ main {
 
 .hover-pointer:hover {
     cursor: pointer;
+}
+
+.ws-pre-wrap {
+    white-space: pre-wrap;
 }
 
 .section-1 {

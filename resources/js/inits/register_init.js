@@ -7,5 +7,5 @@ const registerForm = document.getElementById('register-form');
 registerForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    authModule.register('username', 'email', 'password', 'confirm-password');
+    authModule.register('username', 'email', 'password', 'confirm-password', 'tos-privacy-policy-check');
 });

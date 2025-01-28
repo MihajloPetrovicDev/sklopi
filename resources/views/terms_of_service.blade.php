@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="robots" content="noindex, nofollow">
     <x-base-head-tags />
-    <title>@lang('ui.my_account.header_title')</title>
+    <title>@lang('ui.terms_of_service.header_title')</title>
 </head>
 
 <body>
-    <x-minimal-header />
-
-    <form action="/api/log-out" method="post">
-        @csrf
-        <button class="btn btn-danger log-out-btn" type="submit">@lang('ui.my_account.log_out')</button>
-    </form>
+    <x-header />
 
     <main>
-        
+        <h2 class="mt-5 text-center fs-1">@lang('ui.terms_of_service.terms_of_service')</h2>
+
+        <div class="section-1 w-70p mx-auto mt-5 pin-50px">
+            <p class="mb-0px ws-pre-wrap">@lang('terms_of_service.terms_of_service')</p>
+        </div>
     </main>
 
     <x-footer />

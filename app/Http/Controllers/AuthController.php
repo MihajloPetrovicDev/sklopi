@@ -47,6 +47,7 @@ class AuthController extends Controller
             'username' => ['required', 'min: 3', 'max: 20', 'unique:users,username'],
             'email' => ['required', 'email', 'max: 80', 'unique:users,email'],
             'password' => ['required', 'min: 5', 'max: 80', 'regex:/[a-zA-Z]/', 'regex:/[0-9]/'],
+            'tosPrivacyPolicyCheck' => ['accepted'],
         ], 
         [
             'username.unique' => __('errors.register.username_taken'),
@@ -61,6 +62,7 @@ class AuthController extends Controller
             'email.required' => __('errors.register.email_required'),
             'password.required' => __('errors.register.password_required'),
             'password.regex' => __('errors.register.password_regex'),
+            'tosPrivacyPolicyCheck.accepted' => __('errors.register.tos_privacy_policy_check_accepted'),
         ]);
 
         try {

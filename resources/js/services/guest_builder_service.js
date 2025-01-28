@@ -4,6 +4,22 @@ import numberFormatService from './number_format_service';
 
 
 const guestBuilderService = {
+    getBuildComponentTypesIsUniqueArray() {
+        const buildComponentTypesIsUnique = {
+            1: true,   // CPU
+            2: true,   // Motherboard
+            3: false,   // Ram
+            4: true,   // GPU
+            5: false,   // Storage
+            6: true,   // PSU
+            7: true,   // Case
+            8: false,   // Other
+        }
+
+        return buildComponentTypesIsUnique;
+    },
+
+
     getCheapestBuyLinksCombination(buildComponents, buyLinks) {
         let cheapestBuyLinksCombination = [];
         
@@ -134,6 +150,8 @@ const guestBuilderService = {
 
 
     createBuildComponent(buildComponentName, buildComponentTypeId) {
+        const buildComponentTypesIsUnique = this.getBuildComponentTypesIsUniqueArray();
+
         const buildComponent = {
             id: uuid(),
             name: buildComponentName,
@@ -142,7 +160,10 @@ const guestBuilderService = {
 
         let buildComponents = JSON.parse(localStorage.getItem('buildComponents')) || [];
 
-        if(buildComponents.find(buildComponent => buildComponent.type_id === buildComponentTypeId)) {
+        console.log(buildComponents);
+        console.log(buildComponents.find(buildComponent => buildComponent.typeId == buildComponentTypeId));
+
+        if(buildComponentTypesIsUnique[buildComponentTypeId] && buildComponents.find(buildComponent => buildComponent.typeId == Number(buildComponentTypeId))) {
             return;
         }
 

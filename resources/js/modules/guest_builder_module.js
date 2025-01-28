@@ -1,5 +1,4 @@
 import '../app';
-import errorService from '../services/error_service';
 import builderService from '../services/guest_builder_service';
 import guestBuilderService from '../services/guest_builder_service';
 import numberFormatService from '../services/number_format_service';
@@ -10,24 +9,58 @@ const guestBuilderModule = {
     loadBuildComponents() {
         const buildComponents = JSON.parse(localStorage.getItem('buildComponents')) || [];
         const buyLinks = JSON.parse(localStorage.getItem('buyLinks')) || [];
-
+        const buildComponentTypesIsUniqueArray = guestBuilderService.getBuildComponentTypesIsUniqueArray();
         const cheapestBuyLinksCombination = builderService.getCheapestBuyLinksCombination(buildComponents, buyLinks);
 
         for(let i=1; i<=8; i++) {
             let builderBuildComponentContainer = document.querySelector('[data-build-component-type-id="' + i + '"]');
-            let buildComponent = buildComponents.find(buildComponent => buildComponent.typeId == i);
-            let cheapestBuyLink = buildComponent ? cheapestBuyLinksCombination.find(buyLink => buyLink.buildComponentId === buildComponent.id) : null;
-            let buildComponentContainer;
 
-            if(buildComponent) {
-                buildComponentContainer = builderService.getBuildComponentContainer(buildComponent, cheapestBuyLink);
+            // If the component type is unique, check if it exists and display it, or display the Add Component button
+            if(buildComponentTypesIsUniqueArray[i] == true) {
+                this.showUniqueBuildComponentType(buildComponents, i, cheapestBuyLinksCombination, builderBuildComponentContainer);
+                continue;
             }
-            else {
-                buildComponentContainer = builderService.getAddBuildComponentButtonContainer(i);
-            }
+
+            // If the component type isnt unique, iterate trough all of the buildComponents which are of the current component
+            // type_id and add them to the DOM, after that just add the Add Component Button (because non unique component types)
+            // don't have a quantity limit
+            this.showNonUniqueBuildComponentType(buildComponents, i, cheapestBuyLinksCombination, builderBuildComponentContainer);
+        }
+    },
+
+
+    showUniqueBuildComponentType(buildComponents, buildComponentTypeId, cheapestBuyLinksCombination, builderBuildComponentContainer) {
+        // Get the current 
+        let currentBuildComponent = buildComponents.find(buildComponent => buildComponent.typeId == buildComponentTypeId);
+        let cheapestBuyLink = currentBuildComponent ? cheapestBuyLinksCombination.find(buyLink => buyLink.buildComponentId === currentBuildComponent.id) : null;
+        let buildComponentContainer;
+
+        if(currentBuildComponent) {
+            buildComponentContainer = builderService.getBuildComponentContainer(currentBuildComponent, cheapestBuyLink);
+        }
+        else {
+            buildComponentContainer = builderService.getAddBuildComponentButtonContainer(buildComponentTypeId);
+        }
+
+        builderBuildComponentContainer.appendChild(buildComponentContainer);
+    },
+
+
+    showNonUniqueBuildComponentType(buildComponents, buildComponentTypeId, cheapestBuyLinksCombination, builderBuildComponentContainer) {
+        let currentBuildComponents = buildComponents.filter(buildComponent => buildComponent.typeId == buildComponentTypeId);
+        let buildComponentContainer;
+
+        currentBuildComponents.forEach(currentBuildComponent => {
+            let cheapestBuyLink = currentBuildComponent ? cheapestBuyLinksCombination.find(buyLink => buyLink.buildComponentId === currentBuildComponent.id) : null;
+
+            buildComponentContainer = builderService.getBuildComponentContainer(currentBuildComponent, cheapestBuyLink);
 
             builderBuildComponentContainer.appendChild(buildComponentContainer);
-        }
+        });
+
+        buildComponentContainer = builderService.getAddBuildComponentButtonContainer(buildComponentTypeId);
+        
+        builderBuildComponentContainer.appendChild(buildComponentContainer);
     },
 
 

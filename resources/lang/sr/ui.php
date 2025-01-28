@@ -84,6 +84,10 @@ return [
         'confirm_password' => 'Potvrdi Lozinku',
         'have_an_account' => 'Imaš nalog',
         'login' => 'Prijavi Se',
+        'i_accept' => 'Prihvatam',
+        'terms_of_service' => 'Uslove Korišćenja',
+        'and' => 'i',
+        'privacy_policy' => 'Politiku Privatnosti',
     ],
     'my_account' => [
         'header_title' => 'Moj Nalog - sklopi',
@@ -156,5 +160,13 @@ return [
         'save' => 'Sačuvaj',
         'buy_links' => 'Linkovi za Kupovinu',
         'add_buy_link' => 'Dodaj Link za Kupovinu',
+    ],
+    'terms_of_service' => [
+        'header_title' => 'Uslovi Korišćenja - sklopi',
+        'terms_of_service' => 'Uslovi Korišćenja',
+    ],
+    'privacy_policy' => [
+        'header_title' => 'Politika Privatnosti - sklopi',
+        'privacy_policy' => 'Politika Privatnosti',
     ],
 ];

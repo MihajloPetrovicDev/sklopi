@@ -27,6 +27,13 @@
                 <label class="mt-3" for="password">@lang('ui.register.confirm_password'):</label>
                 <input class="form-control" type="password" id="confirm-password"></input>
 
+                <div class="d-flex">
+                    <input class="form-check" type="checkbox" id="tos-privacy-policy-check"></input>
+                    <label class="mt-21px ml-15px" for="tos-privacy-policy-check">
+                        @lang('ui.register.i_accept') <a href="/terms-of-service" target="_blank">@lang('ui.register.terms_of_service')</a> @lang('ui.register.and') <a href="/privacy-policy" target="_blank">@lang('ui.register.privacy_policy')</a>
+                    </label>
+                </div>
+
                 <button class="mt-5 btn btn-primary mx-auto d-block" type="submit">@lang('ui.register.register')</button>
             </form>
 
