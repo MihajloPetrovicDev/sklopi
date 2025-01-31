@@ -36,10 +36,10 @@
 
         <x-builder :build="$build" :build-components="$buildComponents" :cheapest-buy-links-combination="$cheapestBuildComponentsBuyLinksCombination"/>
         
-        <div class="section-1 mx-auto w-80p d-flex mt-5 pin-50px align-items-center justify-content-between">
-            <p class="mb-0 fs-5">@lang('ui.build.components_total'): @formatToComaDecimalSeparator($buildTotals['combinationComponentTotal']) RSD</p>
-            <p class="mb-0 fs-5">@lang('ui.build.delivery_total'): @formatToComaDecimalSeparator($buildTotals['combinationDeliveryTotal']) RSD</p>
-            <p class="mb-0 fs-3">@lang('ui.build.total'): <span class="fw-500">@formatToComaDecimalSeparator($buildTotals['combinationTotal']) RSD</span></p>
+        <div class="section-1 mx-auto w-80p d-flex mt-5 pin-50px align-items-center justify-content-between gap-5 md-max-1030px-d-block">
+            <p class="mb-0 fs-5">@lang('ui.build.components_total'): <span class="fw-500">@formatToComaDecimalSeparator($buildTotals['combinationComponentTotal']) RSD</span></p>
+            <p class="mb-0 fs-5 md-max-1030px-mt-10px">@lang('ui.build.delivery_total'): <span class="fw-500">@formatToComaDecimalSeparator($buildTotals['combinationDeliveryTotal']) RSD</span></p>
+            <p class="mb-0 fs-3 md-max-1030px-mt-30px">@lang('ui.build.total'): <span class="fw-500">@formatToComaDecimalSeparator($buildTotals['combinationTotal']) RSD</span></p>
         </div>
     </main>
 

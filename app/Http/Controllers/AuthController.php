@@ -32,7 +32,9 @@ class AuthController extends Controller
 
 
     public function getMyAccountPage() {
-        return view('my_account');
+        $user = Auth::user();
+
+        return view('my_account', compact('user'));
     }
 
 

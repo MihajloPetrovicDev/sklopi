@@ -9,7 +9,7 @@
     <x-minimal-header />
 
     <main>
-        <div class="section-1 mx-auto mt-80px w-450px pin-50px">
+        <div class="section-1 mx-auto mt-80px w-450px pin-50px md-max-600px-w-90p">
             <h2 class="text-center">@lang('ui.login.login')</h2>
 
             <div id="error-container-placeholder"></div>

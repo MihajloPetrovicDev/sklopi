@@ -14,7 +14,7 @@
 
         <div class="w-40p mx-auto" id="error-container-placeholder"></div>
 
-        <div class="section-1 mx-auto mt-80px w-40p">
+        <div class="section-1 mx-auto mt-80px w-40p md-max-1030px-w-60p md-max-600px-w-80p">
             <form id="create-new-build-form">
                 <label for="build-name">@lang('ui.create_new_build.build_name'):</label>
                 <input class="form-control mt-1" type="text" id="build-name" placeholder="{{ __('ui.create_new_build.optional') }}"></input>

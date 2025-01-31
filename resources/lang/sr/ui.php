@@ -92,6 +92,8 @@ return [
     'my_account' => [
         'header_title' => 'Moj Nalog - sklopi',
         'log_out' => 'Odjavi Se',
+        'username' => 'Korisničko Ime',
+        'email' => 'Email',
     ],
     'build_component' => [
         'component' => 'Komponenta',
@@ -169,4 +171,5 @@ return [
         'header_title' => 'Politika Privatnosti - sklopi',
         'privacy_policy' => 'Politika Privatnosti',
     ],
+    ''
 ];
