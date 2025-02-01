@@ -1,14 +1,14 @@
 <?php $hasComponent = false ?>
 
-<div class="mx-auto w-80p section-1 mt-5 pbl-20px">
+<div class="mx-auto w-80p section-1 mt-5 pbl-20px md-max-1200px-w-100p md-max-1200px-bin-none md-max-1200px-br-0px">
 
 
     
     {{-- CPU / Type = 1 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">CPU</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center">CPU</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there is a CPU component. If there is --}}
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
@@ -35,10 +35,10 @@
 
 
     {{-- Motherboard / Type = 2 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">@lang('ui.build.motherboard')</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">@lang('ui.build.motherboard')</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there is a Motherboard component. If there is --}}
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
@@ -63,10 +63,10 @@
 
 
     {{-- RAM / Type = 3 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">RAM</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">RAM</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there are RAM components. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 3)
@@ -85,10 +85,10 @@
 
 
     {{-- GPU / Type = 4 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">GPU</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">GPU</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there is a GPU component. If there is --}}
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
@@ -113,10 +113,10 @@
 
 
     {{-- Storage / Type = 5 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">@lang('ui.build.storage')</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">@lang('ui.build.storage')</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there are Storage components. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 5)
@@ -135,10 +135,10 @@
 
 
     {{-- PSU / Type = 6 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">PSU</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">PSU</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there is a PSU component. If there is --}}
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
@@ -163,10 +163,10 @@
 
 
     {{-- Case / Type = 7 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">@lang('ui.build.case')</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">@lang('ui.build.case')</p>
 
-        <div class="bb-lgray w-85p pin-20px pbl-10px">
+        <div class="bb-lgray w-85p pin-20px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there is a Case component. If there is --}}
             {{-- show the component and update the $hasComponent to true. --}}
             @foreach($buildComponents as $buildComponent)
@@ -190,10 +190,10 @@
 
 
     {{-- Other / Type = 8 --}}
-    <div class="d-flex align-items-center">
-        <p class="fs-4 w-15p text-end pr-2p mb-0px">@lang('ui.build.other')</p>
+     <div class="d-flex align-items-center md-max-900px-d-block">
+        <p class="fs-4 w-15p text-end pr-2p mb-0px md-max-900px-mx-auto md-max-900px-text-center md-max-900px-w-100p">@lang('ui.build.other')</p>
 
-        <div class="w-85p pin-20px pbl-10px">
+        <div class="w-85p pin-20px pbl-10px pbl-10px md-max-900px-w-100p">
             {{-- Check trough the buildComponents list to see if there are Other components. --}}
             @foreach($buildComponents as $buildComponent)
                 @if($buildComponent->type_id == 8)

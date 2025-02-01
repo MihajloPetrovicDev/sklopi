@@ -3,7 +3,7 @@ import i18next from "i18next";
 const builderService = {
     getAddBuyLinkNameContainer() {
         let nameDiv = document.createElement('div');
-        nameDiv.classList.add('w-48p')
+        nameDiv.classList.add('w-48p', 'md-max-1200px-w-90p')
         
         let nameLabel = document.createElement('label');
         nameLabel.for = 'add-buy-link-name';
@@ -23,7 +23,7 @@ const builderService = {
 
     getAddBuyLinkLinkContainer() {
         let linkDiv = document.createElement('div');
-        linkDiv.classList.add('w-47p', 'ml-5p')
+        linkDiv.classList.add('w-47p', 'ml-5p', 'md-max-1200px-w-90p', 'md-max-1200px-ml-0px', 'md-max-1200px-mt-5px')
         
         let linkLabel = document.createElement('label');
         linkLabel.for = 'add-buy-link-link';
@@ -42,7 +42,7 @@ const builderService = {
 
     getAddBuyLinkPriceContainer() {
         let priceDiv = document.createElement('div');
-        priceDiv.classList.add('w-20p');
+        priceDiv.classList.add('w-20p', 'md-max-1200px-w-90p');
         
         let priceLabel = document.createElement('label');
         priceLabel.for = 'add-buy-link-price';
@@ -62,13 +62,13 @@ const builderService = {
 
     async getAddBuyLinkDeliveryGroupContainer(buildId) {
         let deliveryGroupDiv = document.createElement('div');
-        deliveryGroupDiv.classList.add('d-flex', 'w-75p', 'ml-5p');
+        deliveryGroupDiv.classList.add('d-flex', 'w-75p', 'ml-5p', 'md-max-1200px-d-block', 'md-max-1200px-w-90p', 'md-max-1200px-ml-0px', 'md-max-1200px-mt-5px');
 
         let deliveryGroupDivLeft = document.createElement('div');
-        deliveryGroupDivLeft.classList.add('w-60p', 'pr-10px');
+        deliveryGroupDivLeft.classList.add('w-60p', 'pr-10px', 'md-max-1200px-w-100p', 'md-max-1200px-pr-0px');
 
         let deliveryGroupDivRight = document.createElement('div');
-        deliveryGroupDivRight.classList.add('w-40p');
+        deliveryGroupDivRight.classList.add('w-40p', 'md-max-1200px-w-40p', 'md-max-600px-w-100p');
         
         let deliveryGroupLabel = document.createElement('label');
         deliveryGroupLabel.for = 'add-buy-link-delivery-group-select';
@@ -140,10 +140,10 @@ const builderService = {
         addBuyLinkDeleteButtonSpan.textContent = 'delete';
 
         const addBuyLinkContainerTopRow = document.createElement('div');
-        addBuyLinkContainerTopRow.classList.add('d-flex', 'mt-1');
+        addBuyLinkContainerTopRow.classList.add('d-flex', 'mt-1', 'md-max-1200px-d-block');
 
         const addBuyLinkContainerBottomRow = document.createElement('div');
-        addBuyLinkContainerBottomRow.classList.add('d-flex', 'mt-3');
+        addBuyLinkContainerBottomRow.classList.add('d-flex', 'mt-3', 'md-max-1200px-d-block', 'md-max-1200px-mt-5px');
 
 
         const addBuyLinkNameContainer = this.getAddBuyLinkNameContainer();
@@ -190,7 +190,7 @@ const builderService = {
 
     getDeliveryGroupNameContainer(deliveryGroupName) {
         const deliveryGroupNameContainer = document.createElement('div');
-        deliveryGroupNameContainer.classList.add('w-30p');
+        deliveryGroupNameContainer.classList.add('w-30p', 'md-max-1200px-w-95p');
 
         const deliveryGroupNameLabel = document.createElement('label');
         deliveryGroupNameLabel.for = 'delivery-group-name';
@@ -210,7 +210,7 @@ const builderService = {
 
     getDeliveryGroupFreeDeliveryAtContainer(deliveryGroupFreeDeliveryAt, currency) {
         const deliveryGroupFreeDeliveryAtContainer = document.createElement('div');
-        deliveryGroupFreeDeliveryAtContainer.classList.add('w-30p', 'ml-5p');
+        deliveryGroupFreeDeliveryAtContainer.classList.add('w-30p', 'ml-5p', 'md-max-1200px-ml-0px', 'md-max-1200px-w-95p');
 
         const deliveryGroupFreeDeliveryAtLabel = document.createElement('label');
         deliveryGroupFreeDeliveryAtLabel.for = 'delivery-group-free-delivery-at';
@@ -250,7 +250,7 @@ const builderService = {
 
     getDeliveryGroupDeliveryCostContainer(deliveryGroupCost, currency) {
         const deliveryGroupDeliveryCostContainer = document.createElement('div');
-        deliveryGroupDeliveryCostContainer.classList.add('w-30p', 'ml-5p');
+        deliveryGroupDeliveryCostContainer.classList.add('w-30p', 'ml-5p', 'md-max-1200px-ml-0px', 'md-max-1200px-w-95p');
 
         const deliveryGroupDeliveryCostLabel = document.createElement('label');
         deliveryGroupDeliveryCostLabel.for = 'delivery-group-delivery-cost';

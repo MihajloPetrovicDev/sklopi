@@ -252,7 +252,7 @@ const builderModule = {
         deliveryGroupContainer.classList.add('d-flex', 'mx-auto', 'w-100p', 'section-2');
 
         const deliveryGroupInputsContainer = document.createElement('div');
-        deliveryGroupInputsContainer.classList.add('d-flex', 'w-90p');
+        deliveryGroupInputsContainer.classList.add('d-flex', 'w-90p', 'md-max-1200px-d-block');
 
         deliveryGroupInputsContainer.appendChild(deliveryGroupNameContainer);
         deliveryGroupInputsContainer.appendChild(deliveryGroupFreeDeliveryAtContainer);

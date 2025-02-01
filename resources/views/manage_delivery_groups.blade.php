@@ -17,15 +17,15 @@
         <div class="w-70p mx-auto" id="error-container-placeholder"></div>
 
         @if($build)
-            <div class="w-70p mx-auto section-1 mt-5 pin-50px">
+            <div class="w-70p mx-auto section-1 mt-5 pin-50px md-max-1200px-w-100p md-max-600px-pin-20px md-max-1200px-bin-none md-max-1200px-br-0px">
                 <div class="w-100p d-flex">
-                    <div class="w-20p"></div>
+                    <div class="w-20p md-max-1200px-w-0px"></div>
 
                     <div class="w-60p">
-                        <h3 class="text-center">@lang('ui.manage_delivery_groups.local_delivery_groups')</h3>
+                        <h3 class="text-center md-max-1200px-text-start">@lang('ui.manage_delivery_groups.local_delivery_groups')</h3>
                     </div>
 
-                    <div class="w-20p">
+                    <div class="w-20p md-max-1200px-w-40p">
                         <button class="btn btn-primary btn-text-truncate float-end w-100p" id="new-delivery-group-button">+ @lang('ui.manage_delivery_groups.new_delivery_group')</button>
                     </div>
                 </div>

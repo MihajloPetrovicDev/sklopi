@@ -11,7 +11,7 @@
     <main>
         <h2 class="mt-5 text-center fs-1">@lang('ui.privacy_policy.privacy_policy')</h2>
 
-        <div class="section-1 w-70p mx-auto mt-5 pin-50px">
+        <div class="section-1 w-70p mx-auto mt-5 pin-50px md-max-600px-w-80p">
             <p class="mb-0px ws-pre-wrap">@lang('privacy_policy.privacy_policy')</p>
         </div>
     </main>

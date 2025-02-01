@@ -1,11 +1,11 @@
 <div class="d-flex mx-auto w-100p section-2" data-delivery-group-id="{{ $deliveryGroup->id }}">
-    <div class="d-flex w-90p">
-        <div class="w-30p">
+    <div class="d-flex w-90p md-max-1200px-d-block">
+        <div class="w-30p md-max-1200px-w-95p">
             <label for="component-name">@lang('ui.delivery_groups_list_item.name'):</label>
             <input class="form-control mt-1 delivery-group-name" type="text" value="{{ $deliveryGroup->name }}"></input>
         </div>
 
-        <div class="w-30p ml-5p">
+        <div class="w-30p ml-5p md-max-1200px-ml-0px md-max-1200px-w-95p">
             <label for="component-name">@lang('ui.delivery_groups_list_item.free_delivery_at'):</label>
             <div class="d-flex mt-1">
                 <input class="form-control delivery-group-free-delivery-at" type="text" value="{{ $deliveryGroup->free_delivery_at }}" placeholder="{{ __('ui.delivery_groups_list_item.optional') }}"></input>
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="w-30p ml-5p">
+        <div class="w-30p ml-5p md-max-1200px-ml-0px md-max-1200px-w-95p">
             <label for="component-name">@lang('ui.delivery_groups_list_item.delivery_cost'):</label>
             <div class="d-flex mt-1">
                 <input class="form-control delivery-group-delivery-cost" type="text" value="{{ $deliveryGroup->delivery_cost }}"></input>

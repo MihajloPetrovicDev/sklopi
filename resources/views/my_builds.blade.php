@@ -11,7 +11,7 @@
     <main>
         <h2 class="mt-5 text-center fs-1">@lang('ui.my_builds.my_builds')</h2>
 
-        <div class="section-1 mx-auto mt-80px w-60p">
+        <div class="section-1 mx-auto mt-80px w-60p md-max-600px-w-80p">
             <div class="h-38px mb-5">
                 <a class="btn btn-primary float-end mt-0" href="/create-new-build">+ @lang('ui.my_builds.new_build')</a>
             </div>

@@ -16,7 +16,7 @@
 
         <div class="w-60p mx-auto" id="error-container-placeholder"></div>
 
-        <div class="section-1 mx-auto mt-80px w-60p">
+        <div class="section-1 mx-auto mt-80px w-60p md-max-1200px-w-100p md-max-1200px-bin-none md-max-1200px-br-0px md-max-1200px-pin-20px">
             <div class="w-85p mx-auto">
                 <label for="component-name">@lang('ui.build_component.component_name'):</label>
                 <input class="form-control mt-1" type="text" id="component-name" value="{{ $buildComponent->name }}"></input>

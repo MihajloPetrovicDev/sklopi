@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <x-minimal-header />
+    <x-my-account-header />
 
     <form action="/api/log-out" method="post">
         @csrf
@@ -15,7 +15,7 @@
     </form>
 
     <main>
-        <div class="w-40p mx-auto mt-5 section-1 md-max-1400px-w-65p">
+        <div class="w-40p mx-auto mt-5 section-1 md-max-1400px-w-65p md-max-600px-w-80p">
             <div class="w-80p mx-auto">
                 <div class="d-flex align-items-center md-max-800px-d-block">
                     <p class="mb-0px w-20p text-end md-max-800px-w-100p md-max-800px-text-start">@lang('ui.my_account.username'):</p>

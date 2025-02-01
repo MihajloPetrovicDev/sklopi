@@ -44,7 +44,7 @@ const guestBuilderService = {
         addBuildButtonContainer.classList.add('h-fc', 'mbl-10px', 'w-100p');
 
         const addBuildButton = document.createElement('a');
-        addBuildButton.classList.add('btn', 'btn-primary');
+        addBuildButton.classList.add('btn', 'btn-primary', 'md-max-900px-w-fc', 'md-max-900px-d-block', 'md-max-900px-mx-auto');
         addBuildButton.textContent = i18next.t('add_build_component_button.add_component');
         addBuildButton.href = 'add-guest-build-component?component-type=' + componentTypeId;
 
@@ -241,7 +241,7 @@ const guestBuilderService = {
         buildComponentContainer.classList.add('h-fc', 'mbl-10px', 'w-100p');
 
         const buildComponentMainContainer = document.createElement('div');
-        buildComponentMainContainer.classList.add('d-flex', 'section-2', 'w-100p');
+        buildComponentMainContainer.classList.add('d-flex', 'section-2', 'w-100p', 'md-max-900px-d-block');
 
         const buildComponentNameContainer = this.getBuildComponentNameContainer(buildComponent.name);
         const buildComponentBuyLinkContainer = this.getBuildComponentBuyLinkContainer(cheapestBuyLink);
@@ -259,7 +259,7 @@ const guestBuilderService = {
 
     getBuildComponentNameContainer(buildComponentName) {
         const buildComponentNameContainer = document.createElement('div');
-        buildComponentNameContainer.classList.add('w-50p');
+        buildComponentNameContainer.classList.add('w-50p', 'md-max-900px-w-100p');
         
         const buildComponentNameText = document.createElement('p');
         buildComponentNameText.classList.add('mb-0px');
@@ -273,13 +273,13 @@ const guestBuilderService = {
 
     getBuildComponentBuyLinkContainer(buyLink) {
         const buyLinkContainer = document.createElement('div');
-        buyLinkContainer.classList.add('w-40p', 'd-flex');
+        buyLinkContainer.classList.add('w-40p', 'd-flex', 'md-max-900px-d-block', 'md-max-900px-w-100p');
 
         if(buyLink) {
             const buyLinkLinkValue = buyLink.link.startsWith('http') ? buyLink.link : '//' + buyLink.link;
 
             const buyLinkLinkContainer = document.createElement('div');
-            buyLinkLinkContainer.classList.add('w-50p');
+            buyLinkLinkContainer.classList.add('w-50p', 'md-max-900px-mt-5px', 'md-max-900px-w-100p');
 
             const buyLinkLink = document.createElement('a');
             buyLinkLink.href = buyLinkLinkValue;
@@ -288,7 +288,7 @@ const guestBuilderService = {
             buyLinkLink.textContent = buyLink.name;
 
             const buyLinkPriceContainer = document.createElement('div');
-            buyLinkPriceContainer.classList.add('w-50p');
+            buyLinkPriceContainer.classList.add('w-50p', 'md-max-900px-mt-5px', 'md-max-900px-w-100p');
 
             const buyLinkPrice = document.createElement('p');
             buyLinkPrice.classList.add('mb-0px');
@@ -308,7 +308,7 @@ const guestBuilderService = {
 
     getBuildComponentControlsContainer(buildComponent) {
         const buyLinkControlsContainer = document.createElement('div');
-        buyLinkControlsContainer.classList.add('d-flex', 'w-10p');
+        buyLinkControlsContainer.classList.add('d-flex', 'w-10p', 'md-max-900px-w-20p', 'md-max-900px-mt-20px');
           
         const buyLinkSettingsLink = document.createElement('a');
         buyLinkSettingsLink.classList.add('span-button-black', 'h-24px', 'build-component-settings-button');
