@@ -1,5 +1,6 @@
 import errorService from '../services/error_service';
 import '../app';
+import { appUrl } from '../env';
 
 
 const authModule = {
@@ -11,7 +12,7 @@ const authModule = {
         const tosPrivacyPolicyCheckbox = document.getElementById(tosPrivacyPolicyCheckboxId);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/register', {
+            const response = await axios.post(appUrl + '/api/register', {
                 username: usernameField.value,
                 email: emailField.value,
                 password: passwordField.value,
@@ -32,7 +33,7 @@ const authModule = {
         const passwordField = document.getElementById(passwordFieldId);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/login', {
+            const response = await axios.post(appUrl + '/api/login', {
                 email: emailField.value,
                 password: passwordField.value,
             });
