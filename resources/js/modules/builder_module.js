@@ -1,6 +1,7 @@
 import errorService from '../services/error_service';
 import builderService from '../services/builder_service';
 import '../app';
+import { appUrl } from '../env';
 
 const builderModule = {
     async createNewBuild(buildNameFieldId, visibilityFieldsName) {
@@ -13,7 +14,7 @@ const builderModule = {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/create-new-build', {
+            const response = await axios.post(appUrl + '/api/create-new-build', {
                 buildName: buildNameField.value,
                 buildVisibility: buildIsPublic,
             });
@@ -81,7 +82,7 @@ const builderModule = {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/add-new-build-component', {
+            const response = await axios.post(appUrl + '/api/add-new-build-component', {
                 buildComponentName: buildComponentNameInput.value,
                 buildComponentTypeId: typeId,
                 buildComponentBuildId: buildId,
@@ -116,7 +117,7 @@ const builderModule = {
         const newDeliveryGroupDeliveryCostInput = document.getElementById(newDeliveryGroupDeliveryCostInputId);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/create-new-delivery-group', {
+            const response = await axios.post(appUrl + '/api/create-new-delivery-group', {
                 deliveryGroupName: newDeliveryGroupNameInput.value,
                 deliveryGroupFreeDeliveryAt: newDeliveryGroupFreeDeliveryAtInput.value,
                 deliveryGroupDeliveryCost: newDeliveryGroupDeliveryCostInput.value,
@@ -144,7 +145,7 @@ const builderModule = {
                 let deleteButtonBuildComponentId = deleteBuildComponentButton.getAttribute('build-component-id');
 
                 try {
-                    const response = await axios.post('http://localhost:8000/api/delete-build-component', {
+                    const response = await axios.post(appUrl + '/api/delete-build-component', {
                         deleteBuildComponentId: deleteButtonBuildComponentId,
                     });
 
@@ -200,7 +201,7 @@ const builderModule = {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/update-build-component', {
+            const response = await axios.post(appUrl + '/api/update-build-component', {
                 buildComponentId: buildComponentId,
                 buildComponentName: buildComponentNameInput.value,
                 buildComponentBuyLinks: buyLinks,
@@ -217,7 +218,7 @@ const builderModule = {
 
     async deleteBuild(encodedBuildId) {
         try {
-            const response = await axios.delete('http://localhost:8000/api/delete-build/' + encodedBuildId);
+            const response = await axios.delete(appUrl + '/api/delete-build/' + encodedBuildId);
 
             window.location.href = '/my-builds';
         }
@@ -229,7 +230,7 @@ const builderModule = {
 
     async saveBuildName(buildId, buildName) {
         try {
-            const response = await axios.post('http://localhost:8000/api/save-build-name', {
+            const response = await axios.post(appUrl + '/api/save-build-name', {
                 buildId: buildId,
                 newBuildName: buildName,
             });
@@ -312,7 +313,7 @@ const builderModule = {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/update-delivery-groups', {
+            const response = await axios.post(appUrl + '/api/update-delivery-groups', {
                 buildId: buildId || null,
                 deliveryGroups: deliveryGroups,
                 addDeliveryGroups: addDeliveryGroups,

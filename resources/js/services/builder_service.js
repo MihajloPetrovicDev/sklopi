@@ -1,4 +1,5 @@
 import i18next from "i18next";
+import { appUrl } from '../env';
 
 const builderService = {
     getAddBuyLinkNameContainer() {
@@ -111,7 +112,7 @@ const builderService = {
 
     async getBuildDeliveryGroups(buildId) {
         try {
-            const response = await axios.post('http://localhost:8000/api/get-build-delivery-groups', {
+            const response = await axios.post(appUrl + '/api/get-build-delivery-groups', {
                 buildId: buildId
             });
             
