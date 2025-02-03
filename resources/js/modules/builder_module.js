@@ -1,7 +1,7 @@
-import errorService from '../services/error_service';
-import builderService from '../services/builder_service';
-import '../app';
-import { appUrl } from '../env';
+import errorService from '../services/error_service.js';
+import builderService from '../services/builder_service.js';
+import '../app.js';
+import { appUrl } from '../env.js';
 
 const builderModule = {
     async createNewBuild(buildNameFieldId, visibilityFieldsName) {

@@ -1,4 +1,4 @@
-import builderModule from "../modules/builder_module";
+import builderModule from "../modules/builder_module.js";
 
 
 const addBuyLinkButton = document.getElementById('add-buy-link-button');

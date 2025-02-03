@@ -1,4 +1,4 @@
-import guestBuilderModule from '../modules/guest_builder_module';
+import guestBuilderModule from '../modules/guest_builder_module.js';
 
 
 guestBuilderModule.setUpAddBuyLinkButton('add-buy-link-button', 'buy-links-container');

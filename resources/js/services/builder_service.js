@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { appUrl } from '../env';
+import { appUrl } from '../env.js';
 
 const builderService = {
     getAddBuyLinkNameContainer() {

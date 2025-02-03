@@ -1,8 +1,8 @@
-import '../app';
-import builderService from '../services/guest_builder_service';
-import guestBuilderService from '../services/guest_builder_service';
-import numberFormatService from '../services/number_format_service';
-import builderModule from './builder_module';
+import '../app.js';
+import builderService from '../services/guest_builder_service.js';
+import guestBuilderService from '../services/guest_builder_service.js';
+import numberFormatService from '../services/number_format_service.js';
+import builderModule from './builder_module.js';
 
 
 const guestBuilderModule = {

@@ -1,6 +1,6 @@
-import errorService from '../services/error_service';
-import '../app';
-import { appUrl } from '../env';
+import errorService from '../services/error_service.js';
+import '../app.js';
+import { appUrl } from '../env.js';
 
 
 const authModule = {

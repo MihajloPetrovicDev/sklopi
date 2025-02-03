@@ -1,4 +1,4 @@
-import authModule from '../modules/auth_module';
+import authModule from '../modules/auth_module.js';
 
 
 const registerForm = document.getElementById('register-form');

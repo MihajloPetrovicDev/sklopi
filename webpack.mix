@@ -1,5 +1,30 @@
 let mix = require('laravel-mix');
 
-mix.copyDirectory('resources/js', 'public/js')
+mix.webpackConfig({
+   resolve: {
+      extensions: ['.js'],
+   }
+});
+
+mix.js('resources/js/app.js', 'public/js')
+   .js('resources/js/bootstrap.js', 'public/js')
+   .js('resources/js/env.js', 'public/js')
+   .js('resources/js/services/builder_service.js', 'public/js/services')
+   .js('resources/js/services/error_service.js', 'public/js/services')
+   .js('resources/js/services/guest_builder_service.js', 'public/js/services')
+   .js('resources/js/services/number_format_service.js', 'public/js/services')
+   .js('resources/js/modules/auth_module.js', 'public/js/modules')
+   .js('resources/js/modules/builder_module.js', 'public/js/modules')
+   .js('resources/js/modules/guest_builder_module.js', 'public/js/modules')
+   .js('resources/js/inits/add_build_component_init.js', 'public/js/inits')
+   .js('resources/js/inits/add_guest_build_component_init.js', 'public/js/inits')
+   .js('resources/js/inits/build_component_init.js', 'public/js/inits')
+   .js('resources/js/inits/build_init.js', 'public/js/inits')
+   .js('resources/js/inits/create_new_build_init.js', 'public/js/inits')
+   .js('resources/js/inits/guest_build_component_init.js', 'public/js/inits')
+   .js('resources/js/inits/guest_build_init.js', 'public/js/inits')
+   .js('resources/js/inits/login_init.js', 'public/js/inits')
+   .js('resources/js/inits/manage_delivery_groups_init.js', 'public/js/inits')
+   .js('resources/js/inits/register_init.js', 'public/js/inits')
    .css('resources/css/app.css', 'public/css')
    .version();

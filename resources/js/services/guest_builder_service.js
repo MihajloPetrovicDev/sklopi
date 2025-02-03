@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import i18next from 'i18next';
-import numberFormatService from './number_format_service';
+import numberFormatService from './number_format_service.js';
 
 
 const guestBuilderService = {
