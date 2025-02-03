@@ -5,6 +5,7 @@
 /public/js
 /public/hot
 /public/storage
+/public/mix-manifest.json
 /resources/js/env.js
 /storage/*.key
 /storage/pail
