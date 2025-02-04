@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="sr">
 <head>
     <x-base-head-tags />
     <title>@lang('ui.add_build_component.add_component'): {{ $build->name }} / @lang('component_types.name_by_id.'.$buildComponentTypeId) - sklopi</title>

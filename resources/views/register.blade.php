@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="sr">
 <head>
     <x-base-head-tags />
     <title>@lang('ui.register.header_title')</title>
