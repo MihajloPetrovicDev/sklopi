@@ -117,7 +117,7 @@ class BuilderService {
                 $totalDeliveryGroupComponentsPrice += $deliveryGroupBuyLink->price;
             }
 
-            if($totalDeliveryGroupComponentsPrice > $combinationUsedDeliveryGroup->free_delivery_at) {
+            if($totalDeliveryGroupComponentsPrice > $combinationUsedDeliveryGroup->free_delivery_at && $combinationUsedDeliveryGroup->free_delivery_at != null) {
                 $deliveryGroupDeliveryCost = 0;
             }
 
