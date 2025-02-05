@@ -13,5 +13,5 @@
         </div>
     </div>
 
-    <p class="h-15p mx-auto text-center fw-200 c-white-4 fst-italic md-max-1030px-mt-40px md-max-1030px-mb-0px">&copy; {{ date('Y') }} @lang('ui.footer.all_rights_reserved')</p>
+    <p class="h-15p mx-auto text-center fw-200 c-white-4 fst-italic md-max-1030px-mt-40px md-max-1030px-mb-0px">&copy;{{ date('Y') }} @lang('ui.footer.all_rights_reserved')</p>
 </footer>

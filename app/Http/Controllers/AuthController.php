@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\RegistrationMail;
 use App\Services\ErrorService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -75,6 +77,8 @@ class AuthController extends Controller
             $user->save();
 
             Auth::login($user);
+
+            Mail::to($user->email)->send(new RegistrationMail($user));
 
             return response()->json([], 201);
         }
