@@ -21,6 +21,8 @@
                 <label class="mt-3" for="password">@lang('ui.login.password'):</label>
                 <input class="form-control" type="password" id="password"></input>
 
+                <a class="mt-3 d-block text-end" href="/forgot-your-password">@lang('ui.login.forgot_your_password')?</a>
+
                 <button class="mt-5 btn btn-primary mx-auto d-block" type="submit">@lang('ui.login.login')</button>
             </form>
 

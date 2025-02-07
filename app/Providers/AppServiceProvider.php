@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\AuthService;
 use App\Services\ErrorService;
 use App\Services\BuilderService;
 use Illuminate\Support\Facades\Blade;
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->singleton(BuilderService::class, function ($app) {
             return new BuilderService();
+        });
+        $this->app->singleton(AuthService::class, function ($app) {
+            return new AuthService();
         });
     }
 

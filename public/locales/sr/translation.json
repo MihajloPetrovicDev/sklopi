@@ -23,5 +23,8 @@
     },
     "add_build_component_button": {
         "add_component": "+ Dodaj Komponentu"
+    },
+    "my_account_change_password": {
+        "email_instructions_sent": "Poslali smo Vam email sa daljim instrukcijama za promenu lozinke."
     }
 }

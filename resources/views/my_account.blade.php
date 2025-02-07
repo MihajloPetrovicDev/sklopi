@@ -14,6 +14,10 @@
         <button class="btn btn-danger log-out-btn" type="submit">@lang('ui.my_account.log_out')</button>
     </form>
 
+    <div class="w-40p mt-3 md-max-1400px-w-65p md-max-600px-w-80p mx-auto" id="error-container-placeholder"></div>
+
+    <div class="w-40p mt-3 md-max-1400px-w-65p md-max-600px-w-80p mx-auto" id="message-container-placeholder"></div>
+
     <main>
         <div class="w-40p mx-auto mt-5 section-1 md-max-1400px-w-65p md-max-600px-w-80p">
             <div class="w-80p mx-auto">
@@ -23,10 +27,14 @@
                     <input class="form-control ml-5p w-75p md-max-800px-w-100p md-max-800px-ml-0px" value="{{ $user->username }}"></input>
                 </div>
 
-                <div class="d-flex align-items-center mt-3 md-max-800px-d-block">
+                <div class="d-flex align-items-center mt-4 md-max-800px-d-block">
                     <p class="mb-0px w-20p text-end md-max-800px-w-100p md-max-800px-text-start">@lang('ui.my_account.email'):</p>
 
-                    <input class="form-control ml-5p w-75p md-max-800px-w-100p md-max-800px-ml-0px" value="{{ $user->email }}"></input>
+                    <p class="ml-5p w-75p mb-0px fw-light fst-italic text-break md-max-800px-w-100p md-max-800px-ml-0px" id="email-text">{{ $user->email }}</p>
+                </div>
+
+                <div class="d-flex align-items-center mt-4 md-max-800px-d-block">
+                    <button class="btn btn-primary mt-3 mx-auto" id="change-password-button">@lang('ui.my_account.change_password')</button>
                 </div>
             </div>
         </div>
@@ -35,5 +43,6 @@
     <x-footer />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script type="module" src="{{ mix('js/inits/my_account_init.js') }}"></script> 
 </body>
 </html>

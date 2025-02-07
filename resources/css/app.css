@@ -396,6 +396,15 @@ main {
     height: fit-content;
 }
 
+.message-container {
+    background-color: #b7d3e2;
+    border: 2px solid #3ea0d8;
+    padding-block: 20px;
+    padding-inline: 40px;
+    border-radius: 5px;
+    height: fit-content;
+}
+
 .log-out-btn {
     position: absolute;
     top: 15px;
