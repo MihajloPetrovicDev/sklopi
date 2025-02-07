@@ -74,6 +74,7 @@ return [
         'password' => 'Lozinka',
         'dont_have_an_account' => 'Nemaš nalog',
         'create_new_account' => 'Napravi novi nalog',
+        'forgot_your_password' => 'Zaboravio si lozinku',
     ],
     'register' => [
         'header_title' => 'Registruj Se - sklopi',
@@ -94,6 +95,7 @@ return [
         'log_out' => 'Odjavi Se',
         'username' => 'Korisničko Ime',
         'email' => 'Email',
+        'change_password' => 'Promeni Lozinku',
     ],
     'build_component' => [
         'component' => 'Komponenta',
@@ -171,5 +173,20 @@ return [
         'header_title' => 'Politika Privatnosti - sklopi',
         'privacy_policy' => 'Politika Privatnosti',
     ],
-    ''
+    'forgot_your_password' => [
+        'header_title' => 'Zaboravio si lozinku? - sklopi',
+        'forgot_your_password' => 'Zaboravio si lozinku',
+        'email' => 'Email',
+        'cancel' => 'Otkaži',
+        'send' => 'Pošalji',
+        'further_instructions_email' => 'Poslaćemo vam dalja uputstva na email adresu.',
+    ],
+    'change_password' => [
+        'header_title' => 'Promeni Lozinku - sklopi',
+        'change_password' => 'Promeni Lozinku',
+        'new_password' => 'Nova Lozinka',
+        'confirm_new_password' => 'Potvrdi Novu Lozinku',
+        'cancel' => 'Otkaži',
+        'confirm' => 'Potvrdi',
+    ]
 ];

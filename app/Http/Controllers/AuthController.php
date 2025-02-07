@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\AuthService;
 use App\Mail\RegistrationMail;
 use App\Services\ErrorService;
-use Illuminate\Support\Facades\Log;
+use App\Mail\ChangePasswordMail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -15,11 +17,13 @@ use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     protected $errorService;
+    protected $authService;
 
     
-    public function __construct(ErrorService $errorService)
+    public function __construct(ErrorService $errorService, AuthService $authService)
     {
         $this->errorService = $errorService;
+        $this->authService = $authService;
     }
 
 
@@ -124,7 +128,95 @@ class AuthController extends Controller
 
     public function logOut() {
         Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
         return redirect()->route('home');
+    }
+
+
+    public function getForgotYourPasswordPage() {
+        return view('forgot_your_password');
+    }
+
+
+    public function getChangePasswordPage() {
+        return view('change_password');
+    }
+
+
+    public function generateAndSendPasswordResetLink(Request $request) {
+        
+        $requestData = $request->validate([
+            'email' => ['required', 'email', 'max: 80', 'exists:users,email'],
+        ], 
+        [
+            'email.max' => __('errors.forgot_your_password.email_isnt_in_use'),
+            'email.email' => __('errors.forgot_your_password.email_email'),
+            'email.required' => __('errors.forgot_your_password.email_required'),
+            'email.exists' => __('errors.forgot_your_password.email_isnt_in_use'),
+        ]);
+
+        try {
+            $user = User::where('email', $requestData['email'])->first();
+            $passwordResetToken = $this->authService->generatePasswordResetToken();
+
+            DB::beginTransaction();
+
+            $passwordResetTokenObject = $this->authService->createPasswordResetToken($user->email, $passwordResetToken);
+
+            $changePasswordUrl = config('app.url').'/change-password/'.$passwordResetTokenObject->token;
+            Mail::to($user->email)->send(new ChangePasswordMail($user, $changePasswordUrl));
+
+            DB::commit();
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            DB::rollback();
+            return $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function changePassword(Request $request) {
+        if($request['newPassword'] !== $request['confirmNewPassword']) {
+            return response()->json(['errors' => [
+                'error' => [__('errors.change_password.new_passwords_dont_match')]
+            ]], 400);
+        }
+
+        $requestData = $request->validate([
+            'newPassword' => ['required', 'min: 5', 'max: 80', 'regex:/[a-zA-Z]/', 'regex:/[0-9]/'],
+            'passwordResetToken' => ['required', 'min:64', 'max:64', 'exists:password_reset_tokens,token'],   //64 is the length of the HMAC password reset token
+        ],
+        [
+            'newPassword.min' => __('errors.change_password.new_password_min'),
+            'newPassword.max' => __('errors.change_password.new_password_max'),
+            'newPassword.required' => __('errors.change_password.new_password_required'),
+            'newPassword.regex' => __('errors.change_password.new_password_regex'),
+            'passwordResetToken.required' => __('errors.change_password.password_reset_token_required'),
+            'passwordResetToken.min' => __('errors.change_password.password_reset_token_min'),
+            'passwordResetToken.max' => __('errors.change_password.password_reset_token_max'),
+            'passwordResetToken.exists' => __('errors.change_password.password_reset_token_exists'),
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $this->authService->changePassword($requestData['passwordResetToken'], $requestData['newPassword']);
+
+            DB::commit();
+
+            Auth::logoutOtherDevices($requestData['newPassword']);
+            Auth::logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+
+            return response([], 200);
+        }
+        catch(Exception $e) {
+            DB::rollback();
+            $this->errorService->handleExceptionJSON($e);
+        }
     }
 }

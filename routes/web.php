@@ -41,6 +41,10 @@ Route::get('/terms-of-service', [PagesController::class, 'getTermsOfServicePage'
 
 Route::get('/privacy-policy', [PagesController::class, 'getPrivacyPolicyPage']);
 
+Route::get('/forgot-your-password', [AuthController::class, 'getForgotYourPasswordPage'])->middleware('guest');
+
+Route::get('/change-password/{token}', [AuthController::class, 'getChangePasswordPage']);
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');
@@ -64,3 +68,7 @@ Route::delete('/api/delete-build/{id}', [BuilderController::class, 'deleteBuild'
 Route::post('/api/save-build-name', [BuilderController::class, 'saveBuildName'])->middleware('auth');
 
 Route::post('/api/update-delivery-groups', [BuilderController::class, 'updateDeliveryGroups'])->middleware('auth');
+
+Route::post('/api/generate-and-send-password-reset-link', [AuthController::class, 'generateAndSendPasswordResetLink']);
+
+Route::post('/api/change-password', [AuthController::class, 'changePassword']);
