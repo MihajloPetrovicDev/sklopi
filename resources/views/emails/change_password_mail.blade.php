@@ -1,4 +1,4 @@
-<table style="width: 600px; font-family: Verdana; background-color: #efefef; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;" role="presentation" cellspacing="0" cellpadding="0" border="0">
+<table style="width: 600px; font-family: Roboto, Verdana, sans-serif; background-color: #efefef; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;" role="presentation" cellspacing="0" cellpadding="0" border="0">
     <tr>
         <td>
             <img src="https://sklopi.live/images/ui/email_header.jpg" alt="sklopi logo header">
