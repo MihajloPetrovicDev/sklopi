@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\AuthService;
 use App\Services\ErrorService;
 use App\Services\BuilderService;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,5 +35,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('formatToComaDecimalSeparator', function($number) {
             return "<?php echo \App\Helpers\NumberFormatHelper::formatToComaDecimalSeparator($number); ?>";
         });
+
+        if(env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
