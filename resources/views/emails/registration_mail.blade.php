@@ -6,19 +6,19 @@
     </tr>
 
     <tr>
-        <td style="padding-left: 30px;">
+        <td style="padding-left: 30px; padding-right: 30px;">
             <p style="margin-top: 40px; font-size: 24px;">@lang('emails.registration_mail.hello') <b>{{ $user->username }}</b>,</p>
         </td>
     </tr>
 
     <tr>
-        <td style="padding-left: 30px;">
+        <td style="padding-left: 30px; padding-right: 30px;">
             <p style="margin-top: 50px; font-size: 16px;">@lang('emails.registration_mail.successful_registration')</p>
         </td>
     </tr>
 
     <tr>
-        <td style="padding-left: 30px;">
+        <td style="padding-left: 30px; padding-right: 30px;">
             <p style="margin-top: 90px; margin-bottom: 50px; font-size: 14px;">@lang('emails.registration_mail.if_this_wasnt_you') <b>support@sklopi.live</b>.</p>
         </td>
     </tr>
