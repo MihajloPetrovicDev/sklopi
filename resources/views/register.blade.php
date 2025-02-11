@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
+    <meta name="robots" content="noindex, nofollow">
     <x-base-head-tags />
     <title>@lang('ui.register.header_title')</title>
 </head>

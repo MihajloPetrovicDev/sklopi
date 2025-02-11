@@ -8,6 +8,7 @@ use App\Services\BuilderService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Middleware\Authenticate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive('formatToComaDecimalSeparator', function($number) {
             return "<?php echo \App\Helpers\NumberFormatHelper::formatToComaDecimalSeparator($number); ?>";
+        });
+
+        Authenticate::redirectUsing(function ($request) {
+            $currentUrl = url()->current();
+            $redirectTo = parse_url($currentUrl, PHP_URL_PATH);
+    
+            return route('login') . '?redirect-to='.urlencode($redirectTo);
         });
 
         if(env('APP_ENV') !== 'local') {

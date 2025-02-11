@@ -68,8 +68,10 @@ class BuilderController extends Controller
     public function getBuild($encodedBuildId) {
         try {
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
-
-            $this->builderService->checkPermissionToViewBuild($build);
+            
+            if($this->builderService->checkPermissionToViewBuild($build) == false) {
+                return response()->view('errors.403', [], 403);
+            }
 
             //Get an array of arrays(represents the build component) of buy link ids
             $eachBuildComponentBuyLinkIds = $this->builderService->getEachBuildComponentBuyLinkIds($build->id);
@@ -97,7 +99,9 @@ class BuilderController extends Controller
 
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
 
-            $this->builderService->checkIsUserBuildOwner($build);
+            if($this->builderService->checkIsUserBuildOwner($build) == false) {
+                return response()->view('errors.403', [], 403);
+            }
 
             return view('add_build_component', compact('build', 'buildComponentTypeId'));
         }
@@ -170,7 +174,9 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail($requestData['buildComponentBuildId']);
 
-            $this->builderService->checkIsUserBuildOwnerJSON($build);
+            if($this->builderService->checkIsUserBuildOwnerJSON($build) == false) {
+                return response()->json([], 403);
+            }
 
             //Create the build component
             $buildComponent = $this->builderService->createBuildComponent($requestData);
@@ -215,7 +221,9 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail($requestData['deliveryGroupBuildId']);
 
-            $this->builderService->checkIsUserBuildOwnerJSON($build);
+            if($this->builderService->checkIsUserBuildOwnerJSON($build) == false) {
+                return response()->json([], 403);
+            }
 
             $this->builderService->createDeliveryGroup($requestData, $deliveryGroupCost, $build);
 
@@ -239,7 +247,9 @@ class BuilderController extends Controller
         try {
             $buildComponentToDelete = BuildComponent::findOrFail($requestData['deleteBuildComponentId']);
 
-            $this->builderService->checkIsUserBuildOwnerJSON($buildComponentToDelete->build);
+            if($this->builderService->checkIsUserBuildOwnerJSON($buildComponentToDelete->build) == false) {
+                return response()->json([], 403);
+            }
 
             $buildComponentToDelete->delete();
 
@@ -255,7 +265,9 @@ class BuilderController extends Controller
         try {
             $buildComponent = BuildComponent::findOrFail(EncodeHelper::decode($encodedBuildComponentId));
 
-            $this->builderService->checkPermissionToViewBuildJSON($buildComponent->build);
+            if($this->builderService->checkPermissionToViewBuildJSON($buildComponent->build) == false) {
+                return response()->json([], 403);
+            }
 
             $buildDeliveryGroups = DeliveryGroup::where('user_id', Auth::id())
                 ->where(function($query) use ($buildComponent) {
@@ -322,7 +334,9 @@ class BuilderController extends Controller
         try {
             $buildComponent = BuildComponent::findOrFail($requestData['buildComponentId']);
 
-            $this->builderService->checkIsUserBuildOwnerJSON($buildComponent->build);
+            if($this->builderService->checkIsUserBuildOwnerJSON($buildComponent->build) == false) {
+                return response()->json([], 403);
+            }
 
             //If the build component name is changed save it in the DB
             if($buildComponent->name != $requestData['buildComponentName']) {
@@ -353,7 +367,9 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
 
-            $this->builderService->checkIsUserBuildOwnerJSON($build);
+            if($this->builderService->checkIsUserBuildOwnerJSON($build) == false) {
+                return response()->json([], 403);
+            }
 
             $build->delete();
 
@@ -395,6 +411,10 @@ class BuilderController extends Controller
 
         try {
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
+
+            if($this->builderService->checkPermissionToViewBuild($build) == false) {
+                return response()->view('errors.403', [], 403);
+            }
 
             $buildDeliveryGroups = DeliveryGroup::where('build_id', $build->id)->get();
 

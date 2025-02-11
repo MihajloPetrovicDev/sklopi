@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
+    <meta name="robots" content="noindex, nofollow">
     <x-base-head-tags />
-    <meta name="description" content="{{ __('meta_descriptions.discussions') }}">
-    <title>@lang('ui.discussions.header_title')</title>
+    <title>500 Internal Server Error - sklopi</title>
 </head>
 
 <body>
     <x-header />
 
     <main>
-        <h1 class="text-center mt-5 fs-2">@lang('ui.discussions.coming_soon')</h1>
+        <h1 class="text-center display-1 mt-80px fw-500">500</h1>
+        <h2 class="text-center display-5 mt-2">Internal Server Error</h2>
     </main>
 
     <x-footer />

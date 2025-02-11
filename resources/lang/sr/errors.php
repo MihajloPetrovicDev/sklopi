@@ -117,7 +117,7 @@ return [
         'add_delivery_groups_*_delivery_cost_min' => 'Greška prilikom obrade novih grupa za dostavu.',
     ],
     'forgot_your_password' => [
-        'email_isnt_in_use' => 'Ne postoji nalog sa unetom Email adresom.',
+        'email_exists' => 'Ne postoji nalog sa unetom Email adresom.',
         'email_required' => 'Email adresa je obavezna.',
         'email_email' => 'Email adresa nije u tačnom formatu.',
         'email_max' => 'Email adresa nije u tačnom formatu.',
@@ -128,10 +128,24 @@ return [
         'new_password_max' => 'Lozinka ne sme da bude duža od 80 karaktera.',
         'new_password_required' => 'Lozinka je obavezna.',
         'new_password_regex' => 'Lozinka mora da sadrži minimum 1 broj i 1 slovo.',
-        'token_expired' => 'Token za promenu šifre je istekao.',
-        'password_reset_token_required' => 'Greška prilikom obrade tokena za promenu šifre.',
-        'password_reset_token_min' => 'Greška prilikom obrade tokena za promenu šifre.',
-        'password_reset_token_max' => 'Greška prilikom obrade tokena za promenu šifre.',
-        'password_reset_token_exists' => 'Greška prilikom obrade tokena za promenu šifre.',
+        'token_expired' => 'Token za promenu lozinke je istekao.',
+        'password_reset_token_required' => 'Greška prilikom obrade tokena za promenu lozinke.',
+        'password_reset_token_min' => 'Greška prilikom obrade tokena za promenu lozinke.',
+        'password_reset_token_max' => 'Greška prilikom obrade tokena za promenu lozinke.',
+        'password_reset_token_exists' => 'Greška prilikom obrade tokena za promenu lozinke.',
+    ],
+    'generate_and_send_change_email_verification_link' => [
+        'new_email_required' => 'Email adresa nije u tačnom formatu.',
+        'new_email_email' => 'Email adresa nije u tačnom formatu.',
+        'new_email_max' => 'Email adresa nije u tačnom formatu.',
+        'new_email_unique' => 'Nalog sa ovom email adresom već postoji.',
+    ],
+    'change_email' => [
+        'email_change_token_required' => 'Greška prilikom obrade tokena za promenu email adrese.',
+        'email_change_token_min' => 'Greška prilikom obrade tokena za promenu email adrese.',
+        'email_change_token_max' => 'Greška prilikom obrade tokena za promenu email adrese.',
+        'email_change_token_exists' => 'Greška prilikom obrade tokena za promenu email adrese.',
+        'token_expired' => 'Token za promenu email adrese je istekao.',
+        'access_forbiden' => 'Zabranjen pristup. Ovaj zahtev za promenu email adrese nije vezan za vaš nalog.',
     ]
 ];

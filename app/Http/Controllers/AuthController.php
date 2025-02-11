@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\ChangeEmailMail;
 use App\Services\AuthService;
 use App\Mail\RegistrationMail;
 use App\Services\ErrorService;
@@ -96,6 +97,7 @@ class AuthController extends Controller
         $requestData = $request->validate([
             'email' => ['required', 'email', 'max: 80', 'exists:users,email'],
             'password' => ['required', 'min: 5', 'max: 80'],
+            'redirectTo' => ['nullable'],
         ], 
         [
             'email.max' => __('errors.login.email_isnt_in_use'),
@@ -109,6 +111,7 @@ class AuthController extends Controller
 
         try {
             $user = User::where('email', $requestData['email'])->first();
+            $redirectTo = $requestData['redirectTo'] ?? '/';
             
             if(!Hash::check($requestData['password'], $user->password)) {
                 return response()->json(['errors' => [
@@ -118,7 +121,9 @@ class AuthController extends Controller
 
             Auth::login($user);
 
-            return response()->json([], 200);
+            return response()->json([
+                'redirectTo' => $redirectTo
+            ], 200);
         }
         catch(Exception $e) {
             return $this->errorService->handleExceptionJSON($e);
@@ -127,9 +132,7 @@ class AuthController extends Controller
 
 
     public function logOut() {
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
+        $this->authService->logOut();
 
         return redirect()->route('home');
     }
@@ -154,12 +157,12 @@ class AuthController extends Controller
             'email.max' => __('errors.forgot_your_password.email_isnt_in_use'),
             'email.email' => __('errors.forgot_your_password.email_email'),
             'email.required' => __('errors.forgot_your_password.email_required'),
-            'email.exists' => __('errors.forgot_your_password.email_isnt_in_use'),
+            'email.exists' => __('errors.forgot_your_password.email_exists'),
         ]);
 
         try {
             $user = User::where('email', $requestData['email'])->first();
-            $passwordResetToken = $this->authService->generatePasswordResetToken();
+            $passwordResetToken = $this->authService->generateToken();
 
             DB::beginTransaction();
 
@@ -208,15 +211,77 @@ class AuthController extends Controller
             DB::commit();
 
             Auth::logoutOtherDevices($requestData['newPassword']);
-            Auth::logout();
-            request()->session()->invalidate();
-            request()->session()->regenerateToken();
+            $this->authService->logOut();
 
             return response([], 200);
         }
         catch(Exception $e) {
             DB::rollback();
             $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function getChangeEmailPage() {
+        return view('change_email');
+    }
+
+
+    public function generateAndSendChangeEmailVerificationLink(Request $request) {
+        $requestData = $request->validate([
+            'newEmail' => ['required', 'email', 'max: 80', 'unique:users,email'],
+        ],
+        [
+            'newEmail.required' => __('errors.generate_and_send_change_email_verification_link.new_email_required'),
+            'newEmail.email' => __('errors.generate_and_send_change_email_verification_link.new_email_email'),
+            'newEmail.max' => __('errors.generate_and_send_change_email_verification_link.new_email_max'),
+            'newEmail.unique' => __('errors.generate_and_send_change_email_verification_link.new_email_unique'),
+        ]);
+
+        try {
+            $user = Auth::user();
+            $emailChangeToken = $this->authService->generateToken();
+
+            DB::beginTransaction();
+
+            $emailChangeTokenObject = $this->authService->createEmailChangeToken($requestData['newEmail'], $emailChangeToken, $user->id);
+
+            $emailChangeVerificationLink = config('app.url').'/email-change-verification/'.$emailChangeTokenObject->token;
+            Mail::to($user->email)->send(new ChangeEmailMail($user, $emailChangeVerificationLink));
+
+            DB::commit();
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            DB::rollback();
+            return $this->errorService->handleExceptionJSON($e);
+        }
+    }
+
+
+    public function getChangeEmailVerificationPage($token) {
+        return view('change_email_verification');
+    }
+
+
+    public function changeEmail(Request $request) {
+        $requestData = $request->validate([
+            'emailChangeToken' => ['required', 'min:64', 'max:64', 'exists:email_change_tokens,token'],   //64 is the length of the HMAC email change token
+        ],
+        [
+            'emailChangeToken.required' => __('errors.change_email.email_change_token_required'),
+            'emailChangeToken.min' => __('errors.change_email.email_change_token_min'),
+            'emailChangeToken.max' => __('errors.change_email.email_change_token_max'),
+            'emailChangeToken.exists' => __('errors.change_email.email_change_token_exists'),
+        ]);
+
+        try {
+            return $this->authService->changeEmail($requestData['emailChangeToken']);
+
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            return $this->errorService->handleExceptionJSON($e);
         }
     }
 }

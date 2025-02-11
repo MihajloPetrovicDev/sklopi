@@ -169,35 +169,36 @@ class BuilderService {
 
     public function checkPermissionToViewBuild($build) {
         if($build->user_id != Auth::id() && $build->is_public == false) {
-            abort(403);
+            return false;
         }
+
+        return true;
     }
 
 
     public function checkPermissionToViewBuildJSON($build) {
         if($build->user_id != Auth::id() && $build->is_public == false) {
-            return response()->json([], 403);
+            return false;
         }
+
+        return true;
     }
 
 
     public function checkIsUserBuildOwner($build) {
         if($build->user_id != Auth::id()) {
-            abort(403);
+            return false;
         }
+
+        return true;
     }
 
     public function checkIsUserBuildOwnerJSON($build) {
         if($build->user_id != Auth::id()) {
-            return response()->json([], 403);
+            return false;
         }
-    }
 
-
-    public function checkIsUserDeliveryGroupOwnerJSON($deliveryGroup) {
-        if($deliveryGroup->user_id != Auth::id()) {
-            return response()->json([], 403);
-        }
+        return true;
     }
 
 
@@ -300,9 +301,7 @@ class BuilderService {
 
     public function updateDeliveryGroups($requestData) {
         foreach($requestData['deliveryGroups'] as $deliveryGroupsArrayItem) {
-            $deliveryGroup = DeliveryGroup::findOrFail($deliveryGroupsArrayItem['id']);
-
-            $this->checkIsUserDeliveryGroupOwnerJSON($deliveryGroup);
+            $deliveryGroup = DeliveryGroup::where('user_id', Auth::id())->where('id', $deliveryGroupsArrayItem['id'])->firstOrFail();
 
             if($deliveryGroup->name != $deliveryGroupsArrayItem['name']) {
                 $deliveryGroup->name = $deliveryGroupsArrayItem['name'];

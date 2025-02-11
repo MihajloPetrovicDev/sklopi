@@ -17,5 +17,11 @@ return [
         'hello' => 'Zdravo',
         'we_have_received_your_request' => 'Primili smo Vaš zahtev za promenu lozinke. Lozinku možete promeniti na sledećem linku',
         'reset_is_active_only' => 'Link za promenu lozinke funkcioniše samo prva 2 sata nakon izdaje.',
-    ]
+    ],
+    'change_email_mail' => [
+        'subject' => 'Promena Email Adrese',
+        'hello' => 'Zdravo',
+        'we_have_received_your_request' => 'Primili smo Vaš zahtev za promenu email adrese. Potvrdite promenu email adrese na sledećem linku',
+        'reset_is_active_only' => 'Link za potvrdu promene email adrese funkcioniše samo prva 2 sata nakon izdaje.',
+    ],
 ];

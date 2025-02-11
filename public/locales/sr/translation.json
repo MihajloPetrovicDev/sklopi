@@ -26,5 +26,8 @@
     },
     "my_account_change_password": {
         "email_instructions_sent": "Poslali smo Vam email sa daljim instrukcijama za promenu lozinke."
+    },
+    "change_email_verification": {
+        "email_change_successful": "Vaša email adresa je uspešno promenjena."
     }
 }
