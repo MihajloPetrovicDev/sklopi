@@ -46,7 +46,7 @@ Route::get('/change-password/{token}', [AuthController::class, 'getChangePasswor
 
 Route::get('/change-email', [AuthController::class, 'getChangeEmailPage'])->middleware('auth');
 
-Route::get('/change-email-verification/{token}', [AuthController::class, 'getChangeEmailVerificationPage'])->middleware('auth');
+Route::get('/email-change-verification/{token}', [AuthController::class, 'getChangeEmailVerificationPage'])->middleware('auth');
 
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
