@@ -7,25 +7,25 @@
 
     <tr>
         <td style="padding-left: 30px; padding-right: 30px;">
-            <p style="margin-top: 40px; font-size: 24px;">@lang('emails.change_password_mail.hello') <b>{{ $user->username }}</b>,</p>
+            <p style="margin-top: 40px; font-size: 24px;">@lang('emails.change_email_mail.hello') <b>{{ $user->username }}</b>,</p>
         </td>
     </tr>
 
     <tr>
         <td style="padding-left: 30px; padding-right: 30px;">
-            <p style="margin-top: 20px; margin-bottom: 20px; font-size: 16px;">@lang('emails.change_password_mail.we_have_received_your_request'):</p>
+            <p style="margin-top: 20px; margin-bottom: 20px; font-size: 16px;">@lang('emails.change_email_mail.we_have_received_your_request'):</p>
         </td>
     </tr>
 
     <tr>
         <td style="padding-left: 30px; padding-right: 30px;">
-            <a style="font-size: 16px;" href="{{ $changePasswordLink }}" target="_blank">{{ $changePasswordLink }}</a>
+            <a style="font-size: 16px;" href="{{ $changeEmailLink }}" target="_blank">{{ $changeEmailLink }}</a>
         </td>
     </tr>
 
     <tr>
         <td style="padding-left: 30px; padding-right: 30px;">
-            <p style="margin-top: 70px; margin-bottom: 50px; font-size: 16px;">@lang('emails.change_password_mail.reset_is_active_only')</p>
+            <p style="margin-top: 70px; margin-bottom: 50px; font-size: 16px;">@lang('emails.change_email_mail.reset_is_active_only')</p>
         </td>
     </tr>
 

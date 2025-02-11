@@ -514,6 +514,10 @@ main {
     .md-max-1400px-w-65p {
         width: 65% !important;
     }
+
+    .md-max-1400px-w-70p {
+        width: 70% !important;
+    }
 }
 
 
@@ -717,6 +721,26 @@ main {
 
     .md-max-800px-ml-0px {
         margin-left: 0px !important;
+    }
+
+    .md-max-800px-mt-10px {
+        margin-top: 10px !important;
+    }
+
+    .md-max-800px-justify-content-start {
+        justify-content: flex-start !important;
+    }
+
+    .justify-content-end.md-max-800px-justify-content-start {
+        justify-content: flex-start !important;
+    }
+
+    .md-max-800px-bin-none {
+        border-inline: none !important;
+    }
+
+    .md-max-800px-br-0px {
+        border-radius: 0px !important;
     }
 }
 

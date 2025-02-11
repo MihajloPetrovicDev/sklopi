@@ -14,27 +14,37 @@
         <button class="btn btn-danger log-out-btn" type="submit">@lang('ui.my_account.log_out')</button>
     </form>
 
-    <div class="w-40p mt-3 md-max-1400px-w-65p md-max-600px-w-80p mx-auto" id="error-container-placeholder"></div>
+    <h2 class="mt-5 text-center fs-1">@lang('ui.my_account.my_account')</h2>
 
-    <div class="w-40p mt-3 md-max-1400px-w-65p md-max-600px-w-80p mx-auto" id="message-container-placeholder"></div>
+    <div class="w-50p mt-3 md-max-1400px-w-70p md-max-600px-w-80p mx-auto" id="error-container-placeholder"></div>
+
+    <div class="w-50p mt-3 md-max-1400px-w-70p md-max-600px-w-80p mx-auto" id="message-container-placeholder"></div>
 
     <main>
-        <div class="w-40p mx-auto mt-5 section-1 md-max-1400px-w-65p md-max-600px-w-80p">
-            <div class="w-80p mx-auto">
-                <div class="d-flex align-items-center md-max-800px-d-block">
+        <div class="w-50p mx-auto mt-5 section-1 md-max-1400px-w-70p md-max-800px-w-100p md-max-800px-bin-none md-max-800px-br-0px">
+            <div class="w-90p mx-auto">
+                <div class="d-flex align-items-center md-max-800px-d-block bb-lgray pb-4">
                     <p class="mb-0px w-20p text-end md-max-800px-w-100p md-max-800px-text-start">@lang('ui.my_account.username'):</p>
 
-                    <input class="form-control ml-5p w-75p md-max-800px-w-100p md-max-800px-ml-0px" value="{{ $user->username }}"></input>
+                    <div class="d-flex w-75p ml-5p md-max-800px-ml-0px md-max-800px-w-100p">
+                        <input class="form-control" value="{{ $user->username }}"></input>
+                    
+                        <button class="btn btn-primary w-100px ml-m-100px br-tl-0px br-bl-0px" id="save-username-button">@lang('ui.build.save')</button>
+                    </div>
                 </div>
 
-                <div class="d-flex align-items-center mt-4 md-max-800px-d-block">
+                <div class="d-flex align-items-center mt-4 md-max-800px-d-block bb-lgray pb-4">
                     <p class="mb-0px w-20p text-end md-max-800px-w-100p md-max-800px-text-start">@lang('ui.my_account.email'):</p>
 
-                    <p class="ml-5p w-75p mb-0px fw-light fst-italic text-break md-max-800px-w-100p md-max-800px-ml-0px" id="email-text">{{ $user->email }}</p>
+                    <p class="ml-5p w-50p mb-0px fw-light fst-italic text-break md-max-800px-w-100p md-max-800px-ml-0px" id="email-text">{{ $user->email }}</p>
+
+                    <div class="ml-5p w-20p d-flex justify-content-end md-max-800px-w-100p md-max-800px-ml-0px md-max-800px-mt-10px md-max-800px-justify-content-start">
+                        <a class="btn btn-primary" href="/change-email">@lang('ui.my_account.change')</a>
+                    </div>
                 </div>
 
-                <div class="d-flex align-items-center mt-4 md-max-800px-d-block">
-                    <button class="btn btn-primary mt-3 mx-auto" id="change-password-button">@lang('ui.my_account.change_password')</button>
+                <div class="d-flex align-items-center mt-4">
+                    <button class="btn btn-primary mx-auto" id="change-password-button">@lang('ui.my_account.change_password')</button>
                 </div>
             </div>
         </div>

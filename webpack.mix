@@ -25,5 +25,7 @@ mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/inits/forgot_your_password_init.js', 'public/js/inits')
    .js('resources/js/inits/change_password_init.js', 'public/js/inits')
    .js('resources/js/inits/my_account_init.js', 'public/js/inits')
+   .js('resources/js/inits/change_email_init.js', 'public/js/inits')
+   .js('resources/js/inits/change_email_verification_init.js', 'public/js/inits')
    .css('resources/css/app.css', 'public/css')
    .version();

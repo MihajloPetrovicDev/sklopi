@@ -92,9 +92,11 @@ return [
     ],
     'my_account' => [
         'header_title' => 'Moj Nalog - sklopi',
+        'my_account' => 'Moj Nalog',
         'log_out' => 'Odjavi Se',
         'username' => 'Korisničko Ime',
         'email' => 'Email',
+        'change' => 'Promeni',
         'change_password' => 'Promeni Lozinku',
     ],
     'build_component' => [
@@ -179,7 +181,7 @@ return [
         'email' => 'Email',
         'cancel' => 'Otkaži',
         'send' => 'Pošalji',
-        'further_instructions_email' => 'Poslaćemo vam dalja uputstva na email adresu.',
+        'further_instructions_email' => 'Poslaćemo Vam dalje instrukcije na email adresu.',
     ],
     'change_password' => [
         'header_title' => 'Promeni Lozinku - sklopi',
@@ -188,5 +190,16 @@ return [
         'confirm_new_password' => 'Potvrdi Novu Lozinku',
         'cancel' => 'Otkaži',
         'confirm' => 'Potvrdi',
+    ],
+    'change_email' => [
+        'header_title' => 'Promeni Email Adresu - sklopi',
+        'change_email' => 'Promeni Email Adresu',
+        'email' => 'Nova Email Adresa',
+        'further_instructions_email' => 'Poslaćemo Vam dalje instrukcije na trenutnu email adresu.',
+        'cancel' => 'Otkaži',
+        'send' => 'Pošalji',
+    ],
+    'change_email_verification' => [
+        'header_title' => 'Verifikuj Promenu Email Adrese - sklopi',
     ]
 ];

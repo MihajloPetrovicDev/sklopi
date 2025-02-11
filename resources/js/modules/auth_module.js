@@ -3,6 +3,7 @@ import messageService from '../services/message_service.js';
 import authService from '../services/auth_service.js'; 
 import '../app.js';
 import { appUrl } from '../env.js';
+import i18next from 'i18next';
 
 
 const authModule = {
@@ -33,14 +34,17 @@ const authModule = {
     async login(emailFieldId, passwordFieldId) {
         const emailField = document.getElementById(emailFieldId);
         const passwordField = document.getElementById(passwordFieldId);
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectTo = urlParams.get('redirect-to');
 
         try {
             const response = await axios.post(appUrl + '/api/login', {
                 email: emailField.value,
                 password: passwordField.value,
+                redirectTo: redirectTo,
             });
 
-            window.location.href = '/';
+            window.location.href = response.data.redirectTo;
         }
         catch(error) {
             errorService.handleError(error);
@@ -87,8 +91,8 @@ const authModule = {
     },
 
 
-    async setUpMyAccountPageChangePassword(EmailTextId, changePasswordButtonId) {
-        const emailText = document.getElementById(EmailTextId);
+    async setUpMyAccountPageChangePassword(emailTextId, changePasswordButtonId) {
+        const emailText = document.getElementById(emailTextId);
         const changePasswordButton = document.getElementById(changePasswordButtonId);
 
         changePasswordButton.addEventListener('click', async function(e) {
@@ -98,7 +102,42 @@ const authModule = {
 
             messageService.displayMessage(i18next.t('my_account_change_password.email_instructions_sent'), 'message-container-placeholder');
         })
-    }
+    },
+
+
+    async setUpChangeEmailSendButton(newEmailInputId, changeEmailButtonId) {
+        const newEmailInput = document.getElementById(newEmailInputId);
+        const changeEmailButton = document.getElementById(changeEmailButtonId);
+
+        changeEmailButton.addEventListener('click', async function(e) {
+            try {
+                const response = await axios.post(appUrl + '/api/generate-and-send-email-change-link', {
+                    newEmail: newEmailInput.value,
+                });
+
+                window.location.href = '/my-account';
+            }
+            catch(error) {
+                errorService.handleError(error);
+            }
+        })
+    },
+
+
+    async setUpChangeEmailVerificationPage() {
+        const emailChangeToken = window.location.pathname.split('/').pop();
+
+        try {
+            const response = await axios.post(appUrl + '/api/change-email', {
+                emailChangeToken: emailChangeToken,
+            });
+
+            messageService.displayMessage(i18next.t('change_email_verification.email_change_successful'), 'message-container-placeholder');
+        }
+        catch(error) {
+            errorService.handleError(error);
+        }
+    },
 }
 
 

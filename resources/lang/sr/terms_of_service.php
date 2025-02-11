@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'terms_of_service' => 'Dobrodošli na sklopi! Korišćenjem našeg sajta, prihvatate sledeće Uslove korišćenja. Molimo vas da ih pažljivo pročitate pre nego što nastavite sa korišćenjem sajta.
+    'terms_of_service' => 'Dobrodošli na sklopi! Korišćenjem našeg sajta, prihvatate sledeće Uslove korišćenja. Molimo Vas da ih pažljivo pročitate pre nego što nastavite sa korišćenjem sajta.
 
 
 1. Odricanje od odgovornosti za linkove za kupovinu
@@ -9,7 +9,7 @@ Linkovi za kupovinu koje korisnici postavljaju na sajtu vode ka spoljnim sajtovi
     -Bezbednost, sadržaj ili zakonitost tih sajtova.
     -Proizvode ili usluge koji se kupuju putem tih linkova.
     -Eventualne posledice korišćenja tih sajtova, uključujući potencijalnu štetu, gubitke ili zarazu uređaja zlonamernim softverom.
-    -Svi rizici korišćenja kupovnih linkova su isključivo vaša odgovornost.
+    -Svi rizici korišćenja kupovnih linkova su isključivo Vaša odgovornost.
 
 
 2. Zabrana zlonamernog sadržaja
@@ -22,10 +22,10 @@ Korisnici koji postave ovakav sadržaj suočiće se sa trajnom zabranom korišć
 
 
 3. Bezbednost naloga
-Bezbednost vašeg naloga je vaša odgovornost. Preporučujemo:
+Bezbednost Vašeg naloga je Vaša odgovornost. Preporučujemo:
     -Korišćenje jakih lozinki.
     -Da ne delite svoje podatke za prijavu sa trećim licima.
-Sklopi ne snosi odgovornost za posledice zloupotrebe vašeg naloga, uključujući neovlašćen pristup i eventualnu štetu.
+Sklopi ne snosi odgovornost za posledice zloupotrebe Vašeg naloga, uključujući neovlašćen pristup i eventualnu štetu.
 
 
 4. Ograničenje odgovornosti

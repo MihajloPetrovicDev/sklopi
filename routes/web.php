@@ -1,6 +1,5 @@
 <?php
 
-use App\View\Components\GuestBuilder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
@@ -45,6 +44,10 @@ Route::get('/forgot-your-password', [AuthController::class, 'getForgotYourPasswo
 
 Route::get('/change-password/{token}', [AuthController::class, 'getChangePasswordPage']);
 
+Route::get('/change-email', [AuthController::class, 'getChangeEmailPage'])->middleware('auth');
+
+Route::get('/change-email-verification/{token}', [AuthController::class, 'getChangeEmailVerificationPage'])->middleware('auth');
+
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');
@@ -72,3 +75,7 @@ Route::post('/api/update-delivery-groups', [BuilderController::class, 'updateDel
 Route::post('/api/generate-and-send-password-reset-link', [AuthController::class, 'generateAndSendPasswordResetLink']);
 
 Route::post('/api/change-password', [AuthController::class, 'changePassword']);
+
+Route::post('/api/generate-and-send-email-change-link', [AuthController::class, 'generateAndSendChangeEmailVerificationLink']);
+
+Route::post('/api/change-email', [AuthController::class, 'changeEmail'])->middleware('auth');

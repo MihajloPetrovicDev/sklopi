@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'privacy_policy' => 'Dobrodošli na sklopi! Privatnost korisnika je od izuzetnog značaja za nas, i ovom Politikom privatnosti želimo da vas obavestimo o načinu na koji prikupljamo, koristimo i štitimo vaše lične podatke.
+    'privacy_policy' => 'Dobrodošli na sklopi! Privatnost korisnika je od izuzetnog značaja za nas, i ovom Politikom privatnosti želimo da Vas obavestimo o načinu na koji prikupljamo, koristimo i štitimo Vaše lične podatke.
 
 
 1. Podaci koje prikupljamo
@@ -11,22 +11,22 @@ Korišćenjem našeg sajta, možemo prikupljati sledeće podatke:
     -Tehnički podaci: IP adresa, tip uređaja, pregledač i podaci o interakciji sa sajtom.
 
 
-2. Kako koristimo vaše podatke
-    -Prikupljeni podaci koriste se za sledeće svrhe:
-    -Kreiranje i upravljanje vašim nalogom.
+2. Kako koristimo Vaše podatke
+Prikupljeni podaci koriste se za sledeće svrhe:
+    -Kreiranje i upravljanje Vašim nalogom.
     -Prikaz konfiguracija i linkova za kupovinu koje postavljate.
     -Unapređenje funkcionalnosti sajta i korisničkog iskustva.
     -Sprečavanje zloupotreba i održavanje bezbednosti sajta.
 
 
 3. Deljenje podataka sa trećim stranama
-Sklopi ne deli vaše lične podatke sa trećim stranama osim u sledećim slučajevima:
+sklopi ne deli Vaše lične podatke sa trećim stranama osim u sledećim slučajevima:
     -Ako je to neophodno zbog zakonskih zahteva.
     -Ako je potrebno za zaštitu bezbednosti i integriteta sajta.
 
 
 4. Bezbednost podataka
-Preduzimamo sve razumne mere kako bismo zaštitili vaše podatke, uključujući:
+Preduzimamo sve razumne mere kako bismo zaštitili Vaše podatke, uključujući:
     -Šifrovanje lozinki i sigurnosne protokole za zaštitu informacija.
     -Redovne provere i ažuriranje bezbednosnih sistema.
 Ipak, ne možemo garantovati apsolutnu bezbednost podataka na internetu. Preporučujemo da koristite jake lozinke i da budete pažljivi sa svojim podacima za prijavu.

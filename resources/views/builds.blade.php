@@ -2,6 +2,7 @@
 <html lang="sr">
 <head>
     <x-base-head-tags />
+    <meta name="description" content="{{ __('meta_descriptions.builds') }}">
     <title>@lang('ui.builds.header_title')</title>
 </head>
 

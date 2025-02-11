@@ -9,20 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ChangePasswordMail extends Mailable
+class ChangeEmailMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
-    public $changePasswordLink;
+    public $changeEmailLink;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $changePasswordLink)
+    public function __construct($user, $changeEmailLink)
     {
         $this->user = $user;
-        $this->changePasswordLink = $changePasswordLink;
+        $this->changeEmailLink = $changeEmailLink;
     }
 
     /**
@@ -31,7 +31,7 @@ class ChangePasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('emails.change_password_mail.subject'),
+            subject: __('emails.change_email_mail.subject'),
         );
     }
 
@@ -41,7 +41,7 @@ class ChangePasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.change_password_mail',
+            view: 'emails.change_email_mail',
         );
     }
 
