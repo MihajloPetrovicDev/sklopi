@@ -1,5 +1,5 @@
-import guestBuilderModule from '../modules/guest_builder_module.js';
-import builderModule from '../modules/builder_module.js';
+import guestBuilderModule from '../modules/guest_builder_module';
+import builderModule from '../modules/builder_module';
 
 
 guestBuilderModule.loadBuildComponentInfo('component-name', 'buy-links-container');

@@ -1,4 +1,4 @@
-import { appUrl } from '../env.js';
+import { appUrl } from '../env';
 
 const builderService = {
     getAddBuyLinkNameContainer() {

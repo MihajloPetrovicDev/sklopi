@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import numberFormatService from './number_format_service.js';
+import numberFormatService from './number_format_service';
 
 
 const guestBuilderService = {

@@ -1,4 +1,4 @@
-import builderModule from "../modules/builder_module.js";
+import builderModule from "../modules/builder_module";
 
 
 const newDeliveryGroupPopupWindow = document.getElementById('new-delivery-group-popup-container');
