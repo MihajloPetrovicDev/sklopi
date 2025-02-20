@@ -1,4 +1,4 @@
-import './bootstrap.js';
+import './bootstrap';
 import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 

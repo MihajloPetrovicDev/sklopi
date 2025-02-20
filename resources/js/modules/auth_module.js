@@ -1,8 +1,8 @@
-import errorService from '../services/error_service.js';
-import messageService from '../services/message_service.js';
-import authService from '../services/auth_service.js'; 
-import '../app.js';
-import { appUrl } from '../env.js';
+import errorService from '../services/error_service';
+import messageService from '../services/message_service';
+import authService from '../services/auth_service'; 
+import '../app';
+import { appUrl } from '../env';
 import i18next from 'i18next';
 
 

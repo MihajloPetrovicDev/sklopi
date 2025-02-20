@@ -1,4 +1,4 @@
-import guestBuilderModule from '../modules/guest_builder_module.js';
+import guestBuilderModule from '../modules/guest_builder_module';
 
 
 guestBuilderModule.loadBuildComponents();
