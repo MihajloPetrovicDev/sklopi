@@ -38,7 +38,6 @@ return [
         'delete_build' => 'Obriši Konfiguraciju',
         'save' => 'Sačuvaj',
         'name' => 'Naziv',
-        'not_added' => 'Nije Uneto',
     ],
     'create_new_build' => [
         'header_title' => 'Napravi Novu Konfiguraciju - sklopi',

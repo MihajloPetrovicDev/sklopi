@@ -33,7 +33,7 @@
         @if(Auth::check() && $build->user_id == Auth::id())
             <a class="btn btn-primary md-max-900px-w-fc md-max-900px-d-block md-max-900px-mx-auto" href="/add-build-component/?build-id={{ $build->encodedId }}&build-component-type-id={{ $buildComponentTypeId }}">+ @lang('ui.build.add_component')</a>
         @else
-            <p class="h-38px pin-20px d-flex align-items-center fw-light fst-italic c-gray-1 mb-0px md-max-900px-w-fc md-max-900px-d-block md-max-900px-mx-auto">@lang('ui.build.not_added')</p>
+            <p class="btn bgc-gray-1 c-white-3 hover-pointer-none mb-0px md-max-900px-w-fc md-max-900px-d-block md-max-900px-mx-auto">+ @lang('ui.build.add_component')</p>
         @endif
     @endif
 </div>

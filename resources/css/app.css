@@ -200,12 +200,16 @@ main {
     text-decoration: none;
 }
 
+.bgc-gray-1 {
+    background-color: #888888 !important;
+}
+
 .c-white-2 {
     color: #f7f7f7;
 }
 
 .c-white-3 {
-    color: #e9e9e9;
+    color: #e9e9e9 !important;
 }
 
 .c-white-4 {
@@ -354,6 +358,16 @@ main {
 
 .hover-pointer:hover {
     cursor: pointer;
+}
+
+.hover-pointer-none {
+    pointer-events: none !important;
+    cursor: default !important;
+}
+
+.hover-pointer-none:hover {
+    pointer-events: none !important;
+    cursor: default !important;
 }
 
 .ws-pre-wrap {
