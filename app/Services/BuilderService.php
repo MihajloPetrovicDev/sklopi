@@ -176,15 +176,6 @@ class BuilderService {
     }
 
 
-    public function checkPermissionToViewBuildJSON($build) {
-        if($build->user_id != Auth::id() && $build->is_public == false) {
-            return false;
-        }
-
-        return true;
-    }
-
-
     public function checkIsUserBuildOwner($build) {
         if($build->user_id != Auth::id()) {
             return false;
@@ -193,8 +184,9 @@ class BuilderService {
         return true;
     }
 
-    public function checkIsUserBuildOwnerJSON($build) {
-        if($build->user_id != Auth::id()) {
+
+    public function checkIsUserDeliveryGroupOwner($deliveryGroup) {
+        if($deliveryGroup->user_id != Auth::id()) {
             return false;
         }
 

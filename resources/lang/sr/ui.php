@@ -38,6 +38,7 @@ return [
         'delete_build' => 'Obriši Konfiguraciju',
         'save' => 'Sačuvaj',
         'name' => 'Naziv',
+        'not_added' => 'Nije Uneto',
     ],
     'create_new_build' => [
         'header_title' => 'Napravi Novu Konfiguraciju - sklopi',
@@ -201,5 +202,11 @@ return [
     ],
     'change_email_verification' => [
         'header_title' => 'Verifikuj Promenu Email Adrese - sklopi',
+    ],
+    'redirect_to_buy_link' => [
+        'header_title' => 'Preusmeravanje na Link za Kupovinu - sklopi',
+        'you_will_be_redirected' => 'Bićete preusmereni na link koji je dodat od strane korisnika!',
+        'sklopi_cant_guarantee_safety' => 'sklopi ne može da garantuje vašu sigurnost ili ispravnost podataka na ovom linku. Savetujemo da dobro razmislite da li želite da posetite ovaj link. Ako želite, obratite pažnju, mi ne odgovaramo ni za kakvu štetu nanetu vama direkto ili indirektno.',
+        'visit_link' => 'Poseti Link',
     ]
 ];

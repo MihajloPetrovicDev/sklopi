@@ -320,6 +320,10 @@ main {
     margin-bottom: 0px;
 }
 
+.mb-5px {
+    margin-bottom: 5px;
+}
+
 .mbl-10px {
     margin-block: 10px;
 }
