@@ -69,7 +69,7 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
             
-            if($this->builderService->checkPermissionToViewBuild($build) == false) {
+            if(!$this->builderService->checkPermissionToViewBuild($build)) {
                 return response()->view('errors.403', [], 403);
             }
 
@@ -174,7 +174,7 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail($requestData['buildComponentBuildId']);
 
-            if($this->builderService->checkIsUserBuildOwnerJSON($build) == false) {
+            if(!$this->builderService->checkIsUserBuildOwner($build)) {
                 return response()->json([], 403);
             }
 
@@ -221,7 +221,7 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail($requestData['deliveryGroupBuildId']);
 
-            if($this->builderService->checkIsUserBuildOwnerJSON($build) == false) {
+            if(!$this->builderService->checkIsUserBuildOwner($build)) {
                 return response()->json([], 403);
             }
 
@@ -247,7 +247,7 @@ class BuilderController extends Controller
         try {
             $buildComponentToDelete = BuildComponent::findOrFail($requestData['deleteBuildComponentId']);
 
-            if($this->builderService->checkIsUserBuildOwnerJSON($buildComponentToDelete->build) == false) {
+            if(!$this->builderService->checkIsUserBuildOwner($buildComponentToDelete->build)) {
                 return response()->json([], 403);
             }
 
@@ -265,7 +265,7 @@ class BuilderController extends Controller
         try {
             $buildComponent = BuildComponent::findOrFail(EncodeHelper::decode($encodedBuildComponentId));
 
-            if($this->builderService->checkPermissionToViewBuildJSON($buildComponent->build) == false) {
+            if(!$this->builderService->checkPermissionToViewBuild($buildComponent->build)) {
                 return response()->json([], 403);
             }
 
@@ -334,7 +334,7 @@ class BuilderController extends Controller
         try {
             $buildComponent = BuildComponent::findOrFail($requestData['buildComponentId']);
 
-            if($this->builderService->checkIsUserBuildOwnerJSON($buildComponent->build) == false) {
+            if(!$this->builderService->checkIsUserBuildOwner($buildComponent->build)) {
                 return response()->json([], 403);
             }
 
@@ -367,7 +367,7 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
 
-            if($this->builderService->checkIsUserBuildOwnerJSON($build) == false) {
+            if(!$this->builderService->checkIsUserBuildOwner($build)) {
                 return response()->json([], 403);
             }
 
@@ -395,6 +395,11 @@ class BuilderController extends Controller
 
         try {
             $build = Build::findOrFail($requestData['buildId']);
+
+            if(!$this->builderService->checkIsUserBuildOwner($build)) {
+                return response()->json([], 403);
+            }
+
             $build->name = $requestData['newBuildName'];
             $build->save();
 
@@ -412,7 +417,7 @@ class BuilderController extends Controller
         try {
             $build = Build::findOrFail(EncodeHelper::decode($encodedBuildId));
 
-            if($this->builderService->checkPermissionToViewBuild($build) == false) {
+            if(!$this->builderService->checkPermissionToViewBuild($build)) {
                 return response()->view('errors.403', [], 403);
             }
 
@@ -481,6 +486,12 @@ class BuilderController extends Controller
         DB::beginTransaction();
 
         try {
+            foreach($requestData['deliveryGroups'] as $deliveryGroup) {
+                if(!$this->builderService->checkIsUserDeliveryGroupOwner(DeliveryGroup::findOrFail($deliveryGroup['id']))) {
+                    return response()->json([], 403);
+                }
+            }
+
             //Apply the changes to existing delivery groups
             $this->builderService->updateDeliveryGroups($requestData);
 

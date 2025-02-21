@@ -18,7 +18,7 @@ Route::get('/my-account', [AuthController::class, 'getMyAccountPage'])->middlewa
 
 Route::get('/create-new-build', [BuilderController::class, 'getCreateNewBuildPage'])->middleware('auth');
 
-Route::get('/build/{id}', [BuilderController::class, 'getBuild'])->middleware('auth');
+Route::get('/build/{id}', [BuilderController::class, 'getBuild']);
 
 Route::get('/guest-build', [GuestBuilderController::class, 'getGuestBuild'])->middleware('guest');
 
@@ -47,6 +47,8 @@ Route::get('/change-password/{token}', [AuthController::class, 'getChangePasswor
 Route::get('/change-email', [AuthController::class, 'getChangeEmailPage'])->middleware('auth');
 
 Route::get('/email-change-verification/{token}', [AuthController::class, 'getChangeEmailVerificationPage'])->middleware('auth');
+
+Route::get('/redirect-to-buy-link', [PagesController::class, 'getRedirectToBuyLinkPage']);
 
 Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
 
