@@ -29,5 +29,8 @@
     },
     "change_email_verification": {
         "email_change_successful": "Vaša email adresa je uspešno promenjena."
+    },
+    "my_account_change_username": {
+        "username_changed_successfully": "Vaše korisničko ime je uspešno promenjeno."
     }
 }

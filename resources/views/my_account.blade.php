@@ -16,9 +16,9 @@
 
     <h2 class="mt-5 text-center fs-1">@lang('ui.my_account.my_account')</h2>
 
-    <div class="w-50p mt-3 md-max-1400px-w-70p md-max-600px-w-80p mx-auto" id="error-container-placeholder"></div>
+    <div class="w-50p md-max-1400px-w-70p md-max-600px-w-80p mx-auto" id="error-container-placeholder"></div>
 
-    <div class="w-50p mt-3 md-max-1400px-w-70p md-max-600px-w-80p mx-auto" id="message-container-placeholder"></div>
+    <div class="w-50p md-max-1400px-w-70p md-max-600px-w-80p mx-auto" id="message-container-placeholder"></div>
 
     <main>
         <div class="w-50p mx-auto mt-5 section-1 md-max-1400px-w-70p md-max-800px-w-100p md-max-800px-bin-none md-max-800px-br-0px">
@@ -27,7 +27,7 @@
                     <p class="mb-0px w-20p text-end md-max-800px-w-100p md-max-800px-text-start">@lang('ui.my_account.username'):</p>
 
                     <div class="d-flex w-75p ml-5p md-max-800px-ml-0px md-max-800px-w-100p">
-                        <input class="form-control" value="{{ $user->username }}"></input>
+                        <input class="form-control" id="username-input" value="{{ $user->username }}"></input>
                     
                         <button class="btn btn-primary w-100px ml-m-100px br-tl-0px br-bl-0px" id="save-username-button">@lang('ui.build.save')</button>
                     </div>

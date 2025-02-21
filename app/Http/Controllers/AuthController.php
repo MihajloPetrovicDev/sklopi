@@ -284,4 +284,28 @@ class AuthController extends Controller
             return $this->errorService->handleExceptionJSON($e);
         }
     }
+
+
+    public function changeUsername(Request $request) {
+        $requestData = $request->validate([
+            'newUsername' => ['required', 'min: 3', 'max: 20', 'unique:users,username'],
+        ], 
+        [
+            'newUsername.unique' => __('errors.change_username.new_username_unique'),
+            'newUsername.min' => __('errors.change_username.new_username_min'),
+            'newUsername.max' => __('errors.change_username.new_username_max'),
+            'newUsername.required' => __('errors.change_username.new_username_required'),
+        ]);
+
+        try {
+            $user = User::find(Auth::id());
+            $user->username = $requestData['newUsername'];
+            $user->save();
+
+            return response()->json([], 200);
+        }
+        catch(Exception $e) {
+            return $this->errorService->handleExceptionJSON($e);
+        }
+    }
 }

@@ -2,9 +2,14 @@ const errorService = {
     displayError(errorMessage, errorContainerWidth, containerToAttachId) {
         const containerToAttach = document.getElementById(containerToAttachId);
         const existingErrorContainer = document.getElementById('error-container');
+        const existingMessageContainer = document.getElementById('message-container');
 
         if(existingErrorContainer) {
-            containerToAttach.removeChild(existingErrorContainer);
+            existingErrorContainer.remove;
+        }
+
+        if(existingMessageContainer) {
+            existingMessageContainer.remove();
         }
 
         let errorContainer = document.createElement('div');

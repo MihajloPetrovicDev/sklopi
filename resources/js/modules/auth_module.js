@@ -138,6 +138,27 @@ const authModule = {
             errorService.handleError(error);
         }
     },
+
+
+    async setUpMyAccountPageChangeUsername(usernameInputId, saveUsernameButtonId) {
+        const usernameInput = document.getElementById(usernameInputId);
+        const saveUsernameButton = document.getElementById(saveUsernameButtonId);
+
+        saveUsernameButton.addEventListener('click', async function(e) {
+            e.preventDefault();
+
+            try {
+                const response = await axios.patch(appUrl + '/api/change-username', {
+                    newUsername: usernameInput.value,
+                });
+
+                messageService.displayMessage(i18next.t('my_account_change_username.username_changed_successfully'), 'message-container-placeholder');
+            }
+            catch(error) {
+                errorService.handleError(error);
+            }
+        })
+    }
 }
 
 
