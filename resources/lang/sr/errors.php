@@ -147,5 +147,11 @@ return [
         'email_change_token_exists' => 'Greška prilikom obrade tokena za promenu email adrese.',
         'token_expired' => 'Token za promenu email adrese je istekao.',
         'access_forbiden' => 'Zabranjen pristup. Ovaj zahtev za promenu email adrese nije vezan za vaš nalog.',
+    ],
+    'change_username' => [
+        'new_username_unique' => 'Korisničko ime je zauzeto.',
+        'new_username_min' => 'Korisničko ime mora da bude duže od 2 karaktera.',
+        'new_username_max' => 'Korisničko ime ne sme da bude duže od 20 karaktera.',
+        'new_username_required' => 'Korisničko ime je obavezno.',
     ]
 ];

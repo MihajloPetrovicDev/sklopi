@@ -81,3 +81,5 @@ Route::post('/api/change-password', [AuthController::class, 'changePassword']);
 Route::post('/api/generate-and-send-email-change-link', [AuthController::class, 'generateAndSendChangeEmailVerificationLink']);
 
 Route::post('/api/change-email', [AuthController::class, 'changeEmail'])->middleware('auth');
+
+Route::patch('/api/change-username', [AuthController::class, 'changeUsername'])->middleware('auth');
