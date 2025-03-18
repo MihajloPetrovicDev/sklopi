@@ -5,7 +5,7 @@ const errorService = {
         const existingMessageContainer = document.getElementById('message-container');
 
         if(existingErrorContainer) {
-            existingErrorContainer.remove;
+            existingErrorContainer.remove();
         }
 
         if(existingMessageContainer) {

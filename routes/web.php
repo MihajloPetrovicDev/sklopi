@@ -50,9 +50,9 @@ Route::get('/email-change-verification/{token}', [AuthController::class, 'getCha
 
 Route::get('/redirect-to-buy-link', [PagesController::class, 'getRedirectToBuyLinkPage']);
 
-Route::post('/api/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/api/register', [AuthController::class, 'register'])->middleware(['guest', 'throttle:sensitive-actions']);
 
-Route::post('/api/login', [AuthController::class, 'login'])->middleware('guest');
+Route::post('/api/login', [AuthController::class, 'login'])->middleware(['guest', 'throttle:sensitive-actions']);
 
 Route::post('/api/log-out', [AuthController::class, 'logOut'])->middleware('auth');
 
@@ -74,12 +74,12 @@ Route::post('/api/save-build-name', [BuilderController::class, 'saveBuildName'])
 
 Route::post('/api/update-delivery-groups', [BuilderController::class, 'updateDeliveryGroups'])->middleware('auth');
 
-Route::post('/api/generate-and-send-password-reset-link', [AuthController::class, 'generateAndSendPasswordResetLink']);
+Route::post('/api/generate-and-send-password-reset-link', [AuthController::class, 'generateAndSendPasswordResetLink'])->middleware('throttle:sensitive-actions');
 
-Route::post('/api/change-password', [AuthController::class, 'changePassword']);
+Route::post('/api/change-password', [AuthController::class, 'changePassword'])->middleware('throttle:sensitive-actions');
 
-Route::post('/api/generate-and-send-email-change-link', [AuthController::class, 'generateAndSendChangeEmailVerificationLink']);
+Route::post('/api/generate-and-send-email-change-link', [AuthController::class, 'generateAndSendChangeEmailVerificationLink'])->middleware('throttle:sensitive-actions');
 
-Route::post('/api/change-email', [AuthController::class, 'changeEmail'])->middleware('auth');
+Route::post('/api/change-email', [AuthController::class, 'changeEmail'])->middleware('auth')->middleware('throttle:sensitive-actions');
 
-Route::patch('/api/change-username', [AuthController::class, 'changeUsername'])->middleware('auth');
+Route::patch('/api/change-username', [AuthController::class, 'changeUsername'])->middleware('auth')->middleware('throttle:sensitive-actions');

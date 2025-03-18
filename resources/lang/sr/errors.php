@@ -153,5 +153,8 @@ return [
         'new_username_min' => 'Korisničko ime mora da bude duže od 2 karaktera.',
         'new_username_max' => 'Korisničko ime ne sme da bude duže od 20 karaktera.',
         'new_username_required' => 'Korisničko ime je obavezno.',
+    ],
+    'sensitive_actions' => [
+        'too_many_attempts' => 'Previše zahteva. Pokušajte kasnije.',
     ]
 ];
